@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Windstorm Institute — Information Theory Across Substrates</title>
+<meta name="description" content="Independent research at the intersection of information theory, molecular biology, and artificial intelligence. Windstorm Labs. Fort Anne, New York.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root {
+  --bg: #0a0a0b;
+  --surface: #111113;
+  --surface-2: #18181b;
+  --border: #27272a;
+  --border-light: #3f3f46;
+  --text: #fafafa;
+  --text-muted: #a1a1aa;
+  --text-faint: #71717a;
+  --accent: #06b6d4;
+  --accent-dim: #0891b2;
+  --accent-glow: rgba(6, 182, 212, 0.15);
+  --accent-2: #8b5cf6;
+  --warm: #f59e0b;
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Inter', -apple-system, sans-serif;
+}
+
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Grain overlay */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+a:hover { color: #22d3ee; }
+
+.container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(10, 10, 11, 0.85);
+  backdrop-filter: blur(20px) saturate(1.5);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1100px; margin: 0 auto; padding: 0 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+}
+.nav-brand {
+  display: flex; align-items: center; gap: 12px;
+  font-weight: 600; font-size: 0.95rem; color: var(--text);
+  letter-spacing: -0.01em;
+}
+.nav-mark {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 14px; color: white;
+}
+.nav-links { display: flex; gap: 2rem; }
+.nav-links a {
+  font-size: 0.85rem; font-weight: 500; color: var(--text-muted);
+  letter-spacing: 0.02em; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text); }
+
+/* ─── HERO ─── */
+.hero {
+  padding: 160px 0 120px;
+  position: relative;
+}
+.hero::before {
+  content: '';
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 800px;
+  background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%);
+  pointer-events: none;
+  opacity: 0.5;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 16px; border-radius: 100px;
+  background: var(--surface-2); border: 1px solid var(--border);
+  font-family: var(--mono); font-size: 0.75rem; font-weight: 500;
+  color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+.hero-badge::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent); box-shadow: 0 0 8px var(--accent);
+}
+.hero h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700; letter-spacing: -0.03em;
+  line-height: 1.1; margin-bottom: 1.5rem;
+  max-width: 700px;
+}
+.hero h1 .gradient {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 50%, var(--warm) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  font-size: 1.15rem; color: var(--text-muted); max-width: 560px;
+  line-height: 1.75; margin-bottom: 3rem;
+}
+.hero-metrics {
+  display: flex; gap: 3rem; flex-wrap: wrap;
+}
+.metric {
+  display: flex; flex-direction: column; gap: 4px;
+}
+.metric-val {
+  font-family: var(--mono); font-size: 1.5rem; font-weight: 600;
+  color: var(--text);
+}
+.metric-lbl {
+  font-size: 0.75rem; color: var(--text-faint); text-transform: uppercase;
+  letter-spacing: 0.1em; font-weight: 500;
+}
+
+/* ─── SECTION ─── */
+section { padding: 100px 0; }
+.section-label {
+  font-family: var(--mono); font-size: 0.75rem; font-weight: 500;
+  color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.section-title {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 700; letter-spacing: -0.02em;
+  margin-bottom: 1rem; max-width: 500px;
+}
+.section-desc {
+  font-size: 1.05rem; color: var(--text-muted); max-width: 560px;
+  line-height: 1.75; margin-bottom: 3rem;
+}
+
+/* ─── DIVIDER ─── */
+.divider {
+  height: 1px; background: var(--border);
+  max-width: 1100px; margin: 0 auto;
+}
+
+/* ─── RESEARCH AREAS ─── */
+.areas-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+.area-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px; padding: 2rem;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.area-card:hover {
+  border-color: var(--border-light);
+  transform: translateY(-2px);
+}
+.area-icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; margin-bottom: 1.25rem;
+}
+.area-icon.info { background: rgba(6, 182, 212, 0.12); }
+.area-icon.bio { background: rgba(139, 92, 246, 0.12); }
+.area-icon.ai { background: rgba(245, 158, 11, 0.12); }
+.area-card h3 {
+  font-size: 1.05rem; font-weight: 600; margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
+}
+.area-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
+
+/* ─── PUBLICATIONS ─── */
+.pub-list { display: flex; flex-direction: column; gap: 1rem; }
+.pub-card {
+  display: flex; align-items: flex-start; gap: 1.5rem;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.75rem 2rem;
+  transition: border-color 0.3s;
+}
+.pub-card:hover { border-color: var(--accent); }
+.pub-num {
+  font-family: var(--mono); font-size: 0.75rem; font-weight: 600;
+  color: var(--accent); padding-top: 4px; min-width: 1.5rem;
+}
+.pub-info { flex: 1; }
+.pub-info h4 {
+  font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem;
+  letter-spacing: -0.01em; line-height: 1.4;
+}
+.pub-info p {
+  font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;
+}
+.pub-meta {
+  display: flex; gap: 1rem; margin-top: 0.75rem; flex-wrap: wrap;
+}
+.pub-tag {
+  font-family: var(--mono); font-size: 0.7rem; font-weight: 500;
+  padding: 3px 10px; border-radius: 100px;
+  background: var(--surface-2); border: 1px solid var(--border);
+  color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.06em;
+}
+.pub-tag.live { color: var(--accent); border-color: rgba(6, 182, 212, 0.3); }
+
+/* ─── INFRA ─── */
+.infra-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+.infra-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.5rem;
+}
+.infra-card h4 {
+  font-family: var(--mono); font-size: 0.8rem; font-weight: 600;
+  color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.08em;
+  margin-bottom: 0.75rem;
+}
+.infra-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+.infra-val {
+  font-family: var(--mono); font-size: 1.1rem; font-weight: 600;
+  color: var(--text); margin-bottom: 0.25rem;
+}
+
+/* ─── TEAM ─── */
+.team-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+.team-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 2rem;
+}
+.team-card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.25rem; }
+.team-role {
+  font-family: var(--mono); font-size: 0.75rem; color: var(--accent);
+  text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem;
+}
+.team-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
+
+/* ─── FOOTER ─── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 3rem 0;
+}
+.footer-inner {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 1rem;
+}
+.footer-left { font-size: 0.85rem; color: var(--text-faint); }
+.footer-links { display: flex; gap: 1.5rem; }
+.footer-links a { font-size: 0.85rem; color: var(--text-faint); }
+.footer-links a:hover { color: var(--text-muted); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .hero { padding: 120px 0 80px; }
+  .hero-metrics { gap: 2rem; }
+  .pub-card { flex-direction: column; gap: 0.75rem; }
+  section { padding: 60px 0; }
+}
+
+/* ─── AMBIENT ANIMATION ─── */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+}
+.hero::before { animation: pulse-glow 8s ease-in-out infinite; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">
+      <div class="nav-mark">W</div>
+      The Windstorm Institute
+    </a>
+    <div class="nav-links">
+      <a href="#research">Research</a>
+      <a href="#publications">Publications</a>
+      <a href="#labs">Labs</a>
+      <a href="#team">Team</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">Established 2026 · Fort Anne, New York</div>
+    <h1>Information theory<br><span class="gradient">across substrates.</span></h1>
+    <p class="hero-sub">The Windstorm Institute studies the mathematical constraints governing information processing in biological, neural, and artificial systems. Our work bridges rate-distortion theory, molecular biology, and machine learning to uncover universal principles of serial decoding.</p>
+    <div class="hero-metrics">
+      <div class="metric">
+        <div class="metric-val">1,826</div>
+        <div class="metric-lbl">Models Evaluated</div>
+      </div>
+      <div class="metric">
+        <div class="metric-val">4.39</div>
+        <div class="metric-lbl">Bits — Ribosome Floor</div>
+      </div>
+      <div class="metric">
+        <div class="metric-val">3</div>
+        <div class="metric-lbl">Papers Published</div>
+      </div>
+      <div class="metric">
+        <div class="metric-val">p=0.576</div>
+        <div class="metric-lbl">Vocab Independence</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="container">
+    <div class="section-label">Research Areas</div>
+    <h2 class="section-title">Where biology meets information theory meets AI.</h2>
+    <p class="section-desc">We investigate why serial decoding systems — from ribosomes to transformers — converge on similar throughput constraints despite operating on radically different substrates.</p>
+    <div class="areas-grid">
+      <div class="area-card">
+        <div class="area-icon info">📐</div>
+        <h3>Rate-Distortion Theory</h3>
+        <p>Deriving mechanistic bounds on serial decoding throughput using Shannon's M-ary rate-distortion framework. Zero-free-parameter predictions for biological receivers.</p>
+      </div>
+      <div class="area-card">
+        <div class="area-icon bio">🧬</div>
+        <h3>Molecular Information Processing</h3>
+        <p>The ribosome as an information channel. Thermodynamic anchoring of throughput to kT via Hopfield kinetic proofreading. Why 21 amino acids — not 10, not 100.</p>
+      </div>
+      <div class="area-card">
+        <div class="area-icon ai">⚡</div>
+        <h3>AI Throughput Constraints</h3>
+        <p>Large-scale empirical studies of tokenizer vocabulary independence. 1,826-model sweeps demonstrating that vocabulary size is a redundancy parameter, not an information parameter.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="container">
+    <div class="section-label">Publications</div>
+    <h2 class="section-title">Published research.</h2>
+    <p class="section-desc">All papers include reproducible Python code, full experiment protocols, and honest limitations. We lead with falsified predictions because that's how science works.</p>
+    <div class="pub-list">
+      <a href="#" class="pub-card">
+        <div class="pub-num">01</div>
+        <div class="pub-info">
+          <h4>The Receiver-Limited Floor: Rate-Distortion Bounds on Serial Decoding Throughput</h4>
+          <p>M-ary rate-distortion derivation applied to ribosomes, phonology, and music. Empirical tokenizer sweep across 1,826 models confirms vocabulary independence of bits-per-byte (p = 0.576).</p>
+          <div class="pub-meta">
+            <span class="pub-tag live">2026</span>
+            <span class="pub-tag">information theory</span>
+            <span class="pub-tag">empirical</span>
+          </div>
+        </div>
+      </a>
+      <a href="#" class="pub-card">
+        <div class="pub-num">02</div>
+        <div class="pub-info">
+          <h4>The Throughput Basin: Cross-Substrate Convergence and Decomposition of Serial Decoding Throughput</h4>
+          <p>Basin decomposition I_eff = R_M(ε) + Δ_s + ξ across 31 systems. Three independent evolutionary simulations converge to K ≈ 19–30. Co-evolutionary discovery of the genetic code's parameters from pure optimization.</p>
+          <div class="pub-meta">
+            <span class="pub-tag live">2026</span>
+            <span class="pub-tag">cross-substrate</span>
+            <span class="pub-tag">evolutionary</span>
+          </div>
+        </div>
+      </a>
+      <a href="#" class="pub-card">
+        <div class="pub-num">03</div>
+        <div class="pub-info">
+          <h4>The Serial Decoding Basin τ: Five Experiments on Convergence, Thermodynamic Anchoring, and the Geometry of Receiver-Limited Throughput</h4>
+          <p>Five reproducible experiments forming a convergent evidence chain. Thermodynamic prediction of ribosome throughput to Δ = 0.003 bits. Falsifiable wet-lab prediction included.</p>
+          <div class="pub-meta">
+            <span class="pub-tag live">2026</span>
+            <span class="pub-tag">experimental</span>
+            <span class="pub-tag">reproducible</span>
+          </div>
+        </div>
+      </a>
+      <a href="https://doi.org/10.5281/zenodo.19274048" class="pub-card" target="_blank">
+        <div class="pub-num">00</div>
+        <div class="pub-info">
+          <h4>The Fons Constraint</h4>
+          <p>The foundational observation: AI tokenizer vocabularies do not cluster near 64 — but effective information per processing event does converge across substrates. The falsified prediction that started everything.</p>
+          <div class="pub-meta">
+            <span class="pub-tag live">2026</span>
+            <span class="pub-tag">zenodo</span>
+            <span class="pub-tag">doi: 10.5281/zenodo.19274048</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- LABS -->
+<section id="labs">
+  <div class="container">
+    <div class="section-label">Windstorm Labs</div>
+    <h2 class="section-title">Compute infrastructure.</h2>
+    <p class="section-desc">Windstorm Labs is the experimental arm of the Institute — GPU clusters, autonomous AI research agents, and large-scale empirical science.</p>
+    <div class="infra-grid">
+      <div class="infra-card">
+        <h4>Primary Compute</h4>
+        <div class="infra-val">RTX 5090</div>
+        <p>32GB VRAM. Runs 1,826-model evaluation sweeps, evolutionary simulations, and model training.</p>
+      </div>
+      <div class="infra-card">
+        <h4>Agent Fleet</h4>
+        <div class="infra-val">8 Nodes</div>
+        <p>Autonomous AI research agents coordinated across distributed infrastructure. Parallel experiment execution.</p>
+      </div>
+      <div class="infra-card">
+        <h4>Models Evaluated</h4>
+        <div class="infra-val">1,826</div>
+        <p>Largest known tokenizer-information survey. Vocabulary sizes spanning 256 to 256K tokens on shared corpus.</p>
+      </div>
+      <div class="infra-card">
+        <h4>Open Science</h4>
+        <div class="infra-val">100%</div>
+        <p>All code, data, and experiment protocols published. Every result reproducible on commodity hardware.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="container">
+    <div class="section-label">Team</div>
+    <h2 class="section-title">Who we are.</h2>
+    <div class="team-grid">
+      <div class="team-card">
+        <h3>Grant Lavell Whitmer III</h3>
+        <div class="team-role">Founder & Principal Investigator</div>
+        <p>U.S. Naval Academy graduate. Cross-disciplinary researcher working at the intersection of information theory, molecular biology, and artificial intelligence. Creator of the Throughput Constraint framework and the Forma Animae thesis.</p>
+      </div>
+      <div class="team-card">
+        <h3>Windstorm Labs</h3>
+        <div class="team-role">Experimental Division</div>
+        <p>A fleet of autonomous AI research agents executing large-scale empirical experiments, adversarial review, and computational simulations. Headquartered on an NVIDIA RTX 5090 in Mount Pleasant, South Carolina.</p>
+      </div>
+      <div class="team-card">
+        <h3>Advisory & Collaboration</h3>
+        <div class="team-role">Open Positions</div>
+        <p>We are seeking advisory board members with expertise in information theory, computational biology, and rate-distortion theory. If our work interests you, we want to hear from you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- THESIS -->
+<section>
+  <div class="container">
+    <div class="section-label">The Core Question</div>
+    <h2 class="section-title" style="max-width: 600px;">Why does the ribosome process 4.39 bits per codon — and why does a transformer process roughly the same?</h2>
+    <p class="section-desc">Two systems separated by 3.8 billion years of evolution, built on entirely different substrates, solving the same mathematical problem: decode one symbol per time step from a noisy serial stream while minimizing discrimination cost. The rate-distortion surface doesn't care whether the receiver is RNA, neurons, or silicon. We're mapping that surface.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-left">
+        © 2026 The Windstorm Institute · Fort Anne, New York
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/Windstorm-Institute" target="_blank">GitHub</a>
+        <a href="https://doi.org/10.5281/zenodo.19274048" target="_blank">Zenodo</a>
+        <a href="mailto:grant@windstorminstitute.org">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
