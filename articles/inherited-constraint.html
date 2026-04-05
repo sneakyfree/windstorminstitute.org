@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Inherited Constraint — The Windstorm Institute</title>
-<meta name="description" content="The Inherited Constraint: How Language Carries the Fingerprint of Biological Throughput Limits. By Grant Lavell Whitmer III.">
+<meta name="description" content="The Inherited Constraint: How Language Carries the Fingerprint of Biological Throughput Limits — and Passes It to AI. By Grant Lavell Whitmer III.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
@@ -231,6 +231,12 @@ nav {
   color: var(--accent); white-space: nowrap;
 }
 
+/* Table */
+table { width: 100%; border-collapse: collapse; margin: 2rem 0; font-family: var(--sans); font-size: 0.9rem; }
+th { text-align: left; padding: 0.75rem 1rem; border-bottom: 2px solid var(--border-light); color: var(--text); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; }
+td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); color: var(--text-muted); }
+tr:hover td { background: var(--surface); }
+
 /* Article nav */
 .article-nav {
   display: flex;
@@ -289,11 +295,11 @@ nav {
     <a href="../index.html#articles" class="article-back">&larr; All Articles</a>
     <div class="article-meta">
       <span>April 2026</span>
-      <span>~10 min read</span>
+      <span>~15 min read</span>
       <span>Grant Lavell Whitmer III</span>
     </div>
-    <h1>The Inherited Constraint:<br><span class="gradient">How Language Carries the Fingerprint of Biological Throughput Limits</span></h1>
-    <p class="article-subtitle">How Language Carries the Fingerprint of Biological Throughput Limits</p>
+    <h1>The Inherited Constraint:<br><span class="gradient">How Language Carries the Fingerprint of Biological Throughput Limits &mdash; and Passes It to AI</span></h1>
+    <p class="article-subtitle">How Language Carries the Fingerprint of Biological Throughput Limits &mdash; and Passes It to AI</p>
     <div class="figure" style="margin: 2rem auto;">
       <img src="../assets/images/web_hero_convergence.png" alt="Convergence hero image">
     </div>
@@ -307,96 +313,167 @@ nav {
 <!-- ARTICLE BODY -->
 <article class="article-body">
 
-  <p>The first five papers in the Windstorm Institute's research program established the throughput basin &mdash; a narrow band of 3&ndash;6 bits per serial decoding step that constrains biological information processors. Paper 4 then revealed that silicon operates in a different cost regime entirely: sub-linear scaling (&alpha; &lt; 1) means AI has no thermodynamic basin.</p>
-
-  <p>This creates a paradox. If silicon has no basin, why does every large language model converge on approximately 4.2 bits per token &mdash; the same neighborhood as the ribosome?</p>
+  <p><em>This article summarizes &ldquo;The Inherited Constraint: Biological Throughput Limits Shape the Information Structure of Human Language and, Through It, AI&rdquo; (in preparation, 2026).</em></p>
 
   <hr>
 
-  <h2>The Answer: Inheritance</h2>
+  <p>The Dissipative Decoder proved that silicon AI has no thermodynamic throughput basin. Its energy scales sub-linearly with model capacity. No quadratic discrimination cost. No efficiency peak. No physical speed limit.</p>
 
-  <p>AI doesn't discover the basin through its own physics. It inherits the basin's fingerprint from its training data.</p>
+  <p>And yet AI models converge on ~4.2 bits of effective information per token &mdash; right in the middle of the biological basin that they are supposedly exempt from.</p>
 
-  <p>Large language models learn from human language. Human language evolved in brains constrained by the biological throughput basin. The information structure of natural language &mdash; its word frequencies, syntactic patterns, and per-word surprise &mdash; was shaped over hundreds of thousands of years by neural processors that operate within the 3&ndash;6 bit band.</p>
+  <p>This is the paradox. If the physics doesn&rsquo;t constrain silicon, why does silicon land in the same neighborhood as the ribosome?</p>
 
-  <p>When GPT-4 learns to predict the next token, it is learning the statistical structure of a signal that was already compressed to fit within biological throughput limits. The ~4.2 bits per token isn't a property of silicon. It's a property of English.</p>
+  <h2>The Hypothesis</h2>
 
-  <hr>
+  <p>AI inherits its throughput from the biological systems that generated its training data.</p>
+
+  <p>Every language model ever built was trained on human text. Human text was written by human brains. Human brains are biological serial decoders constrained by the throughput basin. The information density of human language &mdash; how surprising each word is, how predictable each sentence is &mdash; evolved to match the ~4&ndash;5 bit processing capacity of the biological systems that produce and receive it.</p>
+
+  <p>When GPT-4 processes English at ~4.4 bits per token, it is not obeying a law of silicon physics. It is learning a pattern that biological evolution burned into the structure of language over millions of years.</p>
 
   <h2>The Experiment</h2>
 
-  <p>We tested this on an RTX 5090 using 7 corpora across 4 model architectures. The key measurement: bits per token (BPT) for natural language versus progressively destroyed versions of the same text.</p>
+  <p>We measured bits-per-token (BPT) &mdash; the model&rsquo;s average surprise at each word &mdash; across seven types of data. Four models. Same hardware. Same methodology. We computed all BPT values <em>before</em> comparing them to the biological basin. If natural language had shown 2 bits or 9 bits, we would have reported that. This is a basin-blind design.</p>
 
-  <p>Natural language BPT: approximately 4.4 bits &mdash; matching the ribosome (4.39) and the basin centroid (4.16 &plusmn; 0.19) to within the measurement uncertainty.</p>
+  <p>It showed 4.4 bits.</p>
 
-  <hr>
+  <p>The ribosome processes information at 4.39 bits per codon. Claude Shannon, in 1951, estimated the entropy of printed English at approximately 1 bit per character &mdash; roughly 5 bits per word. Three independent measurements, three different methods, three different decades, the same number.</p>
 
-  <h2>The Shuffling Cascade</h2>
+  <h2>The Seven Corpora</h2>
 
-  <p>To prove that syntax &mdash; not just word statistics &mdash; carries the basin's fingerprint, we ran a granular shuffling cascade. Starting from natural text, we progressively destroyed structure at different levels:</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Corpus</th>
+        <th>Bits per Token</th>
+        <th>What It Tells Us</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Natural language (English prose)</td>
+        <td>4.4</td>
+        <td>In the basin. Matches the ribosome.</td>
+      </tr>
+      <tr>
+        <td>Programming code (Python)</td>
+        <td>2.8</td>
+        <td>Below the basin. More predictable than prose.</td>
+      </tr>
+      <tr>
+        <td>DNA sequences</td>
+        <td>4.5</td>
+        <td>In the basin &mdash; but a tokenizer artifact.</td>
+      </tr>
+      <tr>
+        <td>Synthetic structured data</td>
+        <td>3.9</td>
+        <td>In the basin &mdash; models exploit any pattern.</td>
+      </tr>
+      <tr>
+        <td>Mathematical notation</td>
+        <td>7.5</td>
+        <td>Above the basin. Unfamiliar to the model.</td>
+      </tr>
+      <tr>
+        <td>Random printable text</td>
+        <td>8.5</td>
+        <td>Far above. No patterns to exploit.</td>
+      </tr>
+      <tr>
+        <td>Shuffled English (same words, random order)</td>
+        <td>10.8</td>
+        <td>Far above. Structure destroyed.</td>
+      </tr>
+    </tbody>
+  </table>
 
-  <p><strong>Level 1:</strong> Shuffle discourse order (paragraph-level). Minimal effect.</p>
+  <p>The most important row is the last one. Shuffled English uses the exact same words as regular English. Same vocabulary. Same word frequencies. Same Zipf distribution. But the grammar, syntax, and semantics have been destroyed &mdash; words appear in random order.</p>
 
-  <p><strong>Level 2:</strong> Shuffle sentence order within paragraphs. Small effect.</p>
+  <p>Without structure, per-token surprise more than doubles. The model can no longer predict what comes next because the cognitive organization of language is gone. What remains &mdash; raw word frequencies &mdash; is not enough.</p>
 
-  <p><strong>Level 3:</strong> Shuffle words within sentences. Massive effect &mdash; surprise nearly doubles to 10.8 bits.</p>
+  <h2>Where Structure Lives: The Granular Shuffling Cascade</h2>
 
-  <p><strong>Level 4:</strong> Shuffle sub-word tokens. Additional effect, but smaller.</p>
+  <p>We didn&rsquo;t just shuffle all the words at once. We destroyed structure one level at a time, measuring the information loss at each step:</p>
 
-  <p>Syntax alone carries 3.3 bits of information &mdash; more than discourse, sentence order, and sub-word structure combined. Grammar isn't just for meaning. It's an information-compression mechanism that keeps per-word surprise within the biological receiver's throughput limit.</p>
+  <p><strong>Shuffle paragraphs</strong> (keep sentences intact): lose ~1.3 bits. Discourse-level structure &mdash; how paragraphs connect to each other &mdash; carries about 1.3 bits of information per token.</p>
 
-  <div class="callout">
-    <div class="callout-label">The Zipf Proof</div>
-    <p>Original and fully shuffled text have identical Zipf exponents (word frequency distributions are preserved by shuffling). Yet natural text carries 6.7 bits less surprise per token. Word statistics are necessary but not sufficient &mdash; syntactic structure does the heavy lifting.</p>
-  </div>
+  <p><strong>Shuffle sentences</strong> (keep words intact within each sentence): lose another ~0.6 bits. Sentence ordering &mdash; which sentence follows which &mdash; carries about 0.6 bits.</p>
 
-  <hr>
+  <p><strong>Shuffle words within sentences</strong> (keep sentence boundaries): lose ~3.3 bits. This is the big one. Sentence-internal word order &mdash; syntax &mdash; carries 3.3 bits of information. More than discourse, sentence ordering, and every other level combined.</p>
 
-  <h2>Shannon Predicted This</h2>
+  <p><strong>Shuffle all words</strong> (destroy everything): lose another ~1.0 bit. The remaining word-order effects within the previous level.</p>
 
-  <p>In 1951, Claude Shannon estimated that English carries approximately 5 bits of information per word. He reached this number through human guessing experiments &mdash; having subjects predict the next letter in a sequence and measuring their accuracy.</p>
+  <p>Syntax &mdash; the grammar of how words are arranged within sentences &mdash; is the dominant carrier of cognitive information in human language. Not the vocabulary. Not the paragraph structure. Not the topics or themes. Grammar.</p>
 
-  <p>Seventy-five years later, with transformer models trained on billions of words, we measure approximately 4.4 bits per token. Shannon was right. And now we know why: the number isn't a property of English specifically. It's a property of any language produced by neural processors constrained by the throughput basin.</p>
+  <p>This finding connects to a 15-year-old hypothesis in psycholinguistics called Uniform Information Density (Jaeger, 2010; Levy &amp; Jaeger, 2007). UID proposes that speakers distribute information roughly evenly across words to match the receiver&rsquo;s processing capacity. But UID never specified what that capacity IS. The throughput basin provides the missing number: ~4&ndash;5 bits per cognitive event.</p>
 
-  <hr>
+  <h2>The Zipf Identity Proof</h2>
+
+  <p>Here is the cleanest result in the paper. We computed the Zipf exponent &mdash; the mathematical shape of the word-frequency distribution &mdash; for both original and shuffled English.</p>
+
+  <p>Original English: &alpha; = &minus;0.843, R&sup2; = 0.992.<br>
+  Shuffled English: &alpha; = &minus;0.843, R&sup2; = 0.992.</p>
+
+  <p>Identical. Exactly the same words at exactly the same frequencies. The Zipf distribution is preserved perfectly by shuffling.</p>
+
+  <p>Yet original English gives ~11 bits of effective information per token while shuffled English gives ~5 bits. Same statistics, 6 bits of difference. Word frequencies are necessary (they set the base rate) but they are not sufficient (structure determines the rest). Anyone who claims that the ~4.4-bit convergence is &ldquo;just Zipf&rsquo;s law&rdquo; is refuted by this single control: Zipf is identical in both conditions, but information extraction is completely different.</p>
+
+  <h2>The Energy Cost of Grammar</h2>
+
+  <p>We expected that exploiting linguistic structure would be computationally &ldquo;free&rdquo; &mdash; the model runs the same forward pass regardless of whether the input is structured or random. We were wrong.</p>
+
+  <p>Natural language costs 0.347 millijoules per token. Shuffled language costs 0.291 millijoules per token. A 20% premium. The model works harder on structured text &mdash; probably because the attention mechanism computes meaningful long-range dependencies (subject-verb agreement, coreference, discourse coherence) that don&rsquo;t exist in shuffled text.</p>
+
+  <p>Grammar is not free. The information it provides (~6.5 extra bits per token) costs real energy to extract (~0.056 millijoules per token, or about 0.009 millijoules per bit of structure). This is a measurable thermodynamic price for cognitive organization.</p>
 
   <h2>The Causal Chain</h2>
 
-  <p>The full picture, across all seven papers, traces a causal chain:</p>
+  <p>We propose &mdash; and we emphasize &ldquo;propose,&rdquo; because two of the four links are hypothesized rather than demonstrated &mdash; the following chain of constraint propagation:</p>
 
-  <blockquote>
-    <p>Physics &rarr; Biology &rarr; Cognition &rarr; Language &rarr; AI</p>
-  </blockquote>
+  <p><strong>Link 1 (Established): Physics &rarr; Biology.</strong> Thermodynamic cost minimization under pairwise discrimination constraints (Regime A, &alpha; &gt; 1) constrains biological decoders to 3&ndash;6 bits per event. Evidence: five companion papers, the cost function derivation, the phase-space proof.</p>
 
-  <p>Thermodynamic cost bounds (physics) constrain the ribosome's alphabet to ~21 amino acids at ~4.4 bits (biology). Neural processors built from these biological components inherit the throughput constraint (cognition). Language evolved to fit within neural throughput limits, compressing per-word surprise to ~4&ndash;5 bits (language). AI models trained on this language inherit the same information density (AI).</p>
+  <p><strong>Link 2 (Established): Biology &rarr; Cognition.</strong> Neural systems built from biological substrates inherit the throughput constraint. Working memory: ~3.1 bits per item. Phoneme discrimination: ~4.2 bits. Evidence: Miller (1956), Miller &amp; Nicely (1955), decades of psychophysics.</p>
 
-  <p>Silicon escapes the thermodynamic basin &mdash; but it cannot escape the training data. The fingerprint propagates.</p>
+  <p><strong>Link 3 (Proposed): Cognition &rarr; Language.</strong> Language evolved as a communication channel between brains constrained to ~4&ndash;5 bits per event. Speakers can only formulate ~4&ndash;5 bits of new information per utterance. Listeners can only decode ~4&ndash;5 bits per processing step. Language optimized to match. Evidence: BPT &asymp; 4.4 (this paper), Shannon&rsquo;s 1951 estimate, the UID literature. <em>Not yet causally demonstrated.</em></p>
 
-  <hr>
+  <p><strong>Link 4 (Proposed): Language &rarr; AI.</strong> Models trained on human language learn its statistical structure. The ~4.4-bit BPT reflects the information density that biological cognition selected for. Destroy the structure (shuffling) and BPT jumps to 10.8. Evidence: the shuffling experiment. <em>Not yet tested with a synthetic-training control.</em></p>
 
-  <h2>Four Falsifiable Predictions</h2>
+  <h2>What Would Falsify This</h2>
 
-  <p>The paper offers four testable predictions:</p>
+  <p>We offer four specific predictions, each designed to break the hypothesis if it&rsquo;s wrong:</p>
 
-  <p><strong>First:</strong> AI models trained on non-linguistic data (images, music, sensor streams) should show different BPT profiles, unconstrained by the linguistic fingerprint.</p>
+  <p><strong>Test 1:</strong> Shuffle text from non-English languages (Chinese, Arabic, Finnish). If the ~5-bit base rate is biologically universal, all languages should show it. If only English does, the finding is language-specific, not biological.</p>
 
-  <p><strong>Second:</strong> Constructed languages with artificially high information density (&gt;6 bits per word) should be harder for humans to learn and use fluently.</p>
+  <p><strong>Test 2:</strong> Train a model exclusively on non-biological data (synthetic patterns, mathematical proofs). If its BPT falls inside the 3&ndash;6 bit basin, the inherited constraint hypothesis is falsified &mdash; the basin would be a property of structured data in general, not biological data specifically.</p>
 
-  <p><strong>Third:</strong> Historical language change should show a drift toward the basin &mdash; older texts should have slightly different BPT than modern texts, converging over centuries.</p>
+  <p><strong>Test 3:</strong> As models improve over generations, BPB on English should approach but not drop far below ~0.5. If frontier models achieve BPB below 0.3, the &ldquo;floor&rdquo; doesn&rsquo;t exist.</p>
 
-  <p><strong>Fourth:</strong> AI models fine-tuned on synthetic (AI-generated) text through multiple generations should slowly drift away from the biological BPT as the human fingerprint degrades.</p>
+  <p><strong>Test 4:</strong> Languages with fewer phonemes should show steeper Zipf slopes. If no correlation exists, the basin-Zipf connection is wrong.</p>
+
+  <p>These predictions are offered openly and without hedging. If any of them fails, we want to know. That is how science works.</p>
+
+  <h2>The Bigger Picture</h2>
+
+  <p>The throughput basin constrains biology directly, through the physics of molecular discrimination. It constrains language indirectly, through the cognitive capacity of the brains that invented it. It constrains AI at one further remove, through the training data that carries language&rsquo;s biological fingerprint.</p>
+
+  <p>The ribosome found this limit through 3.8 billion years of evolution. Human language found it through millions of years of cognitive optimization. AI learned it in a few months of training on the internet. Three timescales, three substrates, one neighborhood: ~4.4 bits.</p>
+
+  <p>The fingerprint is everywhere. You just have to know what to look for.</p>
 
   <hr>
 
   <p style="font-size: 0.9rem; color: var(--text-faint); text-align: center; font-family: var(--sans);">
-    The <a href="../assets/documents/Dissipative-Decoder-FINAL.pdf">Dissipative Decoder</a> and <a href="../assets/documents/Inherited-Constraint-FINAL.pdf">Inherited Constraint</a> papers are available as PDFs. All code and data: <a href="https://github.com/sneakyfree/fons-constraint">github.com/sneakyfree/fons-constraint</a>
+    <em>The Inherited Constraint</em> is in preparation for submission.<br>
+    All code and data: <a href="https://github.com/sneakyfree/fons-constraint">github.com/sneakyfree/fons-constraint</a><br><br>
+    <a href="../assets/documents/Inherited-Constraint-FINAL.pdf">Download the full paper (PDF)</a>
   </p>
 
 </article>
 
 <!-- ARTICLE NAV -->
 <div class="article-nav">
-  <a href="dissipative-decoder.html">&larr; Why the Basin Exists</a>
+  <a href="dissipative-decoder.html">&larr; Why the Basin Exists &mdash; and Why Silicon Escapes It</a>
   <span></span>
 </div>
 
