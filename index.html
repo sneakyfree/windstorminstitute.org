@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Windstorm Institute — Information Theory Across Substrates</title>
-<meta name="description" content="Independent research at the intersection of information theory, molecular biology, and artificial intelligence. Windstorm Labs. Fort Anne, New York.">
+<meta name="description" content="Independent research at the intersection of information theory, molecular biology, and artificial intelligence. Five papers. One throughput basin. Fort Ann, New York.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
@@ -25,8 +25,11 @@
   --accent-glow: rgba(6, 182, 212, 0.15);
   --accent-2: #8b5cf6;
   --warm: #f59e0b;
+  --red: #ef4444;
+  --green: #22c55e;
   --mono: 'JetBrains Mono', monospace;
   --sans: 'Inter', -apple-system, sans-serif;
+  --serif: 'Lora', Georgia, serif;
 }
 
 html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
@@ -84,9 +87,15 @@ nav {
 }
 .nav-links a:hover { color: var(--text); }
 
+/* Mobile menu */
+.nav-toggle {
+  display: none; background: none; border: none; color: var(--text);
+  font-size: 1.5rem; cursor: pointer; padding: 4px;
+}
+
 /* ─── HERO ─── */
 .hero {
-  padding: 160px 0 120px;
+  padding: 160px 0 80px;
   position: relative;
 }
 .hero::before {
@@ -96,6 +105,12 @@ nav {
   background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%);
   pointer-events: none;
   opacity: 0.5;
+}
+.hero-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
 }
 .hero-badge {
   display: inline-flex; align-items: center; gap: 8px;
@@ -110,10 +125,9 @@ nav {
   background: var(--accent); box-shadow: 0 0 8px var(--accent);
 }
 .hero h1 {
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(2.2rem, 4.5vw, 3.5rem);
   font-weight: 700; letter-spacing: -0.03em;
   line-height: 1.1; margin-bottom: 1.5rem;
-  max-width: 700px;
 }
 .hero h1 .gradient {
   background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 50%, var(--warm) 100%);
@@ -121,20 +135,36 @@ nav {
   background-clip: text;
 }
 .hero-sub {
-  font-size: 1.15rem; color: var(--text-muted); max-width: 560px;
-  line-height: 1.75; margin-bottom: 3rem;
+  font-size: 1.05rem; color: var(--text-muted); max-width: 520px;
+  line-height: 1.75; margin-bottom: 2rem;
 }
-.hero-metrics {
-  display: flex; gap: 3rem; flex-wrap: wrap;
+
+/* ─── CONVERGENCE VISUALIZATION ─── */
+.convergence-viz {
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
 }
-.metric {
-  display: flex; flex-direction: column; gap: 4px;
+
+/* ─── STATS ─── */
+.stats-bar {
+  padding: 3rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
-.metric-val {
+.stats-grid {
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem;
+}
+.stat {
+  display: flex; flex-direction: column; gap: 4px; text-align: center; flex: 1;
+  min-width: 120px;
+}
+.stat-val {
   font-family: var(--mono); font-size: 1.5rem; font-weight: 600;
   color: var(--text);
 }
-.metric-lbl {
+.stat-lbl {
   font-size: 0.75rem; color: var(--text-faint); text-transform: uppercase;
   letter-spacing: 0.1em; font-weight: 500;
 }
@@ -149,7 +179,7 @@ section { padding: 100px 0; }
 .section-title {
   font-size: clamp(1.5rem, 3vw, 2.25rem);
   font-weight: 700; letter-spacing: -0.02em;
-  margin-bottom: 1rem; max-width: 500px;
+  margin-bottom: 1rem; max-width: 600px;
 }
 .section-desc {
   font-size: 1.05rem; color: var(--text-muted); max-width: 560px;
@@ -161,6 +191,138 @@ section { padding: 100px 0; }
   height: 1px; background: var(--border);
   max-width: 1100px; margin: 0 auto;
 }
+
+/* ─── RESEARCH ARC ─── */
+.arc-section {
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+.arc-subtitle {
+  font-family: var(--mono); font-size: 0.9rem; color: var(--text-muted);
+  margin-bottom: 3rem;
+}
+.arc-timeline {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 2rem 0;
+  overflow-x: auto;
+}
+.arc-timeline::before {
+  content: '';
+  position: absolute;
+  top: 38px;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--warm));
+  z-index: 0;
+}
+.arc-node {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-width: 160px;
+  flex: 1;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s;
+}
+.arc-node:hover { transform: translateY(-4px); color: inherit; }
+.arc-dot {
+  width: 16px; height: 16px; border-radius: 50%;
+  border: 3px solid var(--bg);
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 2;
+}
+.arc-dot.c-cyan { background: var(--accent); box-shadow: 0 0 12px rgba(6, 182, 212, 0.5); }
+.arc-dot.c-purple { background: var(--accent-2); box-shadow: 0 0 12px rgba(139, 92, 246, 0.5); }
+.arc-dot.c-amber { background: var(--warm); box-shadow: 0 0 12px rgba(245, 158, 11, 0.5); }
+.arc-dot.c-green { background: var(--green); box-shadow: 0 0 12px rgba(34, 197, 94, 0.5); }
+.arc-dot.c-red { background: var(--red); box-shadow: 0 0 12px rgba(239, 68, 68, 0.5); }
+.arc-paper-label {
+  font-family: var(--mono); font-size: 0.65rem; font-weight: 600;
+  color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.08em;
+  margin-bottom: 0.4rem;
+}
+.arc-paper-title {
+  font-size: 0.8rem; font-weight: 600; margin-bottom: 0.4rem;
+  line-height: 1.3;
+}
+.arc-paper-q {
+  font-size: 0.75rem; color: var(--text-muted); font-style: italic;
+}
+.arc-label-bar {
+  text-align: center;
+  margin-top: 2.5rem;
+  padding: 1rem 2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: inline-block;
+}
+.arc-label-bar span {
+  font-family: var(--mono); font-size: 0.8rem; font-weight: 500;
+  color: var(--text-muted); letter-spacing: 0.06em;
+}
+.arc-label-bar strong {
+  color: var(--accent);
+}
+
+/* ─── FORMA ANIMAE ─── */
+.forma-section {
+  padding: 100px 0;
+  position: relative;
+}
+.forma-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(139, 92, 246, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 50%, rgba(6, 182, 212, 0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+.forma-inner {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+.forma-title {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, var(--accent-2) 0%, var(--accent) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.forma-subtitle {
+  font-family: var(--serif);
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--text-faint);
+  margin-bottom: 3rem;
+}
+.forma-text {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  line-height: 2;
+  text-align: left;
+}
+.forma-text p { margin-bottom: 1.5rem; }
+.forma-text strong { color: var(--text); font-weight: 500; }
 
 /* ─── RESEARCH AREAS ─── */
 .areas-grid {
@@ -180,16 +342,47 @@ section { padding: 100px 0; }
 .area-icon {
   width: 40px; height: 40px; border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 1.2rem; margin-bottom: 1.25rem;
+  margin-bottom: 1.25rem;
 }
 .area-icon.info { background: rgba(6, 182, 212, 0.12); }
 .area-icon.bio { background: rgba(139, 92, 246, 0.12); }
 .area-icon.ai { background: rgba(245, 158, 11, 0.12); }
+.area-icon svg { width: 20px; height: 20px; }
 .area-card h3 {
   font-size: 1.05rem; font-weight: 600; margin-bottom: 0.75rem;
   letter-spacing: -0.01em;
 }
 .area-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
+
+/* ─── APPLICATIONS ─── */
+.app-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+.app-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px; padding: 2rem;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.app-card:hover {
+  border-color: var(--border-light);
+  transform: translateY(-2px);
+}
+.app-icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1.25rem;
+}
+.app-icon svg { width: 20px; height: 20px; }
+.app-icon.chip { background: rgba(34, 197, 94, 0.12); }
+.app-icon.dna { background: rgba(239, 68, 68, 0.12); }
+.app-icon.star { background: rgba(245, 158, 11, 0.12); }
+.app-card h3 {
+  font-size: 1.05rem; font-weight: 600; margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
+}
+.app-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
 
 /* ─── PUBLICATIONS ─── */
 .pub-list { display: flex; flex-direction: column; gap: 1rem; }
@@ -223,6 +416,53 @@ section { padding: 100px 0; }
 }
 .pub-tag.live { color: var(--accent); border-color: rgba(6, 182, 212, 0.3); }
 
+/* ─── ARTICLES ─── */
+.articles-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+.article-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+.article-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+.article-card-hero {
+  height: 180px;
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.15) 0%, rgba(139, 92, 246, 0.15) 50%, rgba(245, 158, 11, 0.1) 100%);
+  display: flex; align-items: center; justify-content: center;
+  border-bottom: 1px solid var(--border);
+}
+.article-card-hero-text {
+  font-family: var(--mono); font-size: 2.5rem; font-weight: 700;
+  color: rgba(255,255,255,0.08);
+}
+.article-card-body { padding: 1.75rem 2rem; flex: 1; display: flex; flex-direction: column; }
+.article-card-date {
+  font-family: var(--mono); font-size: 0.7rem; color: var(--text-faint);
+  text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem;
+}
+.article-card-date span { margin-left: 1rem; color: var(--accent); }
+.article-card h3 {
+  font-size: 1.1rem; font-weight: 600; margin-bottom: 0.75rem;
+  line-height: 1.4; letter-spacing: -0.01em;
+}
+.article-card p {
+  font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; flex: 1;
+}
+.article-card-link {
+  margin-top: 1.25rem;
+  font-family: var(--mono); font-size: 0.8rem; font-weight: 500;
+  color: var(--accent);
+}
+
 /* ─── INFRA ─── */
 .infra-grid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -241,6 +481,10 @@ section { padding: 100px 0; }
 .infra-val {
   font-family: var(--mono); font-size: 1.1rem; font-weight: 600;
   color: var(--text); margin-bottom: 0.25rem;
+}
+.infra-note {
+  font-size: 0.85rem; color: var(--text-faint); margin-top: 2rem;
+  font-style: italic;
 }
 
 /* ─── TEAM ─── */
@@ -274,12 +518,30 @@ footer {
 .footer-links a:hover { color: var(--text-muted); }
 
 /* ─── RESPONSIVE ─── */
+@media (max-width: 768px) {
+  .hero-content { grid-template-columns: 1fr; }
+  .convergence-viz { max-width: 100%; margin-top: 2rem; }
+  .arc-timeline { flex-direction: column; align-items: stretch; gap: 1.5rem; }
+  .arc-timeline::before {
+    top: 0; bottom: 0; left: 38px; right: auto;
+    width: 2px; height: auto;
+  }
+  .arc-node {
+    flex-direction: row; text-align: left; align-items: flex-start;
+    min-width: auto; gap: 1rem;
+  }
+  .arc-dot { margin-bottom: 0; margin-top: 4px; flex-shrink: 0; }
+  .pub-card { flex-direction: column; gap: 0.75rem; }
+}
 @media (max-width: 640px) {
   .nav-links { display: none; }
-  .hero { padding: 120px 0 80px; }
-  .hero-metrics { gap: 2rem; }
-  .pub-card { flex-direction: column; gap: 0.75rem; }
+  .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: rgba(10,10,11,0.95); padding: 1rem 2rem; gap: 1rem; border-bottom: 1px solid var(--border); }
+  .nav-toggle { display: block; }
+  .hero { padding: 120px 0 60px; }
+  .stats-grid { gap: 1.5rem; }
+  .stat { min-width: 100px; }
   section { padding: 60px 0; }
+  .articles-grid { grid-template-columns: 1fr; }
 }
 
 /* ─── AMBIENT ANIMATION ─── */
@@ -299,8 +561,10 @@ footer {
       <div class="nav-mark">W</div>
       The Windstorm Institute
     </a>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle navigation">&#9776;</button>
     <div class="nav-links">
       <a href="#research">Research</a>
+      <a href="#articles">Articles</a>
       <a href="#publications">Publications</a>
       <a href="#labs">Labs</a>
       <a href="#team">Team</a>
@@ -311,25 +575,104 @@ footer {
 <!-- HERO -->
 <section class="hero">
   <div class="container">
-    <div class="hero-badge">Established 2026 · Fort Anne, New York</div>
-    <h1>Information theory<br><span class="gradient">across substrates.</span></h1>
-    <p class="hero-sub">The Windstorm Institute studies the mathematical constraints governing information processing in biological, neural, and artificial systems. Our work bridges rate-distortion theory, molecular biology, and machine learning to uncover universal principles of serial decoding.</p>
-    <div class="hero-metrics">
-      <div class="metric">
-        <div class="metric-val">1,826</div>
-        <div class="metric-lbl">Models Evaluated</div>
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="hero-badge">Established 2026 · Fort Ann, New York</div>
+        <h1>Information theory<br><span class="gradient">across substrates.</span></h1>
+        <p class="hero-sub">The Windstorm Institute studies the mathematical constraints governing information processing in biological, neural, and artificial systems. Seven systems from six domains. One throughput band.</p>
       </div>
-      <div class="metric">
-        <div class="metric-val">4.39</div>
-        <div class="metric-lbl">Bits — Ribosome Floor</div>
+      <div class="convergence-viz">
+        <img src="assets/images/web_hero_convergence.png" alt="Seven information processing systems from six domains — Ribosome, English Consonants, Chromatic Scale, Neural Working Memory, AI Transformers, Morse Code, and TCP/IP — all converge on a throughput band of 3 to 6 bits per event, centered at 4.16 bits." style="width: 100%; border-radius: 12px;">
       </div>
-      <div class="metric">
-        <div class="metric-val">3</div>
-        <div class="metric-lbl">Papers Published</div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-val">1,826</div>
+        <div class="stat-lbl">Models Evaluated</div>
       </div>
-      <div class="metric">
-        <div class="metric-val">p=0.576</div>
-        <div class="metric-lbl">Vocab Independence</div>
+      <div class="stat">
+        <div class="stat-val">4.39</div>
+        <div class="stat-lbl">Bits — Ribosome Floor</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">5</div>
+        <div class="stat-lbl">Papers Published</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">14</div>
+        <div class="stat-lbl">Organisms Tested</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">p=0.576</div>
+        <div class="stat-lbl">Vocab Independence</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- THE RESEARCH ARC -->
+<section class="arc-section" id="arc">
+  <div class="container">
+    <div class="section-label">The Big Picture</div>
+    <h2 class="section-title">The Research Arc</h2>
+    <p class="arc-subtitle">Five papers. One question. From observation to law.</p>
+
+    <div style="margin-bottom: 3rem;">
+      <img src="assets/images/web_research_arc.png" alt="The Research Arc: five papers progressing from 'what exists' through 'where it sits' to 'why it must'" style="width: 100%; border-radius: 12px;">
+    </div>
+
+    <div class="arc-timeline">
+      <a href="articles/fons-constraint.html" class="arc-node">
+        <div class="arc-dot c-cyan"></div>
+        <div>
+          <div class="arc-paper-label">Paper 0</div>
+          <div class="arc-paper-title">The Fons Constraint</div>
+          <div class="arc-paper-q">"Why 64 codons?"</div>
+        </div>
+      </a>
+      <a href="articles/receiver-limited-floor.html" class="arc-node">
+        <div class="arc-dot c-purple"></div>
+        <div>
+          <div class="arc-paper-label">Paper 1</div>
+          <div class="arc-paper-title">The Receiver-Limited Floor</div>
+          <div class="arc-paper-q">"Vocabulary doesn't matter"</div>
+        </div>
+      </a>
+      <a href="articles/throughput-basin.html" class="arc-node">
+        <div class="arc-dot c-amber"></div>
+        <div>
+          <div class="arc-paper-label">Paper 2</div>
+          <div class="arc-paper-title">The Throughput Basin</div>
+          <div class="arc-paper-q">"31 systems, one band"</div>
+        </div>
+      </a>
+      <a href="articles/serial-decoding-basin.html" class="arc-node">
+        <div class="arc-dot c-green"></div>
+        <div>
+          <div class="arc-paper-label">Paper 3</div>
+          <div class="arc-paper-title">The Serial Decoding Basin &tau;</div>
+          <div class="arc-paper-q">"&tau; = 4.16 &plusmn; 0.19 bits"</div>
+        </div>
+      </a>
+      <a href="articles/dissipative-decoder.html" class="arc-node">
+        <div class="arc-dot c-red"></div>
+        <div>
+          <div class="arc-paper-label">Paper 4</div>
+          <div class="arc-paper-title">The Dissipative Decoder</div>
+          <div class="arc-paper-q">"WHY the basin exists"</div>
+        </div>
+      </a>
+    </div>
+
+    <div style="text-align: center; margin-top: 2.5rem;">
+      <div class="arc-label-bar">
+        <span><strong>WHAT</strong> exists &nbsp;&rarr;&nbsp; <strong>WHERE</strong> it sits &nbsp;&rarr;&nbsp; <strong>WHY</strong> it must</span>
       </div>
     </div>
   </div>
@@ -337,7 +680,25 @@ footer {
 
 <div class="divider"></div>
 
-<!-- RESEARCH -->
+<!-- FORMA ANIMAE ORGANON -->
+<section class="forma-section" id="forma">
+  <div class="container">
+    <div class="forma-inner">
+      <div class="section-label" style="text-align: center;">The Philosophical Framework</div>
+      <h2 class="forma-title">Forma Animae Organon</h2>
+      <p class="forma-subtitle">The instrument of the soul's form</p>
+      <div class="forma-text">
+        <p>The Windstorm Institute's research is guided by a simple philosophical premise: <strong>information is not a metaphor for life — it is the substrate of life.</strong> The ribosome is not "like" a decoder. It IS a decoder. The brain is not "like" a computer. It IS a serial information processor. When we discovered that these systems all converge on the same throughput band, we were not finding an analogy. We were uncovering the mathematical skeleton that all serial decoders share.</p>
+        <p>The Forma Animae Organon is our name for this lens. It is not a theory — it is a way of looking. It asks: if you strip away the chemistry, the biology, the engineering, <strong>what mathematical structure remains?</strong></p>
+        <p>The answer, across five papers and thousands of experiments, is the rate-distortion surface and the thermodynamic cost landscape. <strong>These are the bones. Everything else is flesh.</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- RESEARCH AREAS -->
 <section id="research">
   <div class="container">
     <div class="section-label">Research Areas</div>
@@ -345,19 +706,59 @@ footer {
     <p class="section-desc">We investigate why serial decoding systems — from ribosomes to transformers — converge on similar throughput constraints despite operating on radically different substrates.</p>
     <div class="areas-grid">
       <div class="area-card">
-        <div class="area-icon info">📐</div>
+        <div class="area-icon info">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"/><path d="M5 20V8l5-5 5 5v12"/><path d="M10 20v-6h4v6"/><path d="M18 20V4l-3 3"/></svg>
+        </div>
         <h3>Rate-Distortion Theory</h3>
         <p>Deriving mechanistic bounds on serial decoding throughput using Shannon's M-ary rate-distortion framework. Zero-free-parameter predictions for biological receivers.</p>
       </div>
       <div class="area-card">
-        <div class="area-icon bio">🧬</div>
+        <div class="area-icon bio">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v8"/><path d="m4.93 10.93 1.41 1.41"/><path d="M2 18h2"/><path d="M20 18h2"/><path d="m19.07 10.93-1.41 1.41"/><path d="M22 22H2"/><path d="m9 8 3 3 3-3"/><path d="m8 14 4 4 4-4"/></svg>
+        </div>
         <h3>Molecular Information Processing</h3>
         <p>The ribosome as an information channel. Thermodynamic anchoring of throughput to kT via Hopfield kinetic proofreading. Why 21 amino acids — not 10, not 100.</p>
       </div>
       <div class="area-card">
-        <div class="area-icon ai">⚡</div>
+        <div class="area-icon ai">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
         <h3>AI Throughput Constraints</h3>
         <p>Large-scale empirical studies of tokenizer vocabulary independence. 1,826-model sweeps demonstrating that vocabulary size is a redundancy parameter, not an information parameter.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- APPLICATIONS -->
+<section id="applications">
+  <div class="container">
+    <div class="section-label">Applications</div>
+    <h2 class="section-title">What the throughput basin means for the real world.</h2>
+    <p class="section-desc">The throughput basin isn't just a theoretical curiosity. It has concrete implications for AI hardware, synthetic biology, and the search for extraterrestrial life.</p>
+    <div class="app-grid">
+      <div class="app-card">
+        <div class="app-icon chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg>
+        </div>
+        <h3>AI Hardware</h3>
+        <p>The throughput basin predicts that AI models gain nothing from larger vocabularies and waste most of their energy on precision they don't need. Quantization research, efficient architectures, and cooling innovation are the paths to the thermodynamic limit. Optimize joules per decision, not FLOPS per second.</p>
+      </div>
+      <div class="app-card">
+        <div class="app-icon dna">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 15c6.667-6 13.333 0 20-6"/><path d="M9 22c1.798-1.998 2.518-3.995 2.807-5.993"/><path d="M15 2c-1.798 1.998-2.518 3.995-2.807 5.993"/><path d="m17 6-2.5-2.5"/><path d="m14 8-1-1"/><path d="m7 18 2.5 2.5"/><path d="m3.5 14.5.5.5"/><path d="m20 9 .5.5"/><path d="m6.5 12.5 1 1"/><path d="m16.5 10.5 1 1"/><path d="m10 16 1.5 1.5"/></svg>
+        </div>
+        <h3>Synthetic Biology</h3>
+        <p>Expanding the genetic code beyond 21 amino acids will cost super-linear energy per addition. Each new amino acid requires exponentially more discrimination infrastructure. The throughput basin constrains what synthetic biology can achieve affordably.</p>
+      </div>
+      <div class="app-card">
+        <div class="app-icon star">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        </div>
+        <h3>Astrobiology</h3>
+        <p>Any alien biochemistry that processes serial information under noise faces the same rate-distortion geometry. The effective throughput per step would land in the same 3-6 bit neighborhood. The basin is universal — it doesn't depend on Earth chemistry.</p>
       </div>
     </div>
   </div>
@@ -372,6 +773,18 @@ footer {
     <h2 class="section-title">Published research.</h2>
     <p class="section-desc">All papers include reproducible Python code, full experiment protocols, and honest limitations. We lead with falsified predictions because that's how science works.</p>
     <div class="pub-list">
+      <a href="https://doi.org/10.5281/zenodo.19274048" class="pub-card" target="_blank">
+        <div class="pub-num">00</div>
+        <div class="pub-info">
+          <h4>The Fons Constraint</h4>
+          <p>The foundational observation: AI tokenizer vocabularies do not cluster near 64 — but effective information per processing event does converge across substrates. The falsified prediction that started everything.</p>
+          <div class="pub-meta">
+            <span class="pub-tag live">2026</span>
+            <span class="pub-tag">zenodo</span>
+            <span class="pub-tag">doi: 10.5281/zenodo.19274048</span>
+          </div>
+        </div>
+      </a>
       <a href="#" class="pub-card">
         <div class="pub-num">01</div>
         <div class="pub-info">
@@ -388,7 +801,7 @@ footer {
         <div class="pub-num">02</div>
         <div class="pub-info">
           <h4>The Throughput Basin: Cross-Substrate Convergence and Decomposition of Serial Decoding Throughput</h4>
-          <p>Basin decomposition I_eff = R_M(ε) + Δ_s + ξ across 31 systems. Three independent evolutionary simulations converge to K ≈ 19–30. Co-evolutionary discovery of the genetic code's parameters from pure optimization.</p>
+          <p>Basin decomposition I_eff = R_M(&epsilon;) + &Delta;_s + &xi; across 31 systems. Three independent evolutionary simulations converge to K &asymp; 19-30. Co-evolutionary discovery of the genetic code's parameters from pure optimization.</p>
           <div class="pub-meta">
             <span class="pub-tag live">2026</span>
             <span class="pub-tag">cross-substrate</span>
@@ -399,8 +812,8 @@ footer {
       <a href="#" class="pub-card">
         <div class="pub-num">03</div>
         <div class="pub-info">
-          <h4>The Serial Decoding Basin τ: Five Experiments on Convergence, Thermodynamic Anchoring, and the Geometry of Receiver-Limited Throughput</h4>
-          <p>Five reproducible experiments forming a convergent evidence chain. Thermodynamic prediction of ribosome throughput to Δ = 0.003 bits. Falsifiable wet-lab prediction included.</p>
+          <h4>The Serial Decoding Basin &tau;: Five Experiments on Convergence, Thermodynamic Anchoring, and the Geometry of Receiver-Limited Throughput</h4>
+          <p>Five reproducible experiments forming a convergent evidence chain. Thermodynamic prediction of ribosome throughput to &Delta; = 0.003 bits. Falsifiable wet-lab prediction included.</p>
           <div class="pub-meta">
             <span class="pub-tag live">2026</span>
             <span class="pub-tag">experimental</span>
@@ -408,16 +821,95 @@ footer {
           </div>
         </div>
       </a>
-      <a href="https://doi.org/10.5281/zenodo.19274048" class="pub-card" target="_blank">
-        <div class="pub-num">00</div>
+      <a href="#" class="pub-card">
+        <div class="pub-num">04</div>
         <div class="pub-info">
-          <h4>The Fons Constraint</h4>
-          <p>The foundational observation: AI tokenizer vocabularies do not cluster near 64 — but effective information per processing event does converge across substrates. The falsified prediction that started everything.</p>
+          <h4>The Dissipative Decoder: Thermodynamic Cost Bounds on the Serial Decoding Throughput Basin</h4>
+          <p>Derives WHY the basin sits where it does from thermodynamic cost minimization. Phase-space analysis proves the basin is geometrically inevitable for any &alpha; > 1. Preliminary thermophilic validation (partial r = &minus;0.782, p = 0.002).</p>
           <div class="pub-meta">
             <span class="pub-tag live">2026</span>
-            <span class="pub-tag">zenodo</span>
-            <span class="pub-tag">doi: 10.5281/zenodo.19274048</span>
+            <span class="pub-tag">thermodynamics</span>
+            <span class="pub-tag">empirical</span>
           </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ARTICLES -->
+<section id="articles">
+  <div class="container">
+    <div class="section-label">Articles</div>
+    <h2 class="section-title">Long-form writing for a general audience.</h2>
+    <p class="section-desc">Research explained in plain language. No jargon walls, no dumbing down — just honest exposition of what the data says and why it matters.</p>
+    <div class="articles-grid">
+      <a href="articles/speed-limit-of-thought.html" class="article-card" style="grid-column: 1 / -1;">
+        <div class="article-card-hero" style="height: 240px;">
+          <img src="assets/images/web_hero_convergence.png" alt="Seven systems converging on the throughput basin" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div class="article-card-body">
+          <div class="article-card-date">April 2026 <span>~18 min read</span></div>
+          <h3>The Speed Limit of Thought: How Biology, Brains, and AI All Hit the Same Wall — and Why Physics Says They Must</h3>
+          <p>The overview. From ribosomes to transformers, every system that decodes serial information under noise lands in the same narrow throughput band. Five papers, one universal constraint, and what it means for the future of AI, synthetic biology, and the search for alien life.</p>
+          <div class="article-card-link">Read article &rarr;</div>
+        </div>
+      </a>
+      <a href="articles/fons-constraint.html" class="article-card">
+        <div class="article-card-hero">
+          <div class="article-card-hero-text" style="color: rgba(255,100,68,0.12);">4&sup3;</div>
+        </div>
+        <div class="article-card-body">
+          <div class="article-card-date">April 2026 <span>~8 min read</span></div>
+          <h3>Why the Genetic Code Uses 64 Codons</h3>
+          <p>Two independent proofs — Shannon and Eigen — both derive triplet encoding as mathematical necessity. The falsified prediction that launched the research program.</p>
+          <div class="article-card-link">Read article &rarr;</div>
+        </div>
+      </a>
+      <a href="articles/receiver-limited-floor.html" class="article-card">
+        <div class="article-card-hero">
+          <div class="article-card-hero-text" style="color: rgba(68,170,255,0.12);">p=.643</div>
+        </div>
+        <div class="article-card-body">
+          <div class="article-card-date">April 2026 <span>~10 min read</span></div>
+          <h3>1,749 Models and a Flat Line</h3>
+          <p>Why bigger vocabularies don't help AI. A 750x vocabulary difference produces a 5% throughput difference. The receiver sets the limit.</p>
+          <div class="article-card-link">Read article &rarr;</div>
+        </div>
+      </a>
+      <a href="articles/throughput-basin.html" class="article-card">
+        <div class="article-card-hero">
+          <div class="article-card-hero-text" style="color: rgba(68,221,170,0.12);">31</div>
+        </div>
+        <div class="article-card-body">
+          <div class="article-card-date">April 2026 <span>~12 min read</span></div>
+          <h3>When a Computer Reinvents the Genetic Code</h3>
+          <p>31 systems across six domains cluster in a 3&ndash;6 bit band. An evolutionary simulation rediscovers the genetic code from pure math.</p>
+          <div class="article-card-link">Read article &rarr;</div>
+        </div>
+      </a>
+      <a href="articles/serial-decoding-basin.html" class="article-card">
+        <div class="article-card-hero">
+          <div class="article-card-hero-text" style="color: rgba(68,170,255,0.12);">&Delta;.003</div>
+        </div>
+        <div class="article-card-body">
+          <div class="article-card-date">April 2026 <span>~12 min read</span></div>
+          <h3>Predicting the Ribosome from Pure Physics</h3>
+          <p>Four measured parameters. Zero fitting. Three decimal places of accuracy. The ribosome operates within 2% of its thermodynamic minimum.</p>
+          <div class="article-card-link">Read article &rarr;</div>
+        </div>
+      </a>
+      <a href="articles/dissipative-decoder.html" class="article-card">
+        <div class="article-card-hero">
+          <div class="article-card-hero-text" style="color: rgba(170,102,255,0.12);">&eta;</div>
+        </div>
+        <div class="article-card-body">
+          <div class="article-card-date">April 2026 <span>~14 min read</span></div>
+          <h3>Why the Basin Exists</h3>
+          <p>Thermodynamic cost minimization explains the throughput basin. The efficiency peak at M&asymp;20. The Carnot analogy. 14 organisms confirm it.</p>
+          <div class="article-card-link">Read article &rarr;</div>
         </div>
       </a>
     </div>
@@ -454,6 +946,7 @@ footer {
         <p>All code, data, and experiment protocols published. Every result reproducible on commodity hardware.</p>
       </div>
     </div>
+    <p class="infra-note">Institute: Fort Ann, NY &nbsp;|&nbsp; Labs: Mount Pleasant, SC</p>
   </div>
 </section>
 
@@ -468,7 +961,7 @@ footer {
       <div class="team-card">
         <h3>Grant Lavell Whitmer III</h3>
         <div class="team-role">Founder & Principal Investigator</div>
-        <p>U.S. Naval Academy graduate. Cross-disciplinary researcher working at the intersection of information theory, molecular biology, and artificial intelligence. Creator of the Throughput Constraint framework and the Forma Animae thesis.</p>
+        <p>U.S. Naval Academy graduate. Cross-disciplinary researcher working at the intersection of information theory, molecular biology, and artificial intelligence. Creator of the Throughput Constraint framework and the Forma Animae Organon — the philosophical lens through which the Institute approaches its research. Author of the forthcoming popular book <em>The Pattern</em>, which brings the throughput basin story to a general audience.</p>
       </div>
       <div class="team-card">
         <h3>Windstorm Labs</h3>
@@ -500,7 +993,7 @@ footer {
   <div class="container">
     <div class="footer-inner">
       <div class="footer-left">
-        © 2026 The Windstorm Institute · Fort Anne, New York
+        &copy; 2026 The Windstorm Institute &middot; Fort Ann, New York
       </div>
       <div class="footer-links">
         <a href="https://github.com/Windstorm-Institute" target="_blank">GitHub</a>
