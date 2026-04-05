@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Why the Basin Exists — The Windstorm Institute</title>
+<title>Why the Basin Exists — and Why Silicon Escapes It — The Windstorm Institute</title>
 <meta name="description" content="The Dissipative Decoder: Energy, Information, and the Speed Limit of Thought. By Grant Lavell Whitmer III.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -292,7 +292,7 @@ nav {
       <span>~14 min read</span>
       <span>Grant Lavell Whitmer III</span>
     </div>
-    <h1>Why the Basin Exists:<br><span class="gradient">The Dissipative Decoder: Energy, Information, and the Speed Limit of Thought</span></h1>
+    <h1>Why the Basin Exists &mdash; and Why Silicon Escapes It:<br><span class="gradient">The Dissipative Decoder: Energy, Information, and the Speed Limit of Thought</span></h1>
     <p class="article-subtitle">This article summarizes "The Dissipative Decoder: Thermodynamic Cost Bounds on the Serial Decoding Throughput Basin" (in preparation, 2026).</p>
     <div class="figure" style="margin: 2rem auto;">
       <img src="../assets/images/web_carnot_analogy.png" alt="Carnot analogy diagram">
@@ -373,9 +373,21 @@ nav {
 
   <p>The prediction: organisms living at higher temperatures should show reduced amino acid diversity because thermal noise increases the cost of discrimination. Hotter environments mean the "kitchen" is more expensive to run, so organisms restrict their "menu."</p>
 
-  <p>We tested this against real genomic data from 14 prokaryotic organisms spanning 8&deg;C to 100&deg;C growth temperature. The critical control: we included two organisms (<em>Streptomyces coelicolor</em> and <em>Micrococcus luteus</em>) that have extreme GC-content in their DNA (72&ndash;73%) but grow at room temperature. If the amino acid entropy drop in thermophiles were just a DNA composition artifact, these organisms would show low entropy too.</p>
+  <p>We tested this against real genomic data from 29 organisms spanning 8&deg;C to 100&deg;C growth temperature (Kazusa live database verification). The critical control: we included two organisms (<em>Streptomyces coelicolor</em> and <em>Micrococcus luteus</em>) that have extreme GC-content in their DNA (72&ndash;73%) but grow at room temperature. If the amino acid entropy drop in thermophiles were just a DNA composition artifact, these organisms would show low entropy too.</p>
 
-  <p>They don't. Their amino acid entropy is normal. The temperature signal survives GC correction with a partial correlation of r = &minus;0.782 (p = 0.002). Heat taxes information processing, exactly as predicted.</p>
+  <p>They don't. Their amino acid entropy is normal. The temperature signal survives GC correction with a partial correlation of r = &minus;0.451 (p = 0.014); preliminary evidence pending PGLS confirmation. Heat taxes information processing, exactly as predicted.</p>
+
+  <hr>
+
+  <h2>The Two Regimes</h2>
+
+  <p>Paper 4 revealed a critical distinction that the earlier papers missed. Not all serial decoders face the same cost geometry.</p>
+
+  <p>Biology builds its alphabet through pairwise molecular recognition &mdash; each amino acid must be physically distinguished from every other one. This creates super-linear cost scaling (&alpha; &gt; 1), which guarantees a throughput basin. The ribosome sits at the computed optimum: M = 21 amino acids, operating within 2% of its thermodynamic minimum.</p>
+
+  <p>Silicon builds its vocabulary through learned parameters &mdash; each weight in a neural network is independent. Cost scales sub-linearly (&alpha; &lt; 1). Result: no basin. Silicon can, in principle, scale indefinitely.</p>
+
+  <p>But here's the paradox that Paper 5 resolves: AI still converges on ~4.2 bits per token. Not because silicon is constrained by thermodynamics, but because it learned from language produced by brains that are. The basin's fingerprint propagates through the training data.</p>
 
   <hr>
 
@@ -407,12 +419,16 @@ nav {
     DOI: <a href="#">Zenodo DOI forthcoming</a>
   </p>
 
+  <p style="font-size: 0.9rem; color: var(--text-faint); text-align: center; font-family: var(--sans);">
+    Read the full paper: <a href="../assets/documents/Dissipative-Decoder-FINAL.pdf">[PDF]</a>
+  </p>
+
 </article>
 
 <!-- ARTICLE NAV -->
 <div class="article-nav">
   <a href="serial-decoding-basin.html">&larr; Predicting the Ribosome from Pure Physics</a>
-  <span></span>
+  <a href="inherited-constraint.html">Next: The Inherited Constraint &rarr;</a>
 </div>
 
 <!-- FOOTER -->
