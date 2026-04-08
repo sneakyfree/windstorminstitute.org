@@ -310,7 +310,7 @@ nav {
 <!-- ARTICLE BODY -->
 <article class="article-body">
 
-  <p><em>This article summarizes five papers published by the Windstorm Institute in 2026. It is written for a general audience. Technical readers will find the full mathematics, code, and data in the companion papers on Zenodo.</em></p>
+  <p><em>This article summarizes six papers published by the Windstorm Institute in 2026. It is written for a general audience. Technical readers will find the full mathematics, code, and data in the companion papers on Zenodo.</em></p>
 
   <hr>
 
@@ -324,7 +324,7 @@ nav {
 
   <p>And yet they all landed on the same number.</p>
 
-  <p>This could be a coincidence. The work of the Windstorm Institute over the past year has been dedicated to finding out whether it is. The answer, across five papers and thousands of experiments, is: no. It is not a coincidence. It is a law.</p>
+  <p>This could be a coincidence. The work of the Windstorm Institute over the past year has been dedicated to finding out whether it is. The answer, across six papers and thousands of experiments, is: no. It is not a coincidence. It is a law.</p>
 
   <hr>
 
@@ -418,7 +418,9 @@ nav {
 
   <p>But here's the truly universal result: the peak doesn't depend on the precise cost parameters. We computed the efficiency landscape across the entire physically plausible parameter space and found that the 3-6 bit basin is a geometric inevitability. As long as the cost of discrimination grows faster than linearly with alphabet size — which is guaranteed by the physics of pairwise comparison — the optimum lands between 3 and 6 bits. The exact cost values don't matter. The basin is a topological feature of the mathematics, not a coincidence of parameter tuning.</p>
 
-  <p>We formalized this for two completely different physical regimes. Biology fights thermal noise (the random jiggling of molecules at body temperature) using chemical energy. Silicon AI fights quantization noise (the precision limits of digital arithmetic) using electrical energy. Different physics, different mechanisms — but the same mathematical structure: concave informational returns against convex discrimination costs. Both independently produce optima in the same 3-6 bit range.</p>
+  <p>But the story turned out to be more nuanced than we expected. We measured energy scaling directly: a 27-model benchmark on standardized hardware (RTX 5090) showed that silicon energy scales sub-linearly with model capacity (&alpha; = 0.937). Each additional parameter costs <em>less</em>, not more. Silicon's discrimination cost is sub-linear &mdash; the opposite of biology's quadratic scaling.</p>
+
+  <p>The consequence: the throughput basin exists for biology (where pairwise molecular recognition imposes super-linear cost, &alpha; &gt; 1) but <strong>not</strong> for silicon AI (where learned parameters impose sub-linear cost, &alpha; &lt; 1). We named these Regime A (alphabet-bound, biology) and Regime B (capacity-bound, silicon). The basin is a speed limit for pairwise discriminators. Biology is one. Silicon is not. So why does AI converge on ~4.2 bits per token? Because it learned from language shaped by brains that <em>are</em> constrained by the basin &mdash; a finding explored in the companion paper, <em>The Inherited Constraint</em>.</p>
 
   <hr>
 
@@ -428,19 +430,15 @@ nav {
 
   <p>The Dissipative Decoder makes a specific, testable prediction: organisms that live at higher temperatures should show reduced amino acid diversity. The logic is simple — hotter environments mean higher thermal noise, which means discrimination between similar amino acids costs more energy. The cost-optimal response is to restrict the working alphabet, concentrating usage on fewer amino acids that are easier to tell apart.</p>
 
-  <p>We tested this against real genomic data from 14 prokaryotic organisms spanning 8&deg;C to 100&deg;C growth temperature — from psychrophiles (cold-lovers) living near freezing to hyperthermophilic archaea thriving in boiling hot springs.</p>
+  <p>We tested this against the live Kazusa Codon Usage Database. Twenty-nine organisms spanning 8&deg;C to 100&deg;C growth temperature &mdash; from psychrophiles (cold-lovers) living near freezing to hyperthermophilic archaea thriving in boiling hot springs &mdash; with codon usage tables verified against the primary genomic database.</p>
 
-  <p>The result: amino acid entropy drops significantly with temperature (r = -0.717, p = 0.004). But here's the critical question: is this just because hot-spring organisms have unusual DNA composition?</p>
+  <p>The raw correlation between amino acid entropy and growth temperature is marginal (r = &minus;0.320, p = 0.091). But GC-content &mdash; the proportion of G and C bases in an organism's DNA &mdash; is a significant confound (r = &minus;0.539, p = 0.003). Thermophiles tend to have high GC-content because G-C base pairs have three hydrogen bonds versus two for A-T, making DNA more heat-stable. This compositional bias mechanically favors certain amino acids regardless of any thermodynamic effect on discrimination.</p>
 
-  <p>Thermophiles are known to have high GC-content in their DNA — they use more G and C bases because G-C base pairs have three hydrogen bonds (stronger) versus two for A-T (weaker), which prevents the DNA from melting at high temperatures. This compositional bias mechanically favors certain amino acids regardless of any thermodynamic effect on discrimination.</p>
+  <p>The partial correlation, mathematically removing everything GC-content can explain, is r = &minus;0.451 (p = 0.014, n = 29). The temperature signal survives the control &mdash; significant but moderate.</p>
 
-  <p>To control for this, we included two organisms that serve as a natural experiment: <em>Streptomyces coelicolor</em> and <em>Micrococcus luteus</em>. These bacteria have extreme GC-content (72-73%) — as high as any thermophile — but they grow at room temperature (30&deg;C). If the amino acid entropy drop were just a GC artifact, these organisms should show low entropy too.</p>
+  <p>This is preliminary evidence, not proof. Phylogenetic controls (PGLS) have not yet been applied. Prior work by Singer &amp; Hickey (2003) and Zeldovich et al. (2007) documented temperature-driven compositional shifts attributed to GC bias and protein stability. Our entropy measure captures a complementary signal, but the effect needs confirmation.</p>
 
-  <p>They don't. Their amino acid entropy is normal — right where the mesophiles sit.</p>
-
-  <p>The partial correlation, mathematically removing everything GC-content can explain, is r = -0.782 (p = 0.002). The temperature signal isn't just surviving the control — it's getting <em>stronger</em> once the noise of GC variation is removed.</p>
-
-  <p>Heat taxes information processing in living cells. The throughput basin forces their hand.</p>
+  <p>Heat appears to tax information processing in living cells. The throughput basin may force their hand &mdash; but this prediction is supported, not established.</p>
 
   <hr>
 
@@ -472,9 +470,9 @@ nav {
 
   <h2>The Road Ahead</h2>
 
-  <p>The Windstorm Institute has published four papers and a fifth is in preparation. Together they establish the throughput basin as an empirical fact, derive it from thermodynamic first principles, and begin to validate its predictions against real biological data.</p>
+  <p>The Windstorm Institute has published six papers. Together they establish the throughput basin as an empirical fact, derive it from thermodynamic first principles, explain why silicon escapes the basin while biology cannot, and show how AI inherits its throughput neighborhood from the biological systems that produced its training data.</p>
 
-  <p>Three falsifiable predictions remain in play. The temperature prediction has preliminary support from 14 organisms (partial r = -0.782, p = 0.002) and a full 50-species phylogenetically controlled analysis is underway. The AI energy prediction awaits measurement on standardized hardware. The expanded genetic code prediction awaits calorimetric data from cell-free translation experiments.</p>
+  <p>Falsifiable predictions remain in play. The temperature prediction has preliminary support from 29 Kazusa-verified organisms (partial r = &minus;0.451, p = 0.014) but awaits phylogenetically controlled confirmation (PGLS). The expanded genetic code prediction awaits calorimetric data from cell-free translation experiments. The inherited constraint hypothesis awaits a synthetic-training control &mdash; a model trained exclusively on non-biological data.</p>
 
   <p>Any of these predictions could fail. That's the point. Science doesn't progress by building unfalsifiable frameworks. It progresses by making predictions sharp enough to be wrong — and then checking.</p>
 
