@@ -210,6 +210,8 @@ section { padding: 100px 0; }
   gap: 0.5rem;
   padding: 2rem 0;
   overflow-x: auto;
+  flex-wrap: wrap;
+  row-gap: 2.5rem;
 }
 .arc-timeline::before {
   content: '';
@@ -227,8 +229,9 @@ section { padding: 100px 0; }
   flex-direction: column;
   align-items: center;
   text-align: center;
-  min-width: 160px;
-  flex: 1;
+  min-width: 124px;
+  max-width: 160px;
+  flex: 1 1 124px;
   cursor: pointer;
   text-decoration: none;
   color: inherit;
@@ -922,6 +925,21 @@ footer {
     <div class="section-label">Articles</div>
     <h2 class="section-title">Long-form writing for a general audience.</h2>
     <p class="section-desc">Research explained in plain language. No jargon walls, no dumbing down — just honest exposition of what the data says and why it matters.</p>
+
+    <div style="max-width: 720px; margin: 0 auto 3rem; padding: 1.5rem 1.75rem; border: 1px solid var(--border); border-radius: 12px; background: var(--surface);">
+      <div style="font-family: var(--mono); font-size: 0.7rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.85rem; font-weight: 600;">New here? Read in this order</div>
+      <ol style="margin: 0; padding-left: 1.25rem; font-size: 0.92rem; color: var(--text-muted); line-height: 1.85;">
+        <li><a href="articles/speed-limit-of-thought.html">The Speed Limit of Thought</a> — the overview <span style="color: var(--text-faint);">(~18 min)</span></li>
+        <li><a href="articles/fons-constraint.html">Why 64 Codons</a> — where it started <span style="color: var(--text-faint);">(~8 min)</span></li>
+        <li><a href="articles/receiver-limited-floor.html">1,749 Models and a Flat Line</a> — the AI evidence <span style="color: var(--text-faint);">(~10 min)</span></li>
+        <li><a href="articles/throughput-basin.html">31 Systems</a> — the cross-substrate convergence <span style="color: var(--text-faint);">(~12 min)</span></li>
+        <li><a href="articles/serial-decoding-basin.html">Predicting the Ribosome from Pure Physics</a> — the physics anchor <span style="color: var(--text-faint);">(~12 min)</span></li>
+        <li><a href="articles/dissipative-decoder.html">Why the Basin Exists</a> — the thermodynamic argument <span style="color: var(--text-faint);">(~14 min)</span></li>
+        <li><a href="articles/inherited-constraint.html">The Inherited Constraint</a> — why AI lands nearby <span style="color: var(--text-faint);">(~15 min)</span></li>
+        <li><a href="articles/throughput-basin-origin.html">The Mirror, Not the Wall</a> — Paper 7, the test <span style="color: var(--text-faint);">(~12 min)</span></li>
+      </ol>
+    </div>
+
     <div class="articles-grid">
       <a href="articles/speed-limit-of-thought.html" class="article-card" style="grid-column: 1 / -1;">
         <div class="article-card-hero" style="height: 240px;">
