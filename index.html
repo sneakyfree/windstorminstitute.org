@@ -623,7 +623,7 @@ footer {
   <div class="container">
     <div class="section-label">The Big Picture</div>
     <h2 class="section-title">The Research Arc</h2>
-    <p class="arc-subtitle">Six papers. One question. From observation to law to propagation.</p>
+    <p class="arc-subtitle">Seven papers. One question. From observation to law to propagation — and now, to falsification.</p>
 
     <div class="arc-timeline">
       <a href="articles/fons-constraint.html" class="arc-node">
@@ -672,6 +672,14 @@ footer {
           <div class="arc-paper-label">Paper 5</div>
           <div class="arc-paper-title">The Inherited Constraint</div>
           <div class="arc-paper-q">"Language carries the fingerprint"</div>
+        </div>
+      </a>
+      <a href="articles/throughput-basin-origin.html" class="arc-node">
+        <div class="arc-dot c-cyan"></div>
+        <div>
+          <div class="arc-paper-label">Paper 6 <span style="opacity:0.6;font-weight:400;">(ms. 7)</span></div>
+          <div class="arc-paper-title">The Throughput Basin Origin</div>
+          <div class="arc-paper-q">"Different data, different basin"</div>
         </div>
       </a>
     </div>
@@ -888,6 +896,19 @@ footer {
           </div>
         </div>
       </a>
+      <a href="articles/throughput-basin-origin.html" class="pub-card">
+        <div class="pub-num">06</div>
+        <div class="pub-info">
+          <h4>The Throughput Basin Origin: Four Orthogonal Experiments on Whether Serial Decoding Convergence Is Architectural, Thermodynamic, or Data-Driven <span style="font-size:0.8em;opacity:0.65;font-weight:400;">(Paper 7 in manuscript series)</span></h4>
+          <p>Tests the inherited-constraint hypothesis directly. At 92M parameters, on Markov synthetic data, achieved bits-per-token tracks training-corpus token entropy rather than collapsing to the ~4 BPT natural-language basin (SYN-8: 8.92 BPT on an 8-bit source). Transformer vs state-space comparison finds no detectable difference at this <em>n</em>. Wall-power survey on RTX 5090 places total-system silicon at 10<sup>15</sup>&ndash;10<sup>18</sup>&times; above Landauer (distinct from Paper 4's useful-dissipation figure). <strong>Published with its full internal adversarial review attached</strong>, which identifies four blocking items the present results do not yet resolve and scopes them as Paper 6.1. Read the article and the review as a unit. Code, data, and the unredacted review: <a href="https://github.com/sneakyfree/agi-extensions">github.com/sneakyfree/agi-extensions</a>.</p>
+          <div class="pub-meta">
+            <span class="pub-tag live">2026</span>
+            <span class="pub-tag">experimental</span>
+            <span class="pub-tag">adversarial review</span>
+            <span class="pub-tag">preprint</span>
+          </div>
+        </div>
+      </a>
     </div>
   </div>
 </section>
@@ -975,6 +996,17 @@ footer {
           <div class="article-card-date">April 2026 <span>~15 min read</span></div>
           <h3>The Inherited Constraint: How Language Carries the Fingerprint of Biological Throughput Limits</h3>
           <p>AI has no thermodynamic basin &mdash; so why does it converge on ~4.2 bits/token? Because it learned from language shaped by brains that do. The shuffling cascade: syntax carries 3.3 bits. Shannon predicted this 75 years ago.</p>
+          <div class="article-card-link">Read article &rarr;</div>
+        </div>
+      </a>
+      <a href="articles/throughput-basin-origin.html" class="article-card">
+        <div class="article-card-hero">
+          <div class="article-card-hero-text" style="color: rgba(6,182,212,0.14);">8.92</div>
+        </div>
+        <div class="article-card-body">
+          <div class="article-card-date">April 2026 <span>~12 min read</span></div>
+          <h3>The Mirror, Not the Wall: Why AI's 4-Bit Limit Is About the Data, Not the Machine</h3>
+          <p>Train the same model on a synthetic 8-bit-entropy corpus and it climbs to 8.92 bits per token, not four. The basin moved with the data. Published with the institute's full internal adversarial review attached &mdash; read the article and the review as a unit.</p>
           <div class="article-card-link">Read article &rarr;</div>
         </div>
       </a>
