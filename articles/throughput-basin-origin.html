@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Mirror, Not the Wall — The Windstorm Institute</title>
-<meta name="description" content="The Mirror, Not the Wall: Why AI's 4-Bit Throughput Limit Is About the Data, Not the Machine. Companion article to Paper 6 (manuscript Paper 7), published together with its full internal adversarial review.">
+<meta name="description" content="The Mirror, Not the Wall: Why AI's 4-Bit Throughput Limit Is About the Data, Not the Machine. Companion article to Paper 7, published together with its full internal adversarial review.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
@@ -299,7 +299,7 @@ tr:hover td { background: var(--surface); }
       <span>Grant Lavell Whitmer III</span>
     </div>
     <h1>The Mirror, Not the Wall:<br><span class="gradient">Why AI&rsquo;s 4-Bit Throughput Limit Is About the Data, Not the Machine</span></h1>
-    <p class="article-subtitle">Companion article to Paper 6 &mdash; <em>The Throughput Basin Origin</em> &mdash; published together with its full internal adversarial review.</p>
+    <p class="article-subtitle">Companion article to Paper 7 &mdash; <em>The Throughput Basin Origin</em> &mdash; published together with its full internal adversarial review.</p>
     <div class="figure" style="margin: 2rem auto;">
       <img src="../assets/images/web_hero_convergence.png" alt="Convergence hero image">
     </div>
@@ -313,7 +313,7 @@ tr:hover td { background: var(--surface); }
 <!-- ARTICLE BODY -->
 <article class="article-body">
 
-  <p><em>This article is a companion to Paper 6 &mdash; &ldquo;The Throughput Basin Origin: Four Orthogonal Experiments on Whether Serial Decoding Convergence Is Architectural, Thermodynamic, or Data-Driven&rdquo; (2026). The full manuscript and its internal adversarial review are at <a href="https://github.com/sneakyfree/agi-extensions">github.com/sneakyfree/agi-extensions</a>.</em></p>
+  <p><em>This article is a companion to Paper 7 &mdash; &ldquo;The Throughput Basin Origin: Four Orthogonal Experiments on Whether Serial Decoding Convergence Is Architectural, Thermodynamic, or Data-Driven&rdquo; (2026). The full manuscript and its internal adversarial review are at <a href="https://github.com/sneakyfree/agi-extensions">github.com/sneakyfree/agi-extensions</a>.</em></p>
 
   <hr>
 
@@ -325,7 +325,7 @@ tr:hover td { background: var(--surface); }
 
   <p>The honest answer, for a long time, was: we didn&rsquo;t know. We had guesses. Maybe it was something about attention. Maybe it was a property of gradient descent. Maybe transformers, as a family, had some hidden ceiling baked into how they route information through their layers. Maybe &mdash; and this was the spookiest version &mdash; we were looking at a soft law of learning machines, the way thermodynamics is a soft law of steam engines.</p>
 
-  <p>Paper 6 is the experiment that finally lets us start to say which of those stories is right.</p>
+  <p>Paper 7 is the experiment that finally lets us start to say which of those stories is right.</p>
 
   <p>It looks, so far, like none of them are. But the &ldquo;so far&rdquo; is doing real work in that sentence, and the rest of this article is about why.</p>
 
@@ -365,7 +365,7 @@ tr:hover td { background: var(--surface); }
 
   <p>When you believe the limit lives inside the data, the entire problem rotates ninety degrees. Suddenly the interesting question isn&rsquo;t &ldquo;how do we make a smarter model?&rdquo; It&rsquo;s &ldquo;what would it take to put richer information in front of the one we already have?&rdquo; Those are completely different research programs. They fund different labs, hire different people, publish in different venues, and they answer to different definitions of progress.</p>
 
-  <p>Paper 6 doesn&rsquo;t tell us which program is right for any particular goal. It tells us they were never the same program in the first place, and the field has been quietly conflating them.</p>
+  <p>Paper 7 doesn&rsquo;t tell us which program is right for any particular goal. It tells us they were never the same program in the first place, and the field has been quietly conflating them.</p>
 
   <h2>What the result is <em>not</em> saying</h2>
 
@@ -373,7 +373,7 @@ tr:hover td { background: var(--surface); }
 
   <p>It is <strong>not</strong> saying that natural language is &ldquo;low quality.&rdquo; Four bits per token is a staggering amount of structure; the redundancy is what makes language <em>learnable</em> at all. A corpus with no redundancy would also have nothing to predict, and a model trained on it would learn nothing useful about the world. The basin is a feature of communication, not a bug.</p>
 
-  <p>It is <strong>not</strong> saying that scaling is over, or that architecture doesn&rsquo;t matter. SYN-8 still has to be <em>trained</em>, by a model with enough capacity to actually represent eight bits of structure per token. A small enough network, given the same corpus, would still flatten out below the ceiling &mdash; just at a <em>different</em> basin, one set by capacity instead of by data. Paper 6 separates two effects that used to be tangled. It does not abolish either of them.</p>
+  <p>It is <strong>not</strong> saying that scaling is over, or that architecture doesn&rsquo;t matter. SYN-8 still has to be <em>trained</em>, by a model with enough capacity to actually represent eight bits of structure per token. A small enough network, given the same corpus, would still flatten out below the ceiling &mdash; just at a <em>different</em> basin, one set by capacity instead of by data. Paper 7 separates two effects that used to be tangled. It does not abolish either of them.</p>
 
   <p>And it is <strong>not</strong> saying we have a recipe for &ldquo;eight-bit English.&rdquo; SYN-8 is a synthetic corpus. It is information-dense, but it is not, in any meaningful sense, <em>about</em> anything. Building real-world text that carries more bits per token without becoming gibberish is a much harder problem, and one we are explicitly not claiming to have solved. We&rsquo;re claiming the problem is the right problem.</p>
 
@@ -389,22 +389,22 @@ tr:hover td { background: var(--surface); }
     <p><strong>2. Energy and BPT measurements don&rsquo;t reconcile across experiments.</strong> Pythia-160m on WikiText reports 3.96 BPT in two experiments and 12.10 BPT in a third &mdash; same model, same corpus, different harnesses. Every &phi; we report (the &ldquo;orders of magnitude above Landauer&rdquo; numbers) is downstream of the third one.</p>
     <p><strong>3. The 8.92 number is in the wrong units.</strong> SYN-8 uses a corpus-trained byte-pair encoder. Comparing &ldquo;8.92 bits per BPE token&rdquo; to &ldquo;8.0 bits per source symbol&rdquo; is not an apples-to-apples comparison. We need to re-evaluate in source-symbol units before the headline survives.</p>
     <p><strong>4. We don&rsquo;t have learning curves.</strong> We can&rsquo;t yet show that SYN-8 had plateaued at 8.92 versus still descending. Maybe the model was on its way to four after all and we cut it off.</p>
-    <p style="margin-top: 1rem;">The full review, including four more recommended re-runs (a &ge;1B-parameter SYN-8 model, a hierarchically structured 8-bit corpus, a shuffled-WikiText control, and a fair-kernel Mamba energy comparison), is at <a href="https://github.com/sneakyfree/agi-extensions/blob/main/review/adversarial_review.md">review/adversarial_review.md</a>. The follow-up paper (Paper 6.1) is scoped to address all eight items.</p>
+    <p style="margin-top: 1rem;">The full review, including four more recommended re-runs (a &ge;1B-parameter SYN-8 model, a hierarchically structured 8-bit corpus, a shuffled-WikiText control, and a fair-kernel Mamba energy comparison), is at <a href="https://github.com/sneakyfree/agi-extensions/blob/main/review/adversarial_review.md">review/adversarial_review.md</a>. The follow-up paper (Paper 7.1) is scoped to address all eight items.</p>
   </div>
 
   <p>You may be wondering why we&rsquo;re publishing the review at all if it constrains the headline this much. The answer is that publishing it is the headline. The institute&rsquo;s stated value is that the falsification attempt should arrive at the same time as the claim it constrains, not six months later in someone else&rsquo;s reply paper. If we held the review back to make the abstract look cleaner, we would be doing exactly the thing we say no one in the field should do.</p>
 
-  <p>So: read this article, and then read the review. The defensible version of the headline &mdash; the one we are willing to defend right now &mdash; is narrower than the one in the title. <em>At 92M parameters, on Markov synthetic data, training-corpus token entropy is the dominant predictor of achieved BPT, and we find no positive evidence of a transformer-specific four-bit ceiling in this regime.</em> That is what we have. The bigger story (<em>the basin is a property of data, not of machines, full stop</em>) is what Paper 6.1 is for.</p>
+  <p>So: read this article, and then read the review. The defensible version of the headline &mdash; the one we are willing to defend right now &mdash; is narrower than the one in the title. <em>At 92M parameters, on Markov synthetic data, training-corpus token entropy is the dominant predictor of achieved BPT, and we find no positive evidence of a transformer-specific four-bit ceiling in this regime.</em> That is what we have. The bigger story (<em>the basin is a property of data, not of machines, full stop</em>) is what Paper 7.1 is for.</p>
 
   <h2>The mirror</h2>
 
   <p>There is a moment, in almost every long research arc, when the thing you have been studying turns out to be the thing you were studying <em>with</em>. You spent years measuring something and slowly came to realize you were measuring your own ruler.</p>
 
-  <p>That is what Paper 6 is, for us. The four-bit basin was real. It was reproducible. It was robust across families and scales and training regimes, and it deserved every bit of attention we gave it. But it doesn&rsquo;t look like a property of the models. It looks like a property of the text those models were swimming in, reflected back so consistently that it looked, for a while, like a law of nature.</p>
+  <p>That is what Paper 7 is, for us. The four-bit basin was real. It was reproducible. It was robust across families and scales and training regimes, and it deserved every bit of attention we gave it. But it doesn&rsquo;t look like a property of the models. It looks like a property of the text those models were swimming in, reflected back so consistently that it looked, for a while, like a law of nature.</p>
 
   <p>It was a mirror. We mistook it for a wall.</p>
 
-  <p>The good news about mirrors is that, once you know they&rsquo;re mirrors, you can step around them. The hard part &mdash; the part Paper 6.1 is for &mdash; is being sure it was a mirror in the first place.</p>
+  <p>The good news about mirrors is that, once you know they&rsquo;re mirrors, you can step around them. The hard part &mdash; the part Paper 7.1 is for &mdash; is being sure it was a mirror in the first place.</p>
 
   <hr>
 

@@ -351,6 +351,11 @@ nav {
 
   <p>A 7-billion-parameter transformer: approximately 800,000,000 times above its Landauer floor. Not 2%. Not 200%. Nearly a billion-fold overhead.</p>
 
+  <div class="callout">
+    <div class="callout-label">A note on the &phi; numbers (added April 2026)</div>
+    <p>The &asymp;10<sup>9</sup> figure quoted here is the <em>useful-dissipation</em> fraction per discrimination event &mdash; the thermodynamically relevant energy attributed to the irreversible logical step itself. Paper 7's RTX 5090 measurements report &phi; &asymp; 10<sup>15</sup>&ndash;10<sup>18</sup> for <em>total GPU wall power</em>, which additionally pays for memory access, cooling, power-supply conversion losses, and idle leakage of the entire board. Both numbers are correct; they measure different physical boundaries. The &asymp;10<sup>9</sup> figure here is the right number for the <em>computational</em> efficiency gap; the &asymp;10<sup>16</sup> figure is the right number for the <em>total system</em> efficiency gap. See <a href="throughput-basin-origin.html">Paper 7</a> &sect;3.4 for the full reconciliation.</p>
+  </div>
+
   <p>This single comparison says more about the difference between biological and artificial information processing than any amount of theory. Evolution is a better optimizer than human engineering &mdash; at least for serial decoding under thermodynamic constraints.</p>
 
   <h2>The Temperature Prediction</h2>

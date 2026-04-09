@@ -629,7 +629,7 @@ footer {
       <a href="articles/fons-constraint.html" class="arc-node">
         <div class="arc-dot c-cyan"></div>
         <div>
-          <div class="arc-paper-label">Paper 0</div>
+          <div class="arc-paper-label">Paper 1</div>
           <div class="arc-paper-title">The Fons Constraint</div>
           <div class="arc-paper-q">"Why 64 codons?"</div>
         </div>
@@ -637,7 +637,7 @@ footer {
       <a href="articles/receiver-limited-floor.html" class="arc-node">
         <div class="arc-dot c-purple"></div>
         <div>
-          <div class="arc-paper-label">Paper 1</div>
+          <div class="arc-paper-label">Paper 2</div>
           <div class="arc-paper-title">The Receiver-Limited Floor</div>
           <div class="arc-paper-q">"Vocabulary doesn't matter"</div>
         </div>
@@ -645,7 +645,7 @@ footer {
       <a href="articles/throughput-basin.html" class="arc-node">
         <div class="arc-dot c-amber"></div>
         <div>
-          <div class="arc-paper-label">Paper 2</div>
+          <div class="arc-paper-label">Paper 3</div>
           <div class="arc-paper-title">The Throughput Basin</div>
           <div class="arc-paper-q">"31 systems, one band"</div>
         </div>
@@ -653,7 +653,7 @@ footer {
       <a href="articles/serial-decoding-basin.html" class="arc-node">
         <div class="arc-dot c-green"></div>
         <div>
-          <div class="arc-paper-label">Paper 3</div>
+          <div class="arc-paper-label">Paper 4</div>
           <div class="arc-paper-title">The Serial Decoding Basin &tau;</div>
           <div class="arc-paper-q">"&tau; = 4.16 &plusmn; 0.19 bits"</div>
         </div>
@@ -661,7 +661,7 @@ footer {
       <a href="articles/dissipative-decoder.html" class="arc-node">
         <div class="arc-dot c-red"></div>
         <div>
-          <div class="arc-paper-label">Paper 4</div>
+          <div class="arc-paper-label">Paper 5</div>
           <div class="arc-paper-title">The Dissipative Decoder</div>
           <div class="arc-paper-q">"Two regimes, one mathematics"</div>
         </div>
@@ -669,7 +669,7 @@ footer {
       <a href="articles/inherited-constraint.html" class="arc-node">
         <div class="arc-dot c-amber"></div>
         <div>
-          <div class="arc-paper-label">Paper 5</div>
+          <div class="arc-paper-label">Paper 6</div>
           <div class="arc-paper-title">The Inherited Constraint</div>
           <div class="arc-paper-q">"Language carries the fingerprint"</div>
         </div>
@@ -677,7 +677,7 @@ footer {
       <a href="articles/throughput-basin-origin.html" class="arc-node">
         <div class="arc-dot c-cyan"></div>
         <div>
-          <div class="arc-paper-label">Paper 6 <span style="opacity:0.6;font-weight:400;">(ms. 7)</span></div>
+          <div class="arc-paper-label">Paper 7</div>
           <div class="arc-paper-title">The Throughput Basin Origin</div>
           <div class="arc-paper-q">"Different data, different basin"</div>
         </div>
@@ -785,7 +785,7 @@ footer {
   <div class="container">
     <div class="section-label">The Discovery</div>
     <h2 class="section-title" style="max-width: 700px;">Two regimes. One mathematics. A billion-fold efficiency gap.</h2>
-    <p class="section-desc">Paper 4 revealed that the throughput basin is not universal in the way we first expected. There are two regimes &mdash; and the difference explains everything.</p>
+    <p class="section-desc">Paper 5 revealed that the throughput basin is not universal in the way we first expected. There are two regimes &mdash; and the difference explains everything.</p>
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
       <div class="area-card" style="border-color: rgba(239, 68, 68, 0.3);">
         <div style="font-family: var(--mono); font-size: 0.7rem; color: var(--red); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; font-weight: 600;">Regime A &mdash; Biology</div>
@@ -807,6 +807,7 @@ footer {
       </div>
     </div>
     <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.75; max-width: 640px;">Evolution is a better optimizer &mdash; for this particular problem. The ribosome has had 3.8 billion years to close the gap between its performance and the thermodynamic limit. Silicon has had decades. The mathematics is the same. The engineering maturity is not.</p>
+    <p style="font-size: 0.85rem; color: var(--text-faint); line-height: 1.7; max-width: 640px; margin-top: 1.25rem; padding: 1rem 1.25rem; border-left: 2px solid var(--border-light); background: rgba(255,255,255,0.02);"><strong style="color: var(--text-muted);">A note on the &phi; numbers.</strong> The "~10<sup>9</sup>&times; above Landauer" figure is the <em>useful-dissipation</em> fraction per discrimination event &mdash; the thermodynamically relevant energy attributed to the irreversible logical step itself. Paper 7's RTX 5090 measurements report &phi; &asymp; 10<sup>15</sup>&ndash;10<sup>18</sup> for <em>total GPU wall power</em>, which additionally pays for memory access, cooling, power-supply conversion, and idle circuitry. Both numbers are correct; they measure different physical boundaries. See Paper 7 &sect;3.4 for the full reconciliation.</p>
   </div>
 </section>
 
@@ -899,13 +900,13 @@ footer {
       <a href="articles/throughput-basin-origin.html" class="pub-card">
         <div class="pub-num">06</div>
         <div class="pub-info">
-          <h4>The Throughput Basin Origin: Four Orthogonal Experiments on Whether Serial Decoding Convergence Is Architectural, Thermodynamic, or Data-Driven <span style="font-size:0.8em;opacity:0.65;font-weight:400;">(Paper 7 in manuscript series)</span></h4>
-          <p>Tests the inherited-constraint hypothesis directly. At 92M parameters, on Markov synthetic data, achieved bits-per-token tracks training-corpus token entropy rather than collapsing to the ~4 BPT natural-language basin (SYN-8: 8.92 BPT on an 8-bit source). Transformer vs state-space comparison finds no detectable difference at this <em>n</em>. Wall-power survey on RTX 5090 places total-system silicon at 10<sup>15</sup>&ndash;10<sup>18</sup>&times; above Landauer (distinct from Paper 4's useful-dissipation figure). <strong>Published with its full internal adversarial review attached</strong>, which identifies four blocking items the present results do not yet resolve and scopes them as Paper 6.1. Read the article and the review as a unit. Code, data, and the unredacted review: <a href="https://github.com/sneakyfree/agi-extensions">github.com/sneakyfree/agi-extensions</a>.</p>
+          <h4>The Throughput Basin Origin: Four Orthogonal Experiments on Whether Serial Decoding Convergence Is Architectural, Thermodynamic, or Data-Driven</h4>
+          <p>Tests the inherited-constraint hypothesis directly. At 92M parameters, on Markov synthetic data, achieved bits-per-token tracks training-corpus token entropy rather than collapsing to the ~4 BPT natural-language basin (SYN-8: 8.92 BPT on an 8-bit source). Transformer vs state-space comparison finds no detectable difference at this <em>n</em>. Wall-power survey on RTX 5090 places total-system silicon at 10<sup>15</sup>&ndash;10<sup>18</sup>&times; above Landauer (distinct from Paper 5's useful-dissipation figure). <strong>Published with its full internal adversarial review attached</strong>, which identifies four blocking items the present results do not yet resolve and scopes them as Paper 7.1. Read the article and the review as a unit. Code, data, and the unredacted review: <a href="https://github.com/sneakyfree/agi-extensions">github.com/sneakyfree/agi-extensions</a>.</p>
           <div class="pub-meta">
             <span class="pub-tag live">2026</span>
+            <span class="pub-tag" style="background: rgba(245,158,11,0.15); color: var(--warm); border-color: rgba(245,158,11,0.3);">preprint &mdash; Zenodo pending Paper 7.1</span>
             <span class="pub-tag">experimental</span>
             <span class="pub-tag">adversarial review</span>
-            <span class="pub-tag">preprint</span>
           </div>
         </div>
       </a>

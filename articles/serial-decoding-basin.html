@@ -322,6 +322,12 @@ nav {
 
   <p><strong>Experiment 1: Basin Centroid.</strong> Statistical estimation of the basin center across 21 systems. Result: &tau; = 4.16 &plusmn; 0.19 bits (95% confidence interval). The basin is real and precisely located.</p>
 
+  <div class="callout">
+    <div class="callout-label">Measurement note added April 2026</div>
+    <p>The &tau; = 4.16 &plusmn; 0.19 bits figure is measured in <strong>bits per BPE token</strong> (BPT), not bits per source symbol. The internal adversarial review of Paper 7 identified that BPT measurements are tokenizer-dependent &mdash; the same model on the same corpus can return different BPT values under different tokenization schemes &mdash; and this concern applies retroactively to the &tau; measurement reported here in Papers 1&ndash;4. A bits-per-source-symbol re-measurement is now scoped under <a href="https://github.com/sneakyfree/agi-extensions/issues/1">Paper 7.1</a>.</p>
+    <p style="margin-top: 0.85rem;">The directional finding &mdash; that serial decoders cluster in a narrow throughput band rather than spreading uniformly across the possible range &mdash; is not affected by the unit choice. But the precise numerical value of &tau; may shift when re-measured in tokenizer-independent units, and we want you to know that before you cite the number.</p>
+  </div>
+
   <p><strong>Experiment 2: Monte Carlo Sampling.</strong> 100,000 random draws from biologically plausible parameters. Result: 90.5% land in [3, 6] bits versus 28.3% from unrestricted sampling. The clustering is not an artifact of cherry-picked examples.</p>
 
   <p><strong>Experiment 3: Cross-Domain ANOVA.</strong> Statistical test for domain differences. Result: Kruskal-Wallis p = 0.016. Domains differ from each other (genetics, cognition, and AI don't all sit at exactly the same throughput), but they all fall within the basin. This is the expected pattern if substrate-specific costs shift systems within a constrained band.</p>
