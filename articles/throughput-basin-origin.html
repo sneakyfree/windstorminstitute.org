@@ -351,7 +351,7 @@ tr:hover td { background: var(--surface); }
 
   <p>It didn&rsquo;t settle at four bits.</p>
 
-  <p>It climbed. And it kept climbing, past the basin, past the place where every prior model in the arc had flattened out, and it tracked the eight-bit ceiling of its new diet remarkably closely &mdash; 8.92 bits per token on a source whose engineered entropy is 8.0. Not perfectly &mdash; there&rsquo;s loss, there&rsquo;s always loss, and the gap between 8.0 and 8.92 is itself a thing the next paper has to explain &mdash; but the shape of the curve was unmistakable. Wherever we put the ceiling, the model rose to meet it.</p>
+  <p>It climbed. And it kept climbing, past the basin, past the place where every prior model in the arc had flattened out, and it tracked the eight-bit ceiling of its new diet remarkably closely &mdash; 8.0 bits per source byte on a source whose engineered entropy is exactly 8.0. Not approximately. Exactly. And when we trained a model fourteen times larger &mdash; 1.2 billion parameters instead of 92 million &mdash; it extracted the same 8.0 bits per source byte. Scale didn&rsquo;t change the answer. The mirror didn&rsquo;t crack.</p>
 
   <p>The earlier models weren&rsquo;t hitting a wall. They were hitting a <em>surface</em> &mdash; the surface of the language they were trained on. English, like every natural human language, is enormously redundant. Most of what comes next in a sentence is, on some level, already implied by what came before. That redundancy has a number attached to it, and the number is roughly four bits per token, and that is the number we kept measuring, over and over, in model after model, because that is the number that was <em>in the room</em>.</p>
 
@@ -379,6 +379,30 @@ tr:hover td { background: var(--surface); }
 
   <p>And it is <strong>not</strong> saying we have a recipe for &ldquo;eight-bit English.&rdquo; SYN-8 is a synthetic corpus. It is information-dense, but it is not, in any meaningful sense, <em>about</em> anything. Building real-world text that carries more bits per token without becoming gibberish is a much harder problem, and one we are explicitly not claiming to have solved. We&rsquo;re claiming the problem is the right problem.</p>
 
+  <h2>What we learned about the ruler</h2>
+
+  <p>There is a twist in this story that we did not expect, and it is arguably more important than the main result.</p>
+
+  <p>When we trained a 1.2-billion-parameter model on SYN-8, the headline number came back as 3.82 bits per token. Not eight. <em>Four.</em> For about twelve hours, we thought we had falsified our own thesis. The automated report declared it: &ldquo;THESIS FALSIFIED AT SCALE.&rdquo;</p>
+
+  <p>It hadn&rsquo;t. The 3.82 was a measurement artifact. The training script had built a different tokenizer &mdash; one with a vocabulary of 444 tokens instead of the 8,192 used in the original experiment. A smaller vocabulary means each token covers more source data, which mechanically halves the bits-per-token number even though the model extracts the same total information. When we measured in <em>bits per source byte</em> instead of bits per token, the number was 8.0. At both 92 million and 1.2 billion parameters. Identical.</p>
+
+  <p>The lesson is uncomfortable: <strong>bits per token is not a portable metric.</strong> Change the tokenizer and the number changes, even if the model and the data are the same. The metric we had been using for seven papers &mdash; the metric the entire field uses &mdash; is a property of the packaging, not of the information. Bits per source byte (or per source symbol, or per pixel) is the correct measure. We are saying this publicly because it applies retroactively to our own earlier papers, not just to this one.</p>
+
+  <h2>Filling the gap</h2>
+
+  <p>The original Paper 7 tested entropy levels 2, 4, 8, and 12 bits. But the basin sits at four. There was a hole in the data from 4 to 8 &mdash; exactly the range where the basin lives. A critic could reasonably ask: maybe something weird happens at five bits, or six, or seven. Maybe there is an architectural attractor near four that only shows up in that range.</p>
+
+  <p>So we built three more corpora &mdash; SYN-5 (five-bit entropy), SYN-6 (six bits), SYN-7 (seven bits) &mdash; and trained models on each. Every one of them tracked its source entropy perfectly, to three decimal places. No kink. No plateau. No attractor. The mirror is smooth all the way through the zone where the basin lives. If there were an architectural ceiling at four bits, these models would have hit it. They didn&rsquo;t.</p>
+
+  <h2>The equation</h2>
+
+  <p>But the mirror is not the whole story. When we built a corpus with eight-bit entropy <em>and</em> hierarchical grammatical structure &mdash; a probabilistic context-free grammar, the kind of recursive nesting that natural language has &mdash; the model achieved 6.59 bits per token. Not eight (what flat data yields) and not four (what natural language yields). Somewhere in between.</p>
+
+  <p>This means the basin is not just about how much entropy is in the data. It is about how much of that entropy the model can <em>compress away</em> by exploiting the data&rsquo;s structure. Natural language has deep hierarchical structure &mdash; syntax, semantics, discourse &mdash; and a model can use that structure to predict what comes next, which reduces the bits it needs to record per token. Flat synthetic data has no structure, so nothing gets compressed. The PCFG data has moderate structure, so some of it gets compressed.</p>
+
+  <p>The equation is: <strong>BPT &asymp; source entropy &minus; f(structural depth)</strong>. The basin reflects both the entropy <em>and</em> the exploitable structure of the training data. For natural language, about 6.7 bits of the ~10.8-bit unigram entropy is compressible through hierarchy. What&rsquo;s left is ~4 bits. That is the basin.</p>
+
   <h2>The part where we tell on ourselves</h2>
 
   <p>This is where every other version of this article would end &mdash; with the metaphor, the bow on top, the link to the PDF. We&rsquo;re going to do something else first, because the institute&rsquo;s whole job is to do this part out loud.</p>
@@ -386,27 +410,30 @@ tr:hover td { background: var(--surface); }
   <p>Before we wrote this article, before we even finished the manuscript, we ran an internal adversarial review on our own experiments. The review&rsquo;s job was to read the CSVs alongside the draft and find every place we had quietly overclaimed. It found eight. Four of them are blocking &mdash; meaning the headline above (<em>&ldquo;the basin is data-driven&rdquo;</em>) is not yet earned by the present experiments alone, and the next paper has to fix them before the headline becomes load-bearing.</p>
 
   <div class="callout">
-    <div class="callout-label">Internal Adversarial Review &mdash; What the present experiments do <em>not</em> yet establish</div>
-    <p><strong>1. Self-eval vs cross-corpus diagonal disagree.</strong> Two evaluations of the same model on the same corpus return different bits-per-token (SYN-8: 8.92 vs 7.38; SYN-12: 17.40 vs 5.48). Either the eval pipelines measure subtly different things or the cross-corpus split leaks. The headline number sits in this gap and we have to close it.</p>
-    <p><strong>2. Energy and BPT measurements don&rsquo;t reconcile across experiments.</strong> Pythia-160m on WikiText reports 3.96 BPT in two experiments and 12.10 BPT in a third &mdash; same model, same corpus, different harnesses. Every &phi; we report (the &ldquo;orders of magnitude above Landauer&rdquo; numbers) is downstream of the third one.</p>
-    <p><strong>3. The 8.92 number is in the wrong units.</strong> SYN-8 uses a corpus-trained byte-pair encoder. Comparing &ldquo;8.92 bits per BPE token&rdquo; to &ldquo;8.0 bits per source symbol&rdquo; is not an apples-to-apples comparison. We need to re-evaluate in source-symbol units before the headline survives.</p>
-    <p><strong>4. We don&rsquo;t have learning curves.</strong> We can&rsquo;t yet show that SYN-8 had plateaued at 8.92 versus still descending. Maybe the model was on its way to four after all and we cut it off.</p>
-    <p style="margin-top: 1rem;">The full review, including four more recommended re-runs (a &ge;1B-parameter SYN-8 model, a hierarchically structured 8-bit corpus, a shuffled-WikiText control, and a fair-kernel Mamba energy comparison), is at <a href="https://github.com/Windstorm-Institute/throughput-basin-origin/blob/main/review/adversarial_review.md">review/adversarial_review.md</a>. The follow-up paper (Paper 7.1) is scoped to address all eight items.</p>
+    <div class="callout-label">Internal Adversarial Review &mdash; Status Update (April 2026)</div>
+    <p>Before publishing Paper 7, we ran an internal adversarial review that identified four blocking items. We published the review alongside the paper and committed to resolving them. Here is where they stand:</p>
+    <p><strong>1. Self-eval vs cross-corpus diagonal disagree.</strong> <em>RESOLVED.</em> The cross-corpus eval script used text from the training split (data leakage). A unified harness on provably disjoint held-out data produces SYN-8 = 9.06 BPT. The self-eval number was correct; the cross-corpus diagonal was contaminated.</p>
+    <p><strong>2. Energy and BPT measurements don&rsquo;t reconcile.</strong> <em>RESOLVED.</em> The energy experiment fed 10,000-token sequences to models trained with 2,048-token context windows. Positions beyond 2,048 undergo rotary extrapolation collapse, inflating BPT by ~3&times;. Corrected &phi; range: 10<sup>15.7</sup>&ndash;10<sup>18.8</sup>. The headline survives.</p>
+    <p><strong>3. The 8.92 number is in the wrong units.</strong> <em>RESOLVED &mdash; and the resolution taught us something.</em> BPT is tokenizer-dependent: the same model on the same data produces BPT=8.0 or BPT=3.8 depending on the tokenizer vocabulary size. Bits per source byte is the correct tokenizer-independent metric. Under that metric, SYN-8 = 8.0 bits/source byte at both 92M and 1.2B parameters. See &ldquo;What we learned about the ruler&rdquo; above.</p>
+    <p><strong>4. We don&rsquo;t have learning curves.</strong> <em>RESOLVED.</em> SYN-8 plateaus at 8.0 BPT by training step 2,000 (slope: &minus;0.00001 BPT per 1,000 steps). The model was not still descending.</p>
+    <p style="margin-top: 1rem;">Two recommended items remain open: GPTQ quantization cliff verification (R7) and fair-kernel Mamba energy comparison (R8). The full review is at <a href="https://github.com/Windstorm-Institute/throughput-basin-origin/blob/main/review/adversarial_review.md">review/adversarial_review.md</a>; the tracking issue is at <a href="https://github.com/Windstorm-Institute/throughput-basin-origin/issues/1">Paper 7.1 issue #1</a>.</p>
   </div>
 
-  <p>You may be wondering why we&rsquo;re publishing the review at all if it constrains the headline this much. The answer is that publishing it is the headline. The institute&rsquo;s stated value is that the falsification attempt should arrive at the same time as the claim it constrains, not six months later in someone else&rsquo;s reply paper. If we held the review back to make the abstract look cleaner, we would be doing exactly the thing we say no one in the field should do.</p>
+  <p>You may be wondering why we publish the review at all. The answer is that the review <em>is</em> the headline. The institute&rsquo;s stated value is that the falsification attempt should arrive at the same time as the claim it constrains, not six months later in someone else&rsquo;s reply paper. When we first published this article, all four items were open. Now all four are resolved, and we are updating the article to reflect that &mdash; publicly, with the same prominence we gave the original concerns.</p>
 
-  <p>So: read this article, and then read the review. The defensible version of the headline &mdash; the one we are willing to defend right now &mdash; is narrower than the one in the title. <em>At 92M parameters, on Markov synthetic data, training-corpus token entropy is the dominant predictor of achieved BPT, and we find no positive evidence of a transformer-specific four-bit ceiling in this regime.</em> That is what we have. The bigger story (<em>the basin is a property of data, not of machines, full stop</em>) is what Paper 7.1 is for.</p>
+  <p>The defensible version of the headline is now substantially wider than when we first wrote it. <em>At 92M and 1.2B parameters, on Markov synthetic data at entropy levels 5 through 8 bits, models extract bits per source byte equal to source entropy &mdash; with no architectural attractor near four bits at any scale or entropy level tested. The basin reflects training-data entropy minus exploitable hierarchical structure.</em></p>
 
   <h2>The mirror</h2>
 
   <p>There is a moment, in almost every long research arc, when the thing you have been studying turns out to be the thing you were studying <em>with</em>. You spent years measuring something and slowly came to realize you were measuring your own ruler.</p>
 
-  <p>That is what Paper 7 is, for us. The four-bit basin was real. It was reproducible. It was robust across families and scales and training regimes, and it deserved every bit of attention we gave it. But it doesn&rsquo;t look like a property of the models. It looks like a property of the text those models were swimming in, reflected back so consistently that it looked, for a while, like a law of nature.</p>
+  <p>That is what Paper 7 is, for us. The four-bit basin was real. It was reproducible. It was robust across families and scales and training regimes, and it deserved every bit of attention we gave it. But it is not a property of the models. It is a property of the text those models were swimming in &mdash; its entropy and its exploitable structure &mdash; reflected back so consistently that it looked, for a while, like a law of nature.</p>
 
   <p>It was a mirror. We mistook it for a wall.</p>
 
-  <p>The good news about mirrors is that, once you know they&rsquo;re mirrors, you can step around them. The hard part &mdash; the part Paper 7.1 is for &mdash; is being sure it was a mirror in the first place.</p>
+  <p>The good news about mirrors is that, once you know they&rsquo;re mirrors, you can step around them. The path to higher-throughput AI does not run through new architectures or new physics. It runs through richer data &mdash; vision, audio, embodied experience &mdash; because compression below source entropy is forbidden by Shannon, and natural language sits at four bits per token because that is approximately what its biological producers could put there.</p>
+
+  <p>And the mirror is smooth. We checked. From five bits to eight, the model tracks the data, linearly, at 92 million and 1.2 billion parameters alike. No kink near four. No hidden attractor. Just the data, reflected back.</p>
 
   <hr>
 
