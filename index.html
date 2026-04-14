@@ -626,7 +626,7 @@ footer {
   <div class="container">
     <div class="section-label">The Big Picture</div>
     <h2 class="section-title">The Research Arc</h2>
-    <p class="arc-subtitle">Seven papers. One question. From observation to law to propagation — and now, to falsification.</p>
+    <p class="arc-subtitle">Nine papers. One question. From observation to law to propagation — and now, to falsification.</p>
 
     <div class="arc-timeline">
       <a href="articles/fons-constraint.html" class="arc-node">
@@ -683,6 +683,22 @@ footer {
           <div class="arc-paper-label">Paper 7</div>
           <div class="arc-paper-title">The Throughput Basin Origin</div>
           <div class="arc-paper-q">"Different data, different basin"</div>
+        </div>
+      </a>
+      <a href="https://github.com/Windstorm-Institute/vision-basin" class="arc-node" target="_blank">
+        <div class="arc-dot c-amber"></div>
+        <div>
+          <div class="arc-paper-label">Paper 8</div>
+          <div class="arc-paper-title">The Vision Basin</div>
+          <div class="arc-paper-q">"Each modality, its own basin"</div>
+        </div>
+      </a>
+      <a href="https://github.com/Windstorm-Institute/hardware-basin" class="arc-node" target="_blank">
+        <div class="arc-dot c-green"></div>
+        <div>
+          <div class="arc-paper-label">Paper 9</div>
+          <div class="arc-paper-title">The Hardware Basin</div>
+          <div class="arc-paper-q">"Level allocation, not bit count"</div>
         </div>
       </a>
     </div>
@@ -924,6 +940,33 @@ footer {
           </div>
         </div>
       </a>
+      <a href="https://github.com/Windstorm-Institute/vision-basin" class="pub-card" target="_blank">
+        <div class="pub-num">08</div>
+        <div class="pub-info">
+          <h4>The Vision Basin: Cross-Modal Throughput Measurement Reveals Modality-Specific Information Extraction Rates</h4>
+          <p>12 models across language, vision, and audio. Real LJ Speech at 1.89 bits/mel_dim. MAE generative vision at 1.33 bits/pixel. Visual structural bonus 0.69 bpp. Patch size acts as a visual &ldquo;tokenizer&rdquo; &mdash; bits/pixel varies 4&times; across patch sizes. The basin is modality-specific.</p>
+          <div class="pub-meta">
+            <span class="pub-tag live">2026</span>
+            <span class="pub-tag">cross-modal</span>
+            <span class="pub-tag">vision</span>
+            <span class="pub-tag">audio</span>
+            <span class="pub-tag" style="background: rgba(245,158,11,0.15); color: var(--warm); border-color: rgba(245,158,11,0.3);">preprint</span>
+          </div>
+        </div>
+      </a>
+      <a href="https://github.com/Windstorm-Institute/hardware-basin" class="pub-card" target="_blank">
+        <div class="pub-num">09</div>
+        <div class="pub-info">
+          <h4>The Hardware Basin: Why the Quantization Cliff Is About Level Allocation, Not Bit Count</h4>
+          <p>NF4 at INT4 = BPT 3.90 (works). Symmetric at INT4 = BPT 16.87 (destroyed). Same bit count, opposite outcomes. The cliff is about level allocation. Tested across 4 architectures including Mamba, all 24 layers, 5 quantization methods. Hardware implication: build lookup tables, not wider integer datapaths.</p>
+          <div class="pub-meta">
+            <span class="pub-tag live">2026</span>
+            <span class="pub-tag">hardware</span>
+            <span class="pub-tag">quantization</span>
+            <span class="pub-tag" style="background: rgba(245,158,11,0.15); color: var(--warm); border-color: rgba(245,158,11,0.3);">preprint</span>
+          </div>
+        </div>
+      </a>
     </div>
   </div>
 </section>
@@ -948,6 +991,8 @@ footer {
         <li><a href="articles/dissipative-decoder.html">Why the Basin Exists</a> — the thermodynamic argument <span style="color: var(--text-faint);">(~14 min)</span></li>
         <li><a href="articles/inherited-constraint.html">The Inherited Constraint</a> — why AI lands nearby <span style="color: var(--text-faint);">(~15 min)</span></li>
         <li><a href="articles/throughput-basin-origin.html">The Mirror, Not the Wall</a> — Paper 7, the test <span style="color: var(--text-faint);">(~12 min)</span></li>
+        <li><a href="https://github.com/Windstorm-Institute/vision-basin">The Vision Basin</a> — Paper 8, cross-modal <span style="color: var(--text-faint);">(preprint)</span></li>
+        <li><a href="https://github.com/Windstorm-Institute/hardware-basin">The Hardware Basin</a> — Paper 9, hardware implications <span style="color: var(--text-faint);">(preprint)</span></li>
       </ol>
     </div>
 
