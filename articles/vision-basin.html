@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Vision Basin — The Windstorm Institute</title>
+<meta name="description" content="The Vision Basin: Cross-Modal Throughput Measurement Reveals Modality-Specific Information Extraction Rates's 4-Bit Throughput Limit Is About the Data, Not the Machine. Paper 8 of the Windstorm series. Cross-modal throughput across language, vision, and audio, published together with its full internal adversarial review.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+img{max-width:100%;height:auto}
+
+:root {
+  --bg: #0a0a0b;
+  --surface: #111113;
+  --surface-2: #18181b;
+  --border: #27272a;
+  --border-light: #3f3f46;
+  --text: #fafafa;
+  --text-muted: #a1a1aa;
+  --text-faint: #71717a;
+  --accent: #06b6d4;
+  --accent-dim: #0891b2;
+  --accent-glow: rgba(6, 182, 212, 0.15);
+  --accent-2: #8b5cf6;
+  --warm: #f59e0b;
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Inter', -apple-system, sans-serif;
+  --serif: 'Lora', Georgia, serif;
+}
+
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+a:hover { color: #22d3ee; }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(10, 10, 11, 0.85);
+  backdrop-filter: blur(20px) saturate(1.5);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1100px; margin: 0 auto; padding: 0 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+}
+.nav-brand {
+  display: flex; align-items: center; gap: 12px;
+  font-weight: 600; font-size: 0.95rem; color: var(--text);
+  letter-spacing: -0.01em;
+}
+.nav-mark {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 14px; color: white;
+}
+.nav-links { display: flex; gap: 2rem; }
+.nav-links a {
+  font-size: 0.85rem; font-weight: 500; color: var(--text-muted);
+  letter-spacing: 0.02em; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text); }
+
+/* ─── ARTICLE ─── */
+.article-hero {
+  padding: 140px 0 60px;
+  position: relative;
+  text-align: center;
+}
+.article-hero::before {
+  content: '';
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 600px;
+  background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%);
+  pointer-events: none;
+  opacity: 0.4;
+}
+.article-hero-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+}
+.article-back {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--mono); font-size: 0.75rem; font-weight: 500;
+  color: var(--text-faint); letter-spacing: 0.06em; text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+.article-back:hover { color: var(--accent); }
+.article-meta {
+  font-family: var(--mono); font-size: 0.75rem;
+  color: var(--text-faint); letter-spacing: 0.06em;
+  margin-bottom: 1.5rem;
+  display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;
+}
+.article-hero h1 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700; letter-spacing: -0.02em;
+  line-height: 1.2; margin-bottom: 1.5rem;
+}
+.article-hero h1 .gradient {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 50%, var(--warm) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.article-subtitle {
+  font-size: 1.15rem; color: var(--text-muted);
+  line-height: 1.75; max-width: 600px; margin: 0 auto 2rem;
+}
+.article-author {
+  font-size: 0.9rem; color: var(--text-muted);
+}
+.article-author strong { color: var(--text); }
+
+/* Share buttons */
+.share-bar {
+  display: flex; justify-content: center; gap: 1rem;
+  margin-top: 1.5rem;
+}
+.share-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 14px; border-radius: 6px;
+  background: var(--surface-2); border: 1px solid var(--border);
+  font-family: var(--mono); font-size: 0.7rem; font-weight: 500;
+  color: var(--text-faint); letter-spacing: 0.04em;
+  cursor: pointer; transition: border-color 0.2s, color 0.2s;
+}
+.share-btn:hover { border-color: var(--border-light); color: var(--text-muted); }
+
+/* Article body */
+.article-body {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 3rem 2rem 6rem;
+}
+.article-body h2 {
+  font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em;
+  margin: 3rem 0 1rem;
+  padding-top: 1rem;
+}
+.article-body h3 {
+  font-size: 1.15rem; font-weight: 600;
+  margin: 2rem 0 0.75rem;
+}
+.article-body p {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.9;
+  margin-bottom: 1.5rem;
+}
+.article-body strong { color: var(--text); font-weight: 500; }
+.article-body em { font-style: italic; }
+.article-body blockquote {
+  border-left: 3px solid var(--accent);
+  padding: 1rem 1.5rem;
+  margin: 2rem 0;
+  background: var(--surface);
+  border-radius: 0 8px 8px 0;
+}
+.article-body blockquote p {
+  font-style: italic;
+  color: var(--text);
+  margin-bottom: 0;
+}
+.article-body .figure {
+  margin: 2.5rem 0;
+  text-align: center;
+}
+.article-body .figure img {
+  max-width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+.article-body .figure-caption {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--text-faint);
+  margin-top: 0.75rem;
+  line-height: 1.5;
+}
+.article-body .callout {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  margin: 2rem 0;
+}
+.article-body .callout-label {
+  font-family: var(--mono); font-size: 0.7rem; font-weight: 600;
+  color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+.article-body .callout p { margin-bottom: 0; font-size: 0.95rem; }
+.article-body hr {
+  border: none;
+  height: 1px;
+  background: var(--border);
+  margin: 3rem 0;
+}
+
+/* Paper links */
+.paper-ref {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 2px 8px; border-radius: 4px;
+  background: var(--surface-2); border: 1px solid var(--border);
+  font-family: var(--mono); font-size: 0.7rem; font-weight: 500;
+  color: var(--accent); white-space: nowrap;
+}
+
+/* Table */
+table { width: 100%; border-collapse: collapse; margin: 2rem 0; font-family: var(--sans); font-size: 0.9rem; }
+th { text-align: left; padding: 0.75rem 1rem; border-bottom: 2px solid var(--border-light); color: var(--text); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; }
+td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); color: var(--text-muted); }
+tr:hover td { background: var(--surface); }
+
+/* Article nav */
+.article-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 2rem 3rem;
+}
+.article-nav a {
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}
+
+/* Footer */
+.article-footer {
+  max-width: 680px; margin: 0 auto;
+  padding: 2rem 2rem 4rem;
+  border-top: 1px solid var(--border);
+}
+.article-footer p {
+  font-size: 0.85rem; color: var(--text-faint); line-height: 1.7;
+}
+
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .article-hero { padding: 120px 0 40px; }
+  .article-body { padding: 2rem 1.5rem 4rem; }
+  .article-meta { flex-direction: column; gap: 0.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand">
+      <div class="nav-mark">W</div>
+      The Windstorm Institute
+    </a>
+    <div class="nav-links">
+      <a href="../index.html#research">Research</a>
+      <a href="../index.html#articles">Articles</a>
+      <a href="../index.html#publications">Publications</a>
+      <a href="../index.html#labs">Labs</a>
+      <a href="../index.html#team">Team</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ARTICLE HERO -->
+<header class="article-hero">
+  <div class="article-hero-inner">
+    <a href="../index.html#articles" class="article-back">&larr; All Articles</a>
+    <div class="article-meta">
+      <span>Paper 8</span>
+      <span>April 2026</span>
+      <span>~15 min read</span>
+      <span>Grant Lavell Whitmer III</span>
+      <span>preprint</span>
+    </div>
+    <h1>The Mirror, Not the Wall:<br><span class="gradient">Why AI&rsquo;s 4-Bit Throughput Limit Is About the Data, Not the Machine</span></h1>
+    <p class="article-subtitle">Paper 8 of the Windstorm series. Cross-modal throughput across language, vision, and audio &mdash; <em>The Throughput Basin Origin</em> &mdash; published together with its full internal adversarial review.</p>
+    <div class="figure" style="margin: 2rem auto;">
+      <img src="../assets/images/web_hero_convergence.png" alt="Convergence hero image">
+    </div>
+    <div class="share-bar">
+      <button class="share-btn" onclick="window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(document.title)+' '+encodeURIComponent(location.href),'_blank')">Share on X</button>
+      <button class="share-btn" onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(location.href),'_blank')">Share on LinkedIn</button>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE BODY -->
+<article class="article-body">
+
+  <p><em>This article is a companion to Paper 8 &mdash; &ldquo;The Vision Basin: Cross-Modal Throughput Measurement Reveals Modality-Specific Information Extraction Rates&rdquo; (2026). The full manuscript is at <a href="https://github.com/Windstorm-Institute/vision-basin">github.com/Windstorm-Institute/vision-basin</a>.</em></p>
+
+  <hr>
+
+  <p>Paper 7 proved that language models converge on ~4 bits per token not because of anything in the architecture, but because that&rsquo;s how much information is in the training data. The natural question: what about images? What about audio? If the basin is genuinely about the data, then different data should sit at a different basin.</p>
+
+  <p>It does.</p>
+
+  <h2>Three modalities, three basins</h2>
+
+  <p>We measured throughput &mdash; how many bits of useful prediction a model extracts per source unit &mdash; across 12 models spanning language, vision, and audio. The results are not ambiguous:</p>
+
+  <p><strong>Language</strong> (9 models, Pythia 70M&ndash;1.4B + GPT-2 small&ndash;XL): 0.85&ndash;1.30 bits per source byte. Larger models extract more. The old &ldquo;&tau; = 4.16&rdquo; was bits per BPE token; in tokenizer-independent units, the basin is ~1 bit per byte.</p>
+
+  <p><strong>Vision</strong> (MAE-Base and MAE-Large): 1.33&ndash;1.36 bits per pixel. These are generative models that must reconstruct masked image patches &mdash; not classifiers that collapse images to labels. The classification floor is 0.02 bits per patch (essentially zero information retained).</p>
+
+  <p><strong>Audio</strong> (real LJ Speech, 3,000 utterances, 5.5 hours): 1.89 bits per mel-spectrogram dimension. Music extracts even more: 2.69 bits per mel dimension. Controls are perfect: white noise and silence both extract exactly zero.</p>
+
+  <h2>The visual shuffling cascade</h2>
+
+  <p>Paper 6 showed that destroying linguistic structure (shuffling words) raises BPT from ~4 to ~10.8 &mdash; a structural bonus of ~6.7 bits. We ran the same experiment on images.</p>
+
+  <p>We trained a next-patch prediction model from scratch on STL-10 photographs (96&times;96), then evaluated it on progressively destroyed versions: quadrants shuffled, blocks shuffled, rows shuffled, pixels shuffled. The result: a spatial structural bonus of <strong>0.69 bits per pixel</strong>. Spatial hierarchy is exploitable &mdash; the model gets better predictions from intact images than from scrambled ones.</p>
+
+  <p>The visual bonus (0.69) is about 10&times; smaller than language&rsquo;s (~6.7), per source unit. This makes sense: language has deep compositional hierarchy &mdash; phonology, morphology, syntax, semantics, discourse, pragmatics &mdash; while images have shallower spatial hierarchy (pixel adjacency, objects, scenes). More levels of exploitable structure means more bits of bonus.</p>
+
+  <h2>The ruler problem</h2>
+
+  <p>Paper 7 proved that bits per token is tokenizer-dependent. We found the same problem in vision: <strong>bits per pixel depends on patch size.</strong></p>
+
+  <p>We trained the same model at six patch sizes (8&times;8 through 48&times;48) and measured bits per pixel. It varies by 4&times; &mdash; from 1.19 at 8&times;8 to 0.29 at 48&times;48. Larger patches cover more pixels, which mechanically changes the per-pixel number without changing how much the model actually learned.</p>
+
+  <p>This is the visual version of Paper 7&rsquo;s R5 finding: the measurement depends on the ruler. For text, the ruler is the tokenizer. For images, the ruler is the patch size. For audio, it&rsquo;s the mel-spectrogram parameters. Comparing throughput across modalities requires a universal ruler that nobody has yet built.</p>
+
+  <h2>The 4-bit coincidence</h2>
+
+  <p>Natural images contain about 4.0 bits per pixel under WebP lossless compression. Natural language sits at about 4.16 bits per token. The numerical similarity is striking &mdash; but it&rsquo;s an artifact.</p>
+
+  <p>Visual source entropy is resolution-dependent. STL-10 at 96&times;96 gives 5.07 bpp under PNG. The same images resized to 224&times;224 give 3.20 bpp &mdash; the upsampling creates spatial redundancy that compression exploits. The &ldquo;4 bpp&rdquo; number depends on which resolution and which compressor you use. It is not a universal constant.</p>
+
+  <h2>What this means</h2>
+
+  <p>The throughput basin is not a single number shared across modalities. It is a modality-specific equilibrium &mdash; each data type has its own entropy, its own exploitable structure, and its own basin. Language sits at ~1 bit per byte. Vision sits at ~1.3 bits per pixel. Audio speech sits at ~1.9 bits per mel dimension.</p>
+
+  <p>The equation from Paper 7 &mdash; BPT &asymp; source_entropy &minus; f(structural_depth) &mdash; holds qualitatively for all three. But the function f() and the definition of &ldquo;source unit&rdquo; differ across modalities. Establishing a modality-independent throughput metric &mdash; a universal ruler &mdash; remains the central open problem.</p>
+
+  <hr>
+
+  <p style="font-size: 0.9rem; color: var(--text-faint); text-align: center; font-family: var(--sans);">
+    <em>The Vision Basin</em> is Paper 8 of the Windstorm series.<br>
+    Code &amp; data: <a href="https://github.com/Windstorm-Institute/vision-basin">github.com/Windstorm-Institute/vision-basin</a><br>
+    <a href="https://github.com/Windstorm-Institute/vision-basin">Read the full paper (preprint)</a>
+  </p>
+
+</article>
+
+<!-- ARTICLE NAV -->
+<div class="article-nav">
+  <a href="throughput-basin-origin.html">&larr; The Mirror, Not the Wall (Paper 7)</a>
+  <a href="hardware-basin.html">The Hardware Basin (Paper 9) &rarr;</a>
+</div>
+
+<!-- FOOTER -->
+<footer class="article-footer">
+  <p>&copy; 2026 The Windstorm Institute &middot; Fort Ann, New York &middot; <a href="../index.html">Home</a></p>
+</footer>
+
+</body>
+</html>

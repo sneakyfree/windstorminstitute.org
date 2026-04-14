@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Hardware Basin — The Windstorm Institute</title>
+<meta name="description" content="The Hardware Basin: Why the Quantization Cliff Is About Level Allocation, Not Bit Count Throughput Measurement Reveals Modality-Specific Information Extraction Rates's 4-Bit Throughput Limit Is About the Data, Not the Machine. Paper 9 of the Windstorm series. The quantization cliff depends on level allocation, not bit count, published together with its full internal adversarial review.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+img{max-width:100%;height:auto}
+
+:root {
+  --bg: #0a0a0b;
+  --surface: #111113;
+  --surface-2: #18181b;
+  --border: #27272a;
+  --border-light: #3f3f46;
+  --text: #fafafa;
+  --text-muted: #a1a1aa;
+  --text-faint: #71717a;
+  --accent: #06b6d4;
+  --accent-dim: #0891b2;
+  --accent-glow: rgba(6, 182, 212, 0.15);
+  --accent-2: #8b5cf6;
+  --warm: #f59e0b;
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Inter', -apple-system, sans-serif;
+  --serif: 'Lora', Georgia, serif;
+}
+
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+a:hover { color: #22d3ee; }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(10, 10, 11, 0.85);
+  backdrop-filter: blur(20px) saturate(1.5);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1100px; margin: 0 auto; padding: 0 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+}
+.nav-brand {
+  display: flex; align-items: center; gap: 12px;
+  font-weight: 600; font-size: 0.95rem; color: var(--text);
+  letter-spacing: -0.01em;
+}
+.nav-mark {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 14px; color: white;
+}
+.nav-links { display: flex; gap: 2rem; }
+.nav-links a {
+  font-size: 0.85rem; font-weight: 500; color: var(--text-muted);
+  letter-spacing: 0.02em; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text); }
+
+/* ─── ARTICLE ─── */
+.article-hero {
+  padding: 140px 0 60px;
+  position: relative;
+  text-align: center;
+}
+.article-hero::before {
+  content: '';
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 600px;
+  background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%);
+  pointer-events: none;
+  opacity: 0.4;
+}
+.article-hero-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+}
+.article-back {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--mono); font-size: 0.75rem; font-weight: 500;
+  color: var(--text-faint); letter-spacing: 0.06em; text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+.article-back:hover { color: var(--accent); }
+.article-meta {
+  font-family: var(--mono); font-size: 0.75rem;
+  color: var(--text-faint); letter-spacing: 0.06em;
+  margin-bottom: 1.5rem;
+  display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;
+}
+.article-hero h1 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700; letter-spacing: -0.02em;
+  line-height: 1.2; margin-bottom: 1.5rem;
+}
+.article-hero h1 .gradient {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 50%, var(--warm) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.article-subtitle {
+  font-size: 1.15rem; color: var(--text-muted);
+  line-height: 1.75; max-width: 600px; margin: 0 auto 2rem;
+}
+.article-author {
+  font-size: 0.9rem; color: var(--text-muted);
+}
+.article-author strong { color: var(--text); }
+
+/* Share buttons */
+.share-bar {
+  display: flex; justify-content: center; gap: 1rem;
+  margin-top: 1.5rem;
+}
+.share-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 14px; border-radius: 6px;
+  background: var(--surface-2); border: 1px solid var(--border);
+  font-family: var(--mono); font-size: 0.7rem; font-weight: 500;
+  color: var(--text-faint); letter-spacing: 0.04em;
+  cursor: pointer; transition: border-color 0.2s, color 0.2s;
+}
+.share-btn:hover { border-color: var(--border-light); color: var(--text-muted); }
+
+/* Article body */
+.article-body {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 3rem 2rem 6rem;
+}
+.article-body h2 {
+  font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em;
+  margin: 3rem 0 1rem;
+  padding-top: 1rem;
+}
+.article-body h3 {
+  font-size: 1.15rem; font-weight: 600;
+  margin: 2rem 0 0.75rem;
+}
+.article-body p {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.9;
+  margin-bottom: 1.5rem;
+}
+.article-body strong { color: var(--text); font-weight: 500; }
+.article-body em { font-style: italic; }
+.article-body blockquote {
+  border-left: 3px solid var(--accent);
+  padding: 1rem 1.5rem;
+  margin: 2rem 0;
+  background: var(--surface);
+  border-radius: 0 8px 8px 0;
+}
+.article-body blockquote p {
+  font-style: italic;
+  color: var(--text);
+  margin-bottom: 0;
+}
+.article-body .figure {
+  margin: 2.5rem 0;
+  text-align: center;
+}
+.article-body .figure img {
+  max-width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+.article-body .figure-caption {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--text-faint);
+  margin-top: 0.75rem;
+  line-height: 1.5;
+}
+.article-body .callout {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  margin: 2rem 0;
+}
+.article-body .callout-label {
+  font-family: var(--mono); font-size: 0.7rem; font-weight: 600;
+  color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+.article-body .callout p { margin-bottom: 0; font-size: 0.95rem; }
+.article-body hr {
+  border: none;
+  height: 1px;
+  background: var(--border);
+  margin: 3rem 0;
+}
+
+/* Paper links */
+.paper-ref {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 2px 8px; border-radius: 4px;
+  background: var(--surface-2); border: 1px solid var(--border);
+  font-family: var(--mono); font-size: 0.7rem; font-weight: 500;
+  color: var(--accent); white-space: nowrap;
+}
+
+/* Table */
+table { width: 100%; border-collapse: collapse; margin: 2rem 0; font-family: var(--sans); font-size: 0.9rem; }
+th { text-align: left; padding: 0.75rem 1rem; border-bottom: 2px solid var(--border-light); color: var(--text); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; }
+td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); color: var(--text-muted); }
+tr:hover td { background: var(--surface); }
+
+/* Article nav */
+.article-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 2rem 3rem;
+}
+.article-nav a {
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}
+
+/* Footer */
+.article-footer {
+  max-width: 680px; margin: 0 auto;
+  padding: 2rem 2rem 4rem;
+  border-top: 1px solid var(--border);
+}
+.article-footer p {
+  font-size: 0.85rem; color: var(--text-faint); line-height: 1.7;
+}
+
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .article-hero { padding: 120px 0 40px; }
+  .article-body { padding: 2rem 1.5rem 4rem; }
+  .article-meta { flex-direction: column; gap: 0.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand">
+      <div class="nav-mark">W</div>
+      The Windstorm Institute
+    </a>
+    <div class="nav-links">
+      <a href="../index.html#research">Research</a>
+      <a href="../index.html#articles">Articles</a>
+      <a href="../index.html#publications">Publications</a>
+      <a href="../index.html#labs">Labs</a>
+      <a href="../index.html#team">Team</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ARTICLE HERO -->
+<header class="article-hero">
+  <div class="article-hero-inner">
+    <a href="../index.html#articles" class="article-back">&larr; All Articles</a>
+    <div class="article-meta">
+      <span>Paper 9</span>
+      <span>April 2026</span>
+      <span>~15 min read</span>
+      <span>Grant Lavell Whitmer III</span>
+      <span>preprint</span>
+    </div>
+    <h1>The Mirror, Not the Wall:<br><span class="gradient">Why AI&rsquo;s 4-Bit Throughput Limit Is About the Data, Not the Machine</span></h1>
+    <p class="article-subtitle">Paper 9 of the Windstorm series. The quantization cliff depends on level allocation, not bit count &mdash; <em>The Throughput Basin Origin</em> &mdash; published together with its full internal adversarial review.</p>
+    <div class="figure" style="margin: 2rem auto;">
+      <img src="../assets/images/web_hero_convergence.png" alt="Convergence hero image">
+    </div>
+    <div class="share-bar">
+      <button class="share-btn" onclick="window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(document.title)+' '+encodeURIComponent(location.href),'_blank')">Share on X</button>
+      <button class="share-btn" onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(location.href),'_blank')">Share on LinkedIn</button>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE BODY -->
+<article class="article-body">
+
+  <p><em>This article is a companion to Paper 9 &mdash; &ldquo;The Hardware Basin: Why the Quantization Cliff Is About Level Allocation, Not Bit Count&rdquo; (2026). The full manuscript is at <a href="https://github.com/Windstorm-Institute/hardware-basin">github.com/Windstorm-Institute/hardware-basin</a>.</em></p>
+
+  <hr>
+
+  <p>Paper 7 found something that looked simple: language models collapse when you quantize their weights below 4 bits. INT4 works. INT3 doesn&rsquo;t. The cliff is sharp and universal across eight models.</p>
+
+  <p>We thought we were looking at a floor &mdash; a hard physical limit baked into the mathematics of low-precision arithmetic. We were wrong. We were looking at a wall built by a specific quantization method, not by the arithmetic itself.</p>
+
+  <h2>The experiment that changed the story</h2>
+
+  <p>We loaded Pythia-1.4B (a real, pretrained language model with 1.4 billion parameters) and quantized it two ways, both to 4-bit weights:</p>
+
+  <p><strong>Symmetric quantization</strong> &mdash; the simplest method, and what basic integer hardware does. Place 15 quantization levels uniformly from the minimum weight to the maximum weight. Result: <strong>BPT = 16.87</strong>. Catastrophic. The model outputs gibberish.</p>
+
+  <p><strong>NF4 (normal-float-4)</strong> &mdash; a smarter method. Place the same 15 levels at the quantiles of a normal distribution, so more levels sit near zero (where most weights cluster) and fewer levels sit in the sparse tails. Result: <strong>BPT = 3.90</strong>. Operational. The model works fine.</p>
+
+  <p>Same bit count. Same model. Same data. One works, one doesn&rsquo;t. The difference is entirely in <em>where</em> the bits are spent.</p>
+
+  <h2>Why it matters</h2>
+
+  <p>If the cliff were at a fixed bit count, hardware designers would need to build wider integer datapaths &mdash; INT8 everywhere, no shortcuts. Expensive, power-hungry, physically large.</p>
+
+  <p>But the cliff is at a <em>quality threshold</em> for level allocation. Hardware that supports non-uniform quantization tables &mdash; where each 4-bit code maps to a non-uniform float value, optimized for the weight distribution &mdash; can operate at 4 bits. Hardware that supports only uniform integers needs 8 bits to achieve the same result.</p>
+
+  <p>The practical implication: <strong>build lookup tables, not wider datapaths.</strong> A 16-entry lookup table per weight block costs almost nothing in silicon area, but it shifts the precision floor from INT8 to INT4 &mdash; a 2&times; reduction in memory bandwidth and storage.</p>
+
+  <h2>It&rsquo;s universal</h2>
+
+  <p>We tested the cliff across four model architectures: three transformer variants (Pythia-160M, Pythia-1.4B, GPT-2-medium) and one state-space model (Mamba-370M). The cliff appears in all of them. Mamba uses fundamentally different computation (state-space dynamics instead of attention), but its weight matrices are still approximately Gaussian &mdash; and that&rsquo;s what the cliff is about.</p>
+
+  <p>We tested across all 24 layers of Pythia-410M. The cliff ratio (~4.5&times;) is consistent from layer 0 to layer 23. It does not get worse in deeper layers. It is a property of the weight distribution shape, not the network depth.</p>
+
+  <h2>One matrix defied the cliff</h2>
+
+  <p>One weight matrix in GPT-2-medium showed no cliff at all (ratio 0.9&times;). We investigated: this matrix has extreme kurtosis (124.75) and 80% sparsity. Translation: a few weights are very large, and the rest are near zero. Quantizing the near-zero bulk makes no difference because those weights don&rsquo;t contribute to the output.</p>
+
+  <p>This predicts that pruned models (deliberately sparsified) will be more robust to aggressive quantization. It also predicts that embedding layers (which tend to be sparser) will resist the cliff better than attention layers (which are denser). Both predictions are testable.</p>
+
+  <h2>The optimal quantizer</h2>
+
+  <p>We tested five level-allocation strategies on real Pythia-410M weights at INT4:</p>
+
+  <p><strong>Symmetric uniform:</strong> cosine 0.905. <strong>NF4 (Gaussian quantiles):</strong> cosine 0.973. <strong>Lloyd-Max (mathematically optimal):</strong> cosine 0.990. <strong>Log-scale:</strong> cosine 0.965. <strong>Random (control):</strong> cosine 0.894.</p>
+
+  <p>Lloyd-Max at INT3 (cosine 0.965) is <em>better</em> than symmetric at INT4 (cosine 0.905). The optimal quantizer with 7 levels outperforms the naive quantizer with 15 levels. This is the strongest evidence that the cliff is about level quality, not level count.</p>
+
+  <hr>
+
+  <p style="font-size: 0.9rem; color: var(--text-faint); text-align: center; font-family: var(--sans);">
+    <em>The Hardware Basin</em> is Paper 9 of the Windstorm series.<br>
+    Code &amp; data: <a href="https://github.com/Windstorm-Institute/hardware-basin">github.com/Windstorm-Institute/hardware-basin</a><br>
+    <a href="https://github.com/Windstorm-Institute/hardware-basin">Read the full paper (preprint)</a>
+  </p>
+
+</article>
+
+<!-- ARTICLE NAV -->
+<div class="article-nav">
+  <a href="vision-basin.html">&larr; The Vision Basin (Paper 8)</a>
+  <span></span>
+</div>
+
+<!-- FOOTER -->
+<footer class="article-footer">
+  <p>&copy; 2026 The Windstorm Institute &middot; Fort Ann, New York &middot; <a href="../index.html">Home</a></p>
+</footer>
+
+</body>
+</html>
