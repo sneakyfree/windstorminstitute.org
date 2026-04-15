@@ -395,7 +395,9 @@ tr:hover td { background: var(--surface); }
     <tr><td style="padding: 0.4rem 1rem;">White noise</td><td style="padding: 0.4rem 1rem; text-align: right;">6.30</td></tr>
   </table>
 
-  <p>The same pattern holds: silence has zero entropy, structured signals (tones, chords) sit around 5.3 bits, and random noise reaches 6.3 bits. Audio throughput tracks source complexity, just as vision and language do. Each modality has its own basin, but the basin is always data-driven.</p>
+  <p>The same pattern holds: silence has zero entropy, structured signals (tones, chords) sit around 5.3 bits, and random noise reaches 6.3 bits.</p>
+
+  <p>We also tested wav2vec2 (a speech recognition model) on these signals plus 200 real utterances from LJ Speech. The result mirrors the vision finding: <strong>real speech produces output entropy of just 0.095 bits/frame</strong> &mdash; far below any synthetic signal (0.6&ndash;3.0 bits). The model is extremely confident about real speech because it was trained on speech, just as the ViT is confident about real images because it was trained on ImageNet. In both cases, the basin sits where the model can exploit learned structure. Audio throughput tracks source complexity, just as vision and language do. Each modality has its own basin, but the basin is always data-driven.</p>
 
   <h2>What this means</h2>
 
