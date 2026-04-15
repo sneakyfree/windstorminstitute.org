@@ -382,6 +382,29 @@ tr:hover td { background: var(--surface); }
 
   <p>NF4 preserves 99.5% of the structural bonus. Symmetric INT4 destroys it &mdash; the bonus drops from 6.23 to 0.28, meaning the model can barely distinguish ordered English from word salad. Symmetric INT8, with twice the bit budget, recovers the full bonus. The cliff is not just about cosine similarity in individual matrices. <strong>It is about whether the model still understands language.</strong></p>
 
+  <h2>The end-to-end test</h2>
+
+  <p>The cosine similarity results suggested Lloyd-Max INT3 (cosine 0.965) might outperform symmetric INT4 (cosine 0.905). If true, that would mean the right quantization algorithm could push the floor from 4 bits to 3 &mdash; a further 25% reduction in memory bandwidth.</p>
+
+  <p>We tested this by running full end-to-end perplexity evaluation on Pythia-410M, quantized with each method, on WikiText-2:</p>
+
+  <table style="margin: 1.5rem auto; border-collapse: collapse; font-family: var(--sans); font-size: 0.95rem;">
+    <tr style="border-bottom: 2px solid var(--text-faint);">
+      <th style="padding: 0.5rem 1rem; text-align: left;">Method</th>
+      <th style="padding: 0.5rem 1rem; text-align: right;">BPT</th>
+      <th style="padding: 0.5rem 1rem; text-align: right;">vs. baseline</th>
+    </tr>
+    <tr><td style="padding: 0.4rem 1rem;">FP16 (baseline)</td><td style="padding: 0.4rem 1rem; text-align: right;">4.27</td><td style="padding: 0.4rem 1rem; text-align: right;">1.0&times;</td></tr>
+    <tr><td style="padding: 0.4rem 1rem;">Lloyd-Max INT4</td><td style="padding: 0.4rem 1rem; text-align: right;">8.51</td><td style="padding: 0.4rem 1rem; text-align: right;">2.0&times;</td></tr>
+    <tr><td style="padding: 0.4rem 1rem;">Lloyd-Max INT3</td><td style="padding: 0.4rem 1rem; text-align: right;">11.74</td><td style="padding: 0.4rem 1rem; text-align: right;">2.7&times;</td></tr>
+    <tr><td style="padding: 0.4rem 1rem;">Symmetric INT4</td><td style="padding: 0.4rem 1rem; text-align: right;">16.89</td><td style="padding: 0.4rem 1rem; text-align: right;">4.0&times;</td></tr>
+    <tr><td style="padding: 0.4rem 1rem;">Symmetric INT3</td><td style="padding: 0.4rem 1rem; text-align: right;">16.05</td><td style="padding: 0.4rem 1rem; text-align: right;">3.8&times;</td></tr>
+  </table>
+
+  <p><strong>Lloyd-Max INT3 fails end-to-end.</strong> Per-matrix cosine of 0.965 does not survive error accumulation across 24 layers. Even Lloyd-Max INT4 degrades to 2&times; baseline &mdash; still operational, but substantially worse than NF4&rsquo;s near-lossless 3.90 BPT.</p>
+
+  <p>This is a cautionary result: <strong>cosine similarity overstates quantization quality.</strong> A method can preserve 96.5% of per-matrix fidelity and still produce a model that is 2.7&times; worse end-to-end. The structural bonus test and end-to-end BPT are the metrics that matter. NF4 remains the only INT4 method that preserves both meaning and performance through the full network.</p>
+
   <hr>
 
   <p style="font-size: 0.9rem; color: var(--text-faint); text-align: center; font-family: var(--sans);">
