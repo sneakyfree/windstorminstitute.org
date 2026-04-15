@@ -349,11 +349,53 @@ tr:hover td { background: var(--surface); }
 
   <p>This is the visual version of Paper 7&rsquo;s R5 finding: the measurement depends on the ruler. For text, the ruler is the tokenizer. For images, the ruler is the patch size. For audio, it&rsquo;s the mel-spectrogram parameters. Comparing throughput across modalities requires a universal ruler that nobody has yet built.</p>
 
+  <h2>The visual entropy tracking curve</h2>
+
+  <p>If the visual basin is genuinely data-driven, then images with more complexity should produce higher reconstruction loss in a generative vision model. We tested this using a Masked Autoencoder (MAE-Base) on synthetic images at controlled complexity levels plus real photographs (CIFAR-10):</p>
+
+  <table style="margin: 1.5rem auto; border-collapse: collapse; font-family: var(--sans); font-size: 0.95rem;">
+    <tr style="border-bottom: 2px solid var(--text-faint);">
+      <th style="padding: 0.5rem 1rem; text-align: left;">Image Type</th>
+      <th style="padding: 0.5rem 1rem; text-align: right;">MAE Loss</th>
+      <th style="padding: 0.5rem 1rem; text-align: right;">Bits/Pixel Est</th>
+    </tr>
+    <tr><td style="padding: 0.4rem 1rem;">Uniform gray</td><td style="padding: 0.4rem 1rem; text-align: right;">0.000</td><td style="padding: 0.4rem 1rem; text-align: right;">0.00</td></tr>
+    <tr><td style="padding: 0.4rem 1rem;">Gradient</td><td style="padding: 0.4rem 1rem; text-align: right;">0.000</td><td style="padding: 0.4rem 1rem; text-align: right;">0.00</td></tr>
+    <tr><td style="padding: 0.4rem 1rem;">CIFAR-10 (real photos)</td><td style="padding: 0.4rem 1rem; text-align: right;">0.071</td><td style="padding: 0.4rem 1rem; text-align: right;">0.14</td></tr>
+    <tr><td style="padding: 0.4rem 1rem;">Gaussian noise</td><td style="padding: 0.4rem 1rem; text-align: right;">1.135</td><td style="padding: 0.4rem 1rem; text-align: right;">2.14</td></tr>
+    <tr><td style="padding: 0.4rem 1rem;">Uniform noise</td><td style="padding: 0.4rem 1rem; text-align: right;">1.647</td><td style="padding: 0.4rem 1rem; text-align: right;">2.41</td></tr>
+    <tr><td style="padding: 0.4rem 1rem;">Random 4&times;4 blocks</td><td style="padding: 0.4rem 1rem; text-align: right;">1.797</td><td style="padding: 0.4rem 1rem; text-align: right;">2.47</td></tr>
+    <tr><td style="padding: 0.4rem 1rem;">Random 16&times;16 blocks</td><td style="padding: 0.4rem 1rem; text-align: right;">2.605</td><td style="padding: 0.4rem 1rem; text-align: right;">2.74</td></tr>
+  </table>
+
+  <p>The ordering is exactly what the data-driven hypothesis predicts. Trivially predictable images (uniform, gradient) have near-zero loss. Real photographs (CIFAR-10) have very low loss because natural images have massive exploitable structure &mdash; spatial coherence, object regularity, texture patterns. Random noise is hard to predict. The most difficult case is random 16&times;16 blocks: each patch is a random color, and the MAE&rsquo;s 16&times;16 patches see no useful spatial context at all.</p>
+
+  <p>A ViT-Base classifier confirms this from the discriminative side: output entropy is 3.6 bits for real images (the model is confident) versus 6.5&ndash;8.4 bits for synthetic patterns (the model is confused). The basin sits where the model can exploit structure.</p>
+
   <h2>The 4-bit coincidence</h2>
 
   <p>Natural images contain about 4.0 bits per pixel under WebP lossless compression. Natural language sits at about 4.16 bits per token. The numerical similarity is striking &mdash; but it&rsquo;s an artifact.</p>
 
   <p>Visual source entropy is resolution-dependent. STL-10 at 96&times;96 gives 5.07 bpp under PNG. The same images resized to 224&times;224 give 3.20 bpp &mdash; the upsampling creates spatial redundancy that compression exploits. The &ldquo;4 bpp&rdquo; number depends on which resolution and which compressor you use. It is not a universal constant.</p>
+
+  <h2>Audio follows the same pattern</h2>
+
+  <p>We measured mel-spectrogram entropy across synthetic audio of increasing complexity:</p>
+
+  <table style="margin: 1.5rem auto; border-collapse: collapse; font-family: var(--sans); font-size: 0.95rem;">
+    <tr style="border-bottom: 2px solid var(--text-faint);">
+      <th style="padding: 0.5rem 1rem; text-align: left;">Audio Type</th>
+      <th style="padding: 0.5rem 1rem; text-align: right;">Mel Entropy (bits/frame)</th>
+    </tr>
+    <tr><td style="padding: 0.4rem 1rem;">Silence</td><td style="padding: 0.4rem 1rem; text-align: right;">0.00</td></tr>
+    <tr><td style="padding: 0.4rem 1rem;">AM sweep</td><td style="padding: 0.4rem 1rem; text-align: right;">5.30</td></tr>
+    <tr><td style="padding: 0.4rem 1rem;">Pure 440 Hz tone</td><td style="padding: 0.4rem 1rem; text-align: right;">5.35</td></tr>
+    <tr><td style="padding: 0.4rem 1rem;">Three-note chord</td><td style="padding: 0.4rem 1rem; text-align: right;">5.37</td></tr>
+    <tr><td style="padding: 0.4rem 1rem;">Pink noise (1/f)</td><td style="padding: 0.4rem 1rem; text-align: right;">6.28</td></tr>
+    <tr><td style="padding: 0.4rem 1rem;">White noise</td><td style="padding: 0.4rem 1rem; text-align: right;">6.30</td></tr>
+  </table>
+
+  <p>The same pattern holds: silence has zero entropy, structured signals (tones, chords) sit around 5.3 bits, and random noise reaches 6.3 bits. Audio throughput tracks source complexity, just as vision and language do. Each modality has its own basin, but the basin is always data-driven.</p>
 
   <h2>What this means</h2>
 
