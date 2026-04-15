@@ -361,6 +361,27 @@ tr:hover td { background: var(--surface); }
 
   <p>Lloyd-Max at INT3 (cosine 0.965) is <em>better</em> than symmetric at INT4 (cosine 0.905). The optimal quantizer with 7 levels outperforms the naive quantizer with 15 levels. This is the strongest evidence that the cliff is about level quality, not level count.</p>
 
+  <h2>The structural bonus test</h2>
+
+  <p>Cosine similarity measures how well a single matrix survives quantization. But a language model is 24 layers of matrices chained together, and errors accumulate. The real question is: does the quantized model still <em>understand language</em>?</p>
+
+  <p>We measured the structural bonus &mdash; the BPT difference between real English text and the same text with its words shuffled into random order &mdash; under each quantization method. A model that understands syntax should perform much better on ordered text than shuffled text. A model that is just memorizing surface statistics should perform equally badly on both. The structural bonus is a direct measure of whether the model still exploits linguistic structure.</p>
+
+  <table style="margin: 1.5rem auto; border-collapse: collapse; font-family: var(--sans); font-size: 0.95rem;">
+    <tr style="border-bottom: 2px solid var(--text-faint);">
+      <th style="padding: 0.5rem 1rem; text-align: left;">Method</th>
+      <th style="padding: 0.5rem 1rem; text-align: right;">BPT (ordered)</th>
+      <th style="padding: 0.5rem 1rem; text-align: right;">BPT (shuffled)</th>
+      <th style="padding: 0.5rem 1rem; text-align: right;">Structural bonus</th>
+    </tr>
+    <tr><td style="padding: 0.4rem 1rem;">FP16 (baseline)</td><td style="padding: 0.4rem 1rem; text-align: right;">3.81</td><td style="padding: 0.4rem 1rem; text-align: right;">10.05</td><td style="padding: 0.4rem 1rem; text-align: right;">6.23</td></tr>
+    <tr><td style="padding: 0.4rem 1rem;">NF4</td><td style="padding: 0.4rem 1rem; text-align: right;">3.90</td><td style="padding: 0.4rem 1rem; text-align: right;">10.10</td><td style="padding: 0.4rem 1rem; text-align: right;">6.20</td></tr>
+    <tr><td style="padding: 0.4rem 1rem;">Symmetric INT4</td><td style="padding: 0.4rem 1rem; text-align: right;">16.90</td><td style="padding: 0.4rem 1rem; text-align: right;">17.18</td><td style="padding: 0.4rem 1rem; text-align: right;">0.28</td></tr>
+    <tr><td style="padding: 0.4rem 1rem;">Symmetric INT8</td><td style="padding: 0.4rem 1rem; text-align: right;">3.85</td><td style="padding: 0.4rem 1rem; text-align: right;">10.09</td><td style="padding: 0.4rem 1rem; text-align: right;">6.24</td></tr>
+  </table>
+
+  <p>NF4 preserves 99.5% of the structural bonus. Symmetric INT4 destroys it &mdash; the bonus drops from 6.23 to 0.28, meaning the model can barely distinguish ordered English from word salad. Symmetric INT8, with twice the bit budget, recovers the full bonus. The cliff is not just about cosine similarity in individual matrices. <strong>It is about whether the model still understands language.</strong></p>
+
   <hr>
 
   <p style="font-size: 0.9rem; color: var(--text-faint); text-align: center; font-family: var(--sans);">
