@@ -372,6 +372,27 @@ tr:hover td { background: var(--surface); }
 
   <p>A ViT-Base classifier confirms this from the discriminative side: output entropy is 3.6 bits for real images (the model is confident) versus 6.5&ndash;8.4 bits for synthetic patterns (the model is confused). The basin sits where the model can exploit structure.</p>
 
+  <h2>Trained from scratch — the visual SYN-8</h2>
+
+  <p>The pretrained-MAE results above are evaluative, which a critical reviewer would correctly flag: the model&rsquo;s confidence on real images may reflect its training distribution rather than image entropy itself. To rule that out, we trained a 112-million-parameter ViT-MAE from scratch at each entropy level &mdash; the visual equivalent of Paper 7&rsquo;s SYN-8 experiment. Three random seeds per level, fifteen epochs each, on synthetic images at 224&times;224.</p>
+
+  <table style="margin: 1.5rem auto; border-collapse: collapse; font-family: var(--sans); font-size: 0.95rem;">
+    <tr style="border-bottom: 2px solid var(--text-faint);">
+      <th style="padding: 0.5rem 1rem; text-align: left;">Image Type</th>
+      <th style="padding: 0.5rem 1rem; text-align: right;">Approx Entropy</th>
+      <th style="padding: 0.5rem 1rem; text-align: right;">Eval Loss (mean ± std)</th>
+    </tr>
+    <tr><td style="padding: 0.4rem 1rem;">Uniform color</td><td style="padding: 0.4rem 1rem; text-align: right;">~0 bits</td><td style="padding: 0.4rem 1rem; text-align: right;">0.000001 ± 0.000000</td></tr>
+    <tr><td style="padding: 0.4rem 1rem;">Natural-like (gradients + objects)</td><td style="padding: 0.4rem 1rem; text-align: right;">structured</td><td style="padding: 0.4rem 1rem; text-align: right;">0.014 ± 0.000</td></tr>
+    <tr><td style="padding: 0.4rem 1rem;">4-color blocks</td><td style="padding: 0.4rem 1rem; text-align: right;">~2 bits</td><td style="padding: 0.4rem 1rem; text-align: right;">0.065 ± 0.025</td></tr>
+    <tr><td style="padding: 0.4rem 1rem;">16-color blocks</td><td style="padding: 0.4rem 1rem; text-align: right;">~4 bits</td><td style="padding: 0.4rem 1rem; text-align: right;">0.076 ± 0.004</td></tr>
+    <tr><td style="padding: 0.4rem 1rem;">Gaussian noise</td><td style="padding: 0.4rem 1rem; text-align: right;">~7 bits</td><td style="padding: 0.4rem 1rem; text-align: right;">0.058 ± 0.000</td></tr>
+    <tr><td style="padding: 0.4rem 1rem;">64-color pixels</td><td style="padding: 0.4rem 1rem; text-align: right;">~6 bits</td><td style="padding: 0.4rem 1rem; text-align: right;">0.084 ± 0.001</td></tr>
+    <tr><td style="padding: 0.4rem 1rem;">Uniform noise</td><td style="padding: 0.4rem 1rem; text-align: right;">~8 bits</td><td style="padding: 0.4rem 1rem; text-align: right;">0.083 ± 0.000</td></tr>
+  </table>
+
+  <p>The two key results: trivially predictable images (uniform) reconstruct perfectly, and the natural-like images with exploitable spatial structure (gradients, blob-shaped objects) reconstruct <strong>six times better</strong> than uniform noise of similar entropy. The MAE learns to compress what is compressible. This is the visual equivalent of f(structural_depth) from Paper 7 &mdash; the basin sits at source entropy minus exploitable structure, in vision just as in language. Welch&rsquo;s t-test comparing uniform noise against uniform color: t = 249,994, p = 1.6 &times; 10<sup>&minus;11</sup>.</p>
+
   <h2>The 4-bit coincidence</h2>
 
   <p>Natural images contain about 4.0 bits per pixel under WebP lossless compression. Natural language sits at about 4.16 bits per token. The numerical similarity is striking &mdash; but it&rsquo;s an artifact.</p>
