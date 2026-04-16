@@ -369,6 +369,12 @@ nav {
 
   <p>The rate-distortion surface doesn't care about your vocabulary. It cares about your noise and your discrimination cost. That realization drove us to ask: how many other systems hit this same wall? The answer is in Paper 3.</p>
 
+  <div class="callout">
+    <div class="callout-label">Measurement note added April 2026</div>
+    <p>The BPT values reported here &mdash; roughly 4.2 bits/token across the 1,749-model catalog, and the apparent match to the ribosome&rsquo;s 4.4 bits/codon &mdash; are measured in <strong>bits per BPE token</strong>, not bits per source symbol. The internal adversarial review of Paper 7 identified that BPT measurements are tokenizer-dependent: the same model on the same corpus returns different BPT values under different tokenization schemes. The numerical alignment with the ribosomal floor is therefore at the level of &ldquo;both systems land in the same narrow bit-per-event regime,&rdquo; not an exact match at the source-symbol level. A bits-per-source-symbol re-measurement across the 1,749-model catalog is now scoped under <a href="https://github.com/Windstorm-Institute/throughput-basin-origin/issues/1">Paper 7.1</a>.</p>
+    <p style="margin-top: 0.85rem;">The directional finding &mdash; that 1,749 models spanning three orders of magnitude in vocabulary all land in a narrow throughput band rather than spreading across the possible range &mdash; is not affected by the unit choice. Paper 7 then established that the band&rsquo;s width itself is data-driven: source entropy minus the structure a decoder can exploit.</p>
+  </div>
+
   <hr>
 
   <p style="font-size: 0.9rem; color: var(--text-faint); text-align: center; font-family: var(--sans);">
