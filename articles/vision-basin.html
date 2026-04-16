@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Vision Basin — The Windstorm Institute</title>
-<meta name="description" content="The Vision Basin: Cross-Modal Throughput Measurement Reveals Modality-Specific Information Extraction Rates's 4-Bit Throughput Limit Is About the Data, Not the Machine. Paper 8 of the Windstorm series. Cross-modal throughput across language, vision, and audio, published together with its full internal adversarial review.">
+<meta name="description" content="The Vision Basin (Paper 8 of the Windstorm series): cross-modal throughput measurement across language, vision, and audio. Each modality has its own basin, but the basin is always data-driven — source entropy modulated by exploitable structure.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
@@ -391,7 +391,7 @@ tr:hover td { background: var(--surface); }
     <tr><td style="padding: 0.4rem 1rem;">Uniform noise</td><td style="padding: 0.4rem 1rem; text-align: right;">~8 bits</td><td style="padding: 0.4rem 1rem; text-align: right;">0.083 ± 0.000</td></tr>
   </table>
 
-  <p>The two key results: trivially predictable images (uniform) reconstruct perfectly, and the natural-like images with exploitable spatial structure (gradients, blob-shaped objects) reconstruct <strong>six times better</strong> than uniform noise of similar entropy. The MAE learns to compress what is compressible. This is the visual equivalent of f(structural_depth) from Paper 7 &mdash; the basin sits at source entropy minus exploitable structure, in vision just as in language. Welch&rsquo;s t-test comparing uniform noise against uniform color: t = 249,994, p = 1.6 &times; 10<sup>&minus;11</sup>.</p>
+  <p>The two key results: trivially predictable images (uniform) reconstruct perfectly, and the natural-like images with exploitable spatial structure (gradients, blob-shaped objects) reconstruct <strong>six times better</strong> than uniform noise of similar entropy. The MAE learns to compress what is compressible. This is the visual equivalent of f(structural_depth) from Paper 7 &mdash; the basin sits at source entropy minus exploitable structure, in vision just as in language. Welch&rsquo;s t-test comparing uniform noise against uniform color: t = 249,994, p = 1.6 &times; 10<sup>&minus;11</sup>, Cohen&rsquo;s d = 204,119.</p>
 
   <h2>The 4-bit coincidence</h2>
 
