@@ -45,25 +45,13 @@ ax.spines['left'].set_color('#333333'); ax.grid(True, axis='y', alpha=0.15, colo
 plt.savefig(f'{OUT}/web_hero_convergence.png', facecolor='#0a0a1a'); plt.close()
 print("1/4 Hero convergence")
 
-# === VISUAL 2: Research Arc ===
-fig, ax = plt.subplots(figsize=(14, 5))
-papers = [('Paper 0\nFons\nConstraint','Why 64\ncodons?','#ff6644'),
-    ('Paper 1\nReceiver-\nLimited Floor','1,749 models\np = 0.643','#ffaa44'),
-    ('Paper 2\nThroughput\nBasin','31 systems\nK* ≈ 19–30','#44ddaa'),
-    ('Paper 3\nSerial Decoding\nBasin τ','τ = 4.16 bits\nΔ = 0.003','#44aaff'),
-    ('Paper 4\nDissipative\nDecoder','WHY the\nbasin exists','#aa66ff')]
-pxs = np.linspace(1, 13, 5)
-for i,(t,r,c) in enumerate(papers):
-    ax.add_patch(plt.Circle((pxs[i],2.5), 0.8, color=c, alpha=0.25, zorder=3))
-    ax.add_patch(plt.Circle((pxs[i],2.5), 0.8, fill=False, color=c, linewidth=2, zorder=4))
-    ax.text(pxs[i], 2.5, t, ha='center', va='center', fontsize=8.5, fontweight='bold', color='white', zorder=5)
-    ax.text(pxs[i], 1.2, r, ha='center', va='center', fontsize=9, color=c, fontstyle='italic')
-    if i < 4: ax.annotate('', xy=(pxs[i+1]-0.85,2.5), xytext=(pxs[i]+0.85,2.5), arrowprops=dict(arrowstyle='->', color='#555555', lw=2))
-ax.text(7, 4.2, 'WHAT exists → WHERE it sits → WHY it must', ha='center', fontsize=14, color='#888888', fontstyle='italic')
-ax.set_xlim(-0.5, 14.5); ax.set_ylim(0, 5); ax.set_aspect('equal'); ax.axis('off')
-ax.set_title('The Research Arc', fontsize=16, color='white', fontweight='bold', pad=10)
-plt.savefig(f'{OUT}/web_research_arc.png', facecolor='#0a0a1a'); plt.close()
-print("2/4 Research arc")
+# === VISUAL 2: Research Arc — REMOVED 2026-04-16 ===
+# The previous generator showed only 5 papers (Paper 0-4 in legacy numbering)
+# and was never referenced from any HTML. The output PNG was an orphan.
+# If a research-arc visual is wanted again, regenerate with all 9 current
+# papers (Fons → Receiver-Limited Floor → Throughput Basin → Serial Decoding
+# Basin τ → Dissipative Decoder → Inherited Constraint → Throughput Basin
+# Origin → Vision Basin → Hardware Basin) and the refined data-driven law.
 
 # === VISUAL 3: Carnot Analogy ===
 fig, (a1,a2) = plt.subplots(1, 2, figsize=(14, 6))
