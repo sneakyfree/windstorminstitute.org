@@ -950,30 +950,32 @@ footer {
           </div>
         </div>
       </a>
-      <a href="articles/vision-basin.html" class="pub-card">
+      <a href="https://doi.org/10.5281/zenodo.19672827" class="pub-card" target="_blank">
         <div class="pub-num">08</div>
         <div class="pub-info">
           <h4>The Vision Basin: Cross-Modal Throughput Measurement Reveals Modality-Specific Information Extraction Rates</h4>
-          <p>12 models across language, vision, and audio. Real LJ Speech at 1.89 bits/mel_dim. MAE generative vision at 1.33 bits/pixel. Visual structural bonus 0.69 bpp. Patch size acts as a visual &ldquo;tokenizer&rdquo; &mdash; bits/pixel varies 4&times; across patch sizes. The basin is modality-specific.</p>
+          <p>12 models across language, vision, and audio. Real LJ Speech at 1.89 bits/mel_dim. MAE generative vision at 1.33 bits/pixel. Visual structural bonus 0.69 bpp. Patch size acts as a visual &ldquo;tokenizer&rdquo; &mdash; bits/pixel varies 4&times; across patch sizes. The basin is modality-specific. Built across seven rounds of follow-up; from-scratch ViT-MAE confirms with Cohen&rsquo;s <em>d</em> = 204,119.</p>
           <div class="pub-meta">
             <span class="pub-tag live">2026</span>
             <span class="pub-tag">cross-modal</span>
             <span class="pub-tag">vision</span>
             <span class="pub-tag">audio</span>
-            <span class="pub-tag live">v2.2 published</span>
+            <span class="pub-tag">zenodo</span>
+            <span class="pub-tag">doi: 10.5281/zenodo.19672827</span>
           </div>
         </div>
       </a>
-      <a href="articles/hardware-basin.html" class="pub-card">
+      <a href="https://doi.org/10.5281/zenodo.19672921" class="pub-card" target="_blank">
         <div class="pub-num">09</div>
         <div class="pub-info">
           <h4>The Hardware Basin: Why the Quantization Cliff Is About Level Allocation, Not Bit Count</h4>
-          <p>NF4 at INT4 = BPT 3.90 (works). Symmetric at INT4 = BPT 16.87 (destroyed). Same bit count, opposite outcomes. The cliff is about level allocation. Tested across 4 architectures including Mamba, all 24 layers, 5 quantization methods. Hardware implication: build lookup tables, not wider integer datapaths.</p>
+          <p>NF4 at INT4 = BPT 3.90 (works). Symmetric at INT4 = BPT 16.87 (destroyed). Same bit count, opposite outcomes. The cliff is about level allocation. Tested across 4 architectures including Mamba, all 24 layers, 5 quantization methods. Hardware implication: build lookup tables, not wider integer datapaths. Seven rounds of follow-up; bulletproof at Cohen&rsquo;s <em>d</em> = 400.81.</p>
           <div class="pub-meta">
             <span class="pub-tag live">2026</span>
             <span class="pub-tag">hardware</span>
             <span class="pub-tag">quantization</span>
-            <span class="pub-tag live">v2.2 published</span>
+            <span class="pub-tag">zenodo</span>
+            <span class="pub-tag">doi: 10.5281/zenodo.19672921</span>
           </div>
         </div>
       </a>
@@ -1092,6 +1094,28 @@ footer {
           <div class="article-card-date">April 2026 <span>~12 min read</span></div>
           <h3>The Mirror, Not the Wall: Why AI's 4-Bit Limit Is About the Data, Not the Machine</h3>
           <p>Train the same model on a synthetic 8-bit-entropy corpus and it climbs to 8.92 bits per token, not four. The basin moved with the data. Published with the institute's full internal adversarial review attached &mdash; read the article and the review as a unit.</p>
+          <div class="article-card-link">Read article &rarr;</div>
+        </div>
+      </a>
+      <a href="articles/vision-basin.html" class="article-card">
+        <div class="article-card-hero">
+          <div class="article-card-hero-text" style="color: rgba(139,92,246,0.14);">0.69</div>
+        </div>
+        <div class="article-card-body">
+          <div class="article-card-date">April 2026 <span>~16 min read</span></div>
+          <h3>The Vision Basin: How the Throughput Equation Generalizes to Sight and Sound</h3>
+          <p>Take the data-driven equation from Paper 7 and ask: does it hold for vision and audio? Twelve models, real LJ Speech, a from-scratch ViT-MAE on a controlled-entropy ladder. Each modality has its own basin, but the basin is always source entropy minus exploitable structure. Built across seven rounds of follow-up &mdash; including one documented failure that became the bulletproof verification.</p>
+          <div class="article-card-link">Read article &rarr;</div>
+        </div>
+      </a>
+      <a href="articles/hardware-basin.html" class="article-card">
+        <div class="article-card-hero">
+          <div class="article-card-hero-text" style="color: rgba(245,158,11,0.14);">400</div>
+        </div>
+        <div class="article-card-body">
+          <div class="article-card-date">April 2026 <span>~17 min read</span></div>
+          <h3>The Hardware Basin: Why the Quantization Cliff Is About Where the Bits Go, Not How Many There Are</h3>
+          <p>Symmetric INT4 destroys language models. NF4 INT4 doesn't. Same bit count, opposite outcomes. The cliff is about level allocation, not bit count. Built across seven rounds with a thesis pivot in Round 5 &mdash; and statistical decisiveness at Cohen&rsquo;s <em>d</em> = 400.81 (the kind of effect size you cannot fake).</p>
           <div class="article-card-link">Read article &rarr;</div>
         </div>
       </a>

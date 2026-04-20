@@ -436,6 +436,26 @@ tr:hover td { background: var(--surface); }
 
   <p>The equation from Paper 7 &mdash; BPT &asymp; source_entropy &minus; f(structural_depth) &mdash; holds qualitatively for all three. But the function f() and the definition of &ldquo;source unit&rdquo; differ across modalities. Establishing a modality-independent throughput metric &mdash; a universal ruler &mdash; remains the central open problem.</p>
 
+  <h2>How we built this answer in seven rounds</h2>
+
+  <p>The result above is not a single experiment. It is the cumulative output of seven rounds of follow-up work executed between April 11 and April 16. Each round was the deliberate response to an objection a careful reviewer would raise against the previous round. The credibility of the answer rests on what each round survived, not on any single test.</p>
+
+  <p><strong>Round 1.</strong> A first cascade test on small CIFAR-100 images (32&times;32 pixels) with a 14-million-parameter model. It showed a visual structural bonus exists. A reviewer would say: small model, low resolution, doesn&rsquo;t generalize.</p>
+
+  <p><strong>Round 2 (three hours later).</strong> Same cascade, on STL-10 images (96&times;96 &mdash; nine times more pixels), with a 33-million-parameter model and a finer cascade with five destruction levels. The bonus held at 0.69 bits per pixel.</p>
+
+  <p><strong>Round 3.</strong> Three concurrent experiments addressing three different reviewer objections at once. We tested with pretrained MAE-Base and MAE-Large &mdash; real production-scale vision models. We swept patch sizes from 8&times;8 to 48&times;48 and discovered bits-per-pixel varies four-fold with patch size: <strong>patch size acts as a visual tokenizer, the same metric problem we found for text in Paper 7</strong>. We also discovered visual entropy itself is resolution-dependent. We reported all three as methodological caveats, not contradictions.</p>
+
+  <p><strong>Round 4.</strong> Synthetic piano music (Round 4a) extracted 2.69 bits per mel-frame. A reviewer would say synthetic music isn&rsquo;t real audio. Round 4b replaced the corpus with 3,000 utterances of LJ Speech &mdash; real recorded human speech, three random seeds. Result: 1.886 ± 0.002 bits per mel-dim. The synthetic-vs-real gap is itself informative; synthetic music has more exploitable harmonic regularity than continuous speech.</p>
+
+  <p><strong>Round 5 &mdash; the documented failure.</strong> A reviewer would say real-world data conflates entropy with structure; you need a controlled ladder where you vary entropy independently. We built one. The first attempt failed: tracking ratios of 0.632, 2.998, 0.000, 0.116 &mdash; clearly broken. <strong>We did not bury the failure.</strong> We diagnosed the cause (a tokenizer-pretraining contamination, the visual analog of the Paper 7 B1 leakage) and rebuilt the experiment as Round 6.</p>
+
+  <p><strong>Round 6.</strong> The clean redo, described in detail above in the &ldquo;Trained from scratch&rdquo; section. 112-million-parameter ViT-MAE trained from absolute scratch on seven calibrated entropy levels, three random seeds each. Reconstruction loss tracks source entropy exactly among unstructured distributions, and structured naturalistic data achieves loss six times lower than uniform noise of equivalent entropy. Welch&rsquo;s <em>t</em> = 249,994, <em>p</em> = 1.6&times;10<sup>&minus;11</sup>, Cohen&rsquo;s <em>d</em> = 204,119. <strong>Round 5&rsquo;s failure became Round 6&rsquo;s bulletproof verification.</strong></p>
+
+  <p><strong>Round 7 &mdash; another negative result, also published.</strong> If patch size acts like a tokenizer, surely the bits-per-source-entropy ratio (model bits divided by gzip-source-entropy at that patch size) is the patch-invariant quantity? We tested directly. The ratio is not invariant either. Coefficient of variation: 0.367. <strong>We report the negative result honestly</strong> rather than hide it. Establishing a patch- and resolution-independent visual throughput metric remains an open methodological problem.</p>
+
+  <p>Two findings could have killed the Paper 7 generalization to vision: that the visual basin is just a metric artifact, or that the effect goes away under controlled-entropy conditions. Rounds 3 and 6 were built specifically to test those objections. Both survived. The full per-round experiment reports are in the <a href="https://github.com/Windstorm-Labs/vision-basin">Windstorm-Labs vision-basin repository</a>; the formal scientific paper carries the same journey in §1.3 and the adversarial-review-defense table in §4.4.</p>
+
   <hr>
 
   <p style="font-size: 0.9rem; color: var(--text-faint); text-align: center; font-family: var(--sans);">
