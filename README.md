@@ -32,7 +32,7 @@ Each scientific paper is published in three surfaces:
 2. **Labs repo** — `github.com/Windstorm-Labs/<paper-slug>` — experimental code, data, and plots.
 3. **This website** — the long-form article (`articles/<paper-slug>.html`), plus arc-node and pub-card entries on the homepage.
 
-Zenodo archival DOIs are issued for Papers 1–8 (Paper 8 v2.2: [10.5281/zenodo.19672827](https://doi.org/10.5281/zenodo.19672827)). Paper 9 is currently a preprint; DOI pending.
+Zenodo archival DOIs are now issued for **all nine papers** in the series. Latest concept DOIs: Paper 7 [10.5281/zenodo.19498582](https://doi.org/10.5281/zenodo.19498582) · Paper 8 [10.5281/zenodo.19672827](https://doi.org/10.5281/zenodo.19672827) · Paper 9 [10.5281/zenodo.19672921](https://doi.org/10.5281/zenodo.19672921). The full-trilogy data-driven-basin verification (Papers 7-9) is complete and on Zenodo.
 
 ## Related repositories
 
