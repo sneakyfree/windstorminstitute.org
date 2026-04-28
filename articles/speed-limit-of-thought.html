@@ -320,7 +320,7 @@ nav {
 <!-- ARTICLE BODY -->
 <article class="article-body">
 
-  <p><em>This article summarizes six papers published by the Windstorm Institute in 2026. It is written for a general audience. Technical readers will find the full mathematics, code, and data in the companion papers on Zenodo.</em></p>
+  <p><em>This article summarizes the Windstorm Institute's research arc to date &mdash; nine papers across the foundational series (Papers 1&ndash;6, which establish the throughput basin and explain why it exists) and the data-driven-basin trilogy (Papers 7&ndash;9, which prove the basin is set by the training data rather than the architecture, generalize the equation to vision and audio, and derive the hardware-design implications). It is written for a general audience. Technical readers will find the full mathematics, code, and data in the companion papers on Zenodo.</em></p>
 
   <hr>
 
@@ -334,7 +334,7 @@ nav {
 
   <p>And yet they all landed on the same number.</p>
 
-  <p>This could be a coincidence. The work of the Windstorm Institute over the past year has been dedicated to finding out whether it is. The answer, across six papers and thousands of experiments, is: no. It is not a coincidence. It is a law.</p>
+  <p>This could be a coincidence. The work of the Windstorm Institute over the past year has been dedicated to finding out whether it is. The answer, across nine papers and thousands of experiments, is: no. It is not a coincidence. It is a law.</p>
 
   <hr>
 
@@ -478,9 +478,23 @@ nav {
 
   <hr>
 
+  <h2>Papers 7&ndash;9: The Trilogy That Pivoted the Equation</h2>
+
+  <p>The first six papers established that the basin exists, mapped its width, and explained the thermodynamic and biological constraints that produced it. They left one question dangling: <strong>is the basin a property of the data, or a property of the machines that process it?</strong> Papers 1&ndash;6 are consistent with either reading. The trilogy that followed &mdash; Papers 7, 8, and 9 &mdash; was built specifically to settle that question.</p>
+
+  <p><strong>Paper 7 (The Throughput Basin Origin)</strong> ran the falsification test directly. If the basin is architectural &mdash; if there is something about transformers, or about silicon, or about gradient descent that imposes a ~4-bit ceiling &mdash; then a model trained on data with a fundamentally different statistical signature should still converge to that ceiling. So we trained models from scratch on synthetic data with calibrated entropy levels: 2-bit, 4-bit, 5-bit, 6-bit, 7-bit, 8-bit, 12-bit. The result was decisive. A model trained on 8-bit data extracts <em>8.0 bits per source byte</em> &mdash; exactly the source entropy, with no compression toward the language basin. We confirmed it at 92 million parameters and again at 1.2 billion parameters. The architectural-ceiling theory died. The basin moved with the data. The refined equation: <strong>BPT &asymp; source_entropy &minus; f(structural_depth)</strong>. Throughput is bounded above by the entropy of the data and reduced by whatever hierarchical structure the model can exploit. Paper 7 also corrected an embarrassing methodological oversight: the famous &tau; &asymp; 4.16 figure from Papers 1&ndash;6 was in bits per BPE token &mdash; a tokenizer-packaging artifact. In tokenizer-independent units (bits per source byte), the language basin sits at ~1, not ~4. The convergence is real; the number was off because the ruler was sometimes in inches and sometimes in centimeters.</p>
+
+  <p><strong>Paper 8 (The Vision Basin)</strong> took the refined equation and asked the natural follow-on: does it generalize beyond language? Twelve pretrained models across language, vision, and audio. A 112-million-parameter vision model (a ViT-MAE) trained from scratch on a calibrated ladder of seven entropy levels &mdash; uniform color, color blocks, naturalistic gradients, uniform noise. Three thousand utterances of real recorded human speech (LJ Speech). The answer: <em>each modality has its own characteristic throughput</em>. Vision at ~1.3 bits per pixel under generative reconstruction. Real speech at ~1.9 bits per mel-frame. Language at ~1 bit per source byte. Different numbers, same equation: source entropy minus the structure the model can exploit. The basin is real, it is modality-specific, and it has the same form everywhere we look.</p>
+
+  <p><strong>Paper 9 (The Hardware Basin)</strong> went after the inference-engine implications. Paper 7 had documented a sharp quantization cliff at INT4&rarr;INT3: compress a model's weights below four bits and performance collapses. The natural conclusion was &ldquo;the cliff is at four bits.&rdquo; Paper 9 ran the falsification test against that. Symmetric INT4 quantization (uniform spacing of the available levels) collapses catastrophically &mdash; bits per token jumps from ~4 to ~17. NF4 INT4 quantization (levels placed at the quantiles of a Gaussian) is operational &mdash; bits per token stays at ~3.9. Same bit count, opposite outcomes. <strong>The cliff is not at four bits. It is at the precision where the quantization scheme&rsquo;s level allocation can no longer represent the weight distribution&rsquo;s critical features.</strong> The hardware-design implication is concrete: don&rsquo;t build wider integer datapaths, build quantization lookup tables. The minimum viable inference specification is not &ldquo;N-bit integer&rdquo; but &ldquo;N-bit with distribution-aware level allocation, validated end-to-end.&rdquo; Paper 9&rsquo;s headline statistical result &mdash; FP16 versus symmetric INT4 at 1.4 billion parameters with five independent shuffle seeds &mdash; gives Cohen&rsquo;s <em>d</em> = 400.81. For context: in the social sciences a &ldquo;large&rdquo; effect size is <em>d</em> = 0.8. The trilogy ends with one of the most statistically decisive results in the deep-learning literature.</p>
+
+  <p>Each paper in the trilogy was built across seven rounds of follow-up experiments, with each round deliberately engineered to neutralize the strongest objection a hostile reviewer could raise against the previous round. Paper 9&rsquo;s journey includes a thesis pivot in Round 5 &mdash; the experiment we expected to confirm the original cliff hypothesis instead reframed the paper. Paper 8&rsquo;s journey includes a documented failure (Round 5: a controlled visual-entropy experiment that produced clearly broken numbers) and the diagnosed rebuild that became the bulletproof verification (Round 6). The institute publishes the failures alongside the successes. The methodological-journey narratives are in &sect;1.3 and &sect;1.4 of the formal Papers 8 and 9; the adversarial-review-defense tables are in &sect;4.4 and &sect;4.6.</p>
+
+  <hr>
+
   <h2>The Road Ahead</h2>
 
-  <p>The Windstorm Institute has published six papers. Together they establish the throughput basin as an empirical fact, derive it from thermodynamic first principles, explain why silicon escapes the basin while biology cannot, and show how AI inherits its throughput neighborhood from the biological systems that produced its training data.</p>
+  <p>The Windstorm Institute has published nine papers. Together they establish the throughput basin as an empirical fact, derive it from thermodynamic first principles, explain why silicon escapes the basin while biology cannot, show how AI inherits its throughput neighborhood from the biological systems that produced its training data, prove that the basin is set by the data rather than the architecture, generalize the equation across language, vision, and audio modalities, and derive the inference-hardware design implications.</p>
 
   <p>Falsifiable predictions remain in play. The temperature prediction has preliminary support from 29 Kazusa-verified organisms (partial r = &minus;0.451, p = 0.014) but awaits phylogenetically controlled confirmation (PGLS). The expanded genetic code prediction awaits calorimetric data from cell-free translation experiments. The inherited constraint hypothesis awaits a synthetic-training control &mdash; a model trained exclusively on non-biological data.</p>
 
