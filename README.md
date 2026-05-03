@@ -46,7 +46,7 @@ Each scientific paper is published in three surfaces:
 2. **Labs repo** — `github.com/Windstorm-Labs/<paper-slug>` — experimental code, data, and plots (where the paper is empirical).
 3. **This website** — the long-form article (`articles/<paper-slug>.html`), plus arc-node / Track-2 / pub-card entries on the homepage.
 
-**Zenodo DOIs:** Track 1 — all nine papers deposited. Latest concept DOIs: Paper 7 [10.5281/zenodo.19498582](https://doi.org/10.5281/zenodo.19498582) · Paper 8 [10.5281/zenodo.19672827](https://doi.org/10.5281/zenodo.19672827) · Paper 9 [10.5281/zenodo.19672921](https://doi.org/10.5281/zenodo.19672921). Track 2 — Paper 10 DOI pending.
+**Zenodo DOIs:** Track 1 — all nine papers deposited (latest: Paper 7 [10.5281/zenodo.19498582](https://doi.org/10.5281/zenodo.19498582) · Paper 8 [10.5281/zenodo.19672827](https://doi.org/10.5281/zenodo.19672827) · Paper 9 [10.5281/zenodo.19672921](https://doi.org/10.5281/zenodo.19672921)). Track 2 — Paper 10 [10.5281/zenodo.20014391](https://doi.org/10.5281/zenodo.20014391).
 
 ## Related repositories
 
