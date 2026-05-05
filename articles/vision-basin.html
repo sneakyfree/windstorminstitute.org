@@ -278,6 +278,60 @@ tr:hover td { background: var(--surface); }
   .article-body { padding: 2rem 1.5rem 4rem; }
   .article-meta { flex-direction: column; gap: 0.5rem; }
 }
+
+/* ─── COMMENTS / DISCUSSION ─── */
+.article-comments {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 3rem;
+  border-top: 1px solid var(--border);
+}
+.article-comments-header {
+  margin-bottom: 1.75rem;
+}
+.article-comments-header .section-tag {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.article-comments-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.85rem;
+}
+.article-comments-header p {
+  font-size: 0.85rem;
+  color: var(--text-faint);
+  line-height: 1.7;
+  margin: 0;
+}
+.article-comments-header p a {
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  transition: color 0.2s, border-color 0.2s;
+}
+.article-comments-header p a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+.giscus, .giscus-frame {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+.giscus-frame {
+  border: none;
+  color-scheme: dark;
+}
+@media (max-width: 640px) {
+  .article-comments { padding: 2rem 1.5rem 2.5rem; }
+  .article-comments-header h2 { font-size: 1.25rem; }
+}
 </style>
 </head>
 <body>
@@ -476,6 +530,32 @@ tr:hover td { background: var(--surface); }
 </div>
 
 <!-- FOOTER -->
+
+<!-- COMMENTS / DISCUSSION -->
+<section class="article-comments" id="comments">
+  <div class="article-comments-header">
+    <span class="section-tag">Discussion</span>
+    <h2>Comments &amp; questions</h2>
+    <p>Comments are powered by GitHub Discussions. Sign in with your GitHub account below, or <a href="https://github.com/sneakyfree/windstorminstitute.org/discussions">browse all discussions on GitHub</a>. No GitHub account? <a href="https://github.com/signup">It takes 30 seconds to make one</a> &mdash; or <a href="mailto:grant@windstorminstitute.org">email Grant directly</a> if you'd rather skip it.</p>
+  </div>
+  <script src="https://giscus.app/client.js"
+    data-repo="sneakyfree/windstorminstitute.org"
+    data-repo-id="R_kgDOR6c8ng"
+    data-category="General"
+    data-category-id="DIC_kwDOR6c8ns4C8Z7M"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="noborder_dark"
+    data-lang="en"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+
 <footer class="article-footer">
   <p>&copy; 2026 The Windstorm Institute &middot; Fort Ann, New York &middot; <a href="../index.html">Home</a></p>
 </footer>
