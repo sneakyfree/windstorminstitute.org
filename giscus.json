@@ -1,0 +1,11 @@
+{
+  "origins": [
+    "https://windstorminstitute.org",
+    "https://www.windstorminstitute.org"
+  ],
+  "originsRegex": [
+    "^https://windstorminstitute-org\\.pages\\.dev$",
+    "^https://[a-z0-9-]+\\.windstorminstitute-org\\.pages\\.dev$"
+  ],
+  "defaultCommentOrder": "newest"
+}
