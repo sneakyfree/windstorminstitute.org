@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gravitational Entropy Escrow — The Windstorm Institute</title>
+<meta name="description" content="Gravitational Entropy Escrow (Paper 11): gravity and entropy as the same phenomenon viewed through different vocabularies. Bound mass-pairs hold entropy off the books; the universe attracts because the books want to balance. An interpretive synthesis of Bekenstein, Hawking, Unruh, Jacobson, Padmanabhan, Verlinde, and van Putten.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Windstorm Institute">
+<meta property="og:url" content="https://windstorminstitute.org/articles/gravitational-entropy-escrow.html">
+<meta property="og:title" content="Gravitational Entropy Escrow — The Windstorm Institute">
+<meta property="og:description" content="The universe attracts because the books want to balance. Paper 11 of the Windstorm Institute — second paper in the Entropic Bounds track.">
+<meta property="og:image" content="https://windstorminstitute.org/assets/images/web_hero_convergence.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Gravitational Entropy Escrow">
+<meta name="twitter:description" content="The universe attracts because the books want to balance. Paper 11 of the Windstorm Institute.">
+<meta name="twitter:image" content="https://windstorminstitute.org/assets/images/web_hero_convergence.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+img{max-width:100%;height:auto}
+
+:root {
+  --bg: #0a0a0b;
+  --surface: #111113;
+  --surface-2: #18181b;
+  --border: #27272a;
+  --border-light: #3f3f46;
+  --text: #fafafa;
+  --text-muted: #a1a1aa;
+  --text-faint: #71717a;
+  --accent: #06b6d4;
+  --accent-dim: #0891b2;
+  --accent-glow: rgba(6, 182, 212, 0.15);
+  --accent-2: #8b5cf6;
+  --warm: #f59e0b;
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Inter', -apple-system, sans-serif;
+  --serif: 'Lora', Georgia, serif;
+}
+
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+a:hover { color: #22d3ee; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(10, 10, 11, 0.85);
+  backdrop-filter: blur(20px) saturate(1.5);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1100px; margin: 0 auto; padding: 0 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+}
+.nav-brand {
+  display: flex; align-items: center; gap: 12px;
+  font-weight: 600; font-size: 0.95rem; color: var(--text);
+  letter-spacing: -0.01em;
+}
+.nav-mark {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 14px; color: white;
+}
+.nav-links { display: flex; gap: 2rem; }
+.nav-links a {
+  font-size: 0.85rem; font-weight: 500; color: var(--text-muted);
+  letter-spacing: 0.02em; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text); }
+
+.article-hero {
+  padding: 140px 0 60px;
+  position: relative;
+  text-align: center;
+}
+.article-hero::before {
+  content: '';
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 600px;
+  background: radial-gradient(ellipse, rgba(139, 92, 246, 0.18) 0%, transparent 70%);
+  pointer-events: none;
+  opacity: 0.55;
+}
+.article-hero-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+}
+.article-back {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--mono); font-size: 0.75rem; font-weight: 500;
+  color: var(--text-faint); letter-spacing: 0.06em; text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+.article-back:hover { color: var(--accent); }
+.track-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 12px; border-radius: 100px;
+  background: rgba(139, 92, 246, 0.12);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  font-family: var(--mono); font-size: 0.7rem; font-weight: 600;
+  color: var(--accent-2); letter-spacing: 0.08em; text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+.track-pill::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent-2); box-shadow: 0 0 8px var(--accent-2);
+}
+.article-meta {
+  font-family: var(--mono); font-size: 0.75rem;
+  color: var(--text-faint); letter-spacing: 0.06em;
+  margin-bottom: 1.5rem;
+  display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;
+}
+.article-hero h1 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700; letter-spacing: -0.02em;
+  line-height: 1.2; margin-bottom: 1.5rem;
+}
+.article-hero h1 .gradient {
+  background: linear-gradient(135deg, var(--accent-2) 0%, var(--accent) 50%, var(--warm) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.article-subtitle {
+  font-size: 1.15rem; color: var(--text-muted);
+  line-height: 1.75; max-width: 600px; margin: 0 auto 2rem;
+}
+.share-bar {
+  display: flex; justify-content: center; gap: 1rem;
+  margin-top: 1.5rem;
+}
+.share-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 14px; border-radius: 6px;
+  background: var(--surface-2); border: 1px solid var(--border);
+  font-family: var(--mono); font-size: 0.7rem; font-weight: 500;
+  color: var(--text-faint); letter-spacing: 0.04em;
+  cursor: pointer; transition: border-color 0.2s, color 0.2s;
+}
+.share-btn:hover { border-color: var(--border-light); color: var(--text-muted); }
+
+.article-body {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 3rem 2rem 6rem;
+}
+.article-body h2 {
+  font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em;
+  margin: 3rem 0 1rem;
+  padding-top: 1rem;
+}
+.article-body h3 {
+  font-size: 1.15rem; font-weight: 600;
+  margin: 2rem 0 0.75rem;
+}
+.article-body p {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.9;
+  margin-bottom: 1.5rem;
+}
+.article-body strong { color: var(--text); font-weight: 500; }
+.article-body em { font-style: italic; }
+.article-body blockquote {
+  border-left: 3px solid var(--accent-2);
+  padding: 1rem 1.5rem;
+  margin: 2rem 0;
+  background: var(--surface);
+  border-radius: 0 8px 8px 0;
+}
+.article-body blockquote p {
+  font-style: italic;
+  color: var(--text);
+  margin-bottom: 0;
+}
+.article-body .equation {
+  display: block;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.25rem 2rem;
+  margin: 1.75rem auto;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 1.05rem;
+  color: var(--text);
+  max-width: 520px;
+}
+.article-body hr {
+  border: none;
+  height: 1px;
+  background: var(--border);
+  margin: 3rem 0;
+}
+
+table { width: 100%; border-collapse: collapse; margin: 2rem 0; font-family: var(--sans); font-size: 0.9rem; }
+th { text-align: left; padding: 0.75rem 1rem; border-bottom: 2px solid var(--border-light); color: var(--text); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; }
+td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); color: var(--text-muted); }
+tr:hover td { background: var(--surface); }
+
+.article-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 2rem 3rem;
+}
+.article-nav a {
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}
+
+.article-footer {
+  max-width: 680px; margin: 0 auto;
+  padding: 2rem 2rem 4rem;
+  border-top: 1px solid var(--border);
+}
+.article-footer p {
+  font-size: 0.85rem; color: var(--text-faint); line-height: 1.7;
+}
+
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .article-hero { padding: 120px 0 40px; }
+  .article-body { padding: 2rem 1.5rem 4rem; }
+  .article-meta { flex-direction: column; gap: 0.5rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand">
+      <div class="nav-mark">W</div>
+      The Windstorm Institute
+    </a>
+    <div class="nav-links">
+      <a href="../index.html#research">Research</a>
+      <a href="../index.html#articles">Articles</a>
+      <a href="../index.html#publications">Publications</a>
+      <a href="../index.html#labs">Labs</a>
+      <a href="../index.html#team">Team</a>
+    </div>
+  </div>
+</nav>
+
+<header class="article-hero">
+  <div class="article-hero-inner">
+    <a href="../index.html#articles" class="article-back">&larr; All Articles</a>
+    <div class="track-pill">Track 2 · Entropic Bounds</div>
+    <div class="article-meta">
+      <span>Paper 11</span>
+      <span>May 2026</span>
+      <span>~16 min read</span>
+      <span>Grant Lavell Whitmer III</span>
+      <span>zenodo</span>
+    </div>
+    <h1>Gravitational Entropy Escrow:<br><span class="gradient">The Universe Attracts Because the Books Want to Balance</span></h1>
+    <p class="article-subtitle">A physical reframing under which gravity and entropy are not two phenomena that happen to be related but the same phenomenon viewed through different vocabularies. Newton, Bekenstein&ndash;Hawking, the equivalence principle, and the Milgrom acceleration scale all become facets of one principle &mdash; that gravitational binding energy literally is escrowed entropy, exchanged at the local Unruh temperature against the cosmological horizon as thermodynamic floor.</p>
+    <div class="share-bar">
+      <button class="share-btn" onclick="window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(document.title)+' '+encodeURIComponent(location.href),'_blank')">Share on X</button>
+      <button class="share-btn" onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(location.href),'_blank')">Share on LinkedIn</button>
+    </div>
+  </div>
+</header>
+
+<article class="article-body">
+
+  <p><em>This article is a companion to Paper 11 &mdash; &ldquo;Gravitational Entropy Escrow: An Interpretive Synthesis of Thermodynamic Approaches to Gravity&rdquo; (v0.6.11, 2026). The full manuscript is at <a href="https://github.com/Windstorm-Institute/gravitational-entropy-escrow">github.com/Windstorm-Institute/gravitational-entropy-escrow</a>. This is the second paper in the Institute&rsquo;s Track 2 &mdash; <strong>Entropic Bounds in Analog Systems</strong> &mdash; following the BEC analog gravity result of Paper 10.</em></p>
+
+  <hr>
+
+  <p>Two empirical observations about gravity are sufficiently familiar that physicists rarely pause on them, and sufficiently strange that they should not be left unexamined.</p>
+
+  <p>First: a mass cannot escape the gravitational pull of another mass without expending entropy. The escape energy can be packaged in any form &mdash; kinetic, electromagnetic, mechanical &mdash; but in every realized escape, the budget is paid by an entropy-increasing process external to the bound pair. A rocket vents hot exhaust. A binary system radiates gravitational waves. A photon climbs out of a potential well at the cost of redshift and the heating of its eventual absorber. The energy ledger closes by appeal to the rest of the universe. <strong>The entropy ledger of the rest of the universe is what actually pays.</strong></p>
+
+  <p>Second: black holes are simultaneously the throne of entropy and the throne of gravity. The Bekenstein bound is saturated at the event horizon. The gravitational field is maximal at the event horizon. The two extrema coincide. If gravity and entropy were unrelated phenomena, this coincidence would be staggering. Standard physics has known since the 1970s that they are not unrelated &mdash; black hole entropy is purely geometric, <em>S</em> = k<sub>B</sub><em>A</em> / 4&ell;<sub>p</sub>² &mdash; but the field has not converged on an interpretive framework that makes the coincidence feel <em>inevitable</em> rather than miraculous.</p>
+
+  <p>This paper proposes such a framework.</p>
+
+  <h2>The escrow postulate</h2>
+
+  <blockquote>
+    <p>Gravitational binding energy <em>U</em> between two masses is identical, up to a sign and a temperature factor, to the entropy <em>S</em><sub>esc</sub> held in escrow by the binding. The escrow is redeemed at the local Unruh temperature <em>T</em> whenever the binding is altered. Forces felt by an observer are gradients of escrowed entropy in that observer&rsquo;s frame; trajectories are paths along which the gradient is extremized.</p>
+  </blockquote>
+
+  <p>Formally:</p>
+
+  <div class="equation">S<sub>esc</sub>(r) = |U(r)| / T(r) &nbsp;&nbsp;&nbsp; F = T &middot; &nabla;S<sub>esc</sub></div>
+
+  <p>with <em>T</em>(<em>r</em>) = ℏ<em>a</em>(<em>r</em>) / (2π<em>ck</em><sub>B</sub>), the Unruh temperature associated with the local gravitational acceleration. The first relation is dimensional bookkeeping. The second is Verlinde&rsquo;s identity. The novel content is interpretive: <strong>we read <em>U</em> as escrow rather than as a static potential</strong>, and the observer-dependence of &nabla;<em>S</em><sub>esc</sub> as the thermodynamic origin of the equivalence principle.</p>
+
+  <h2>What gets recovered</h2>
+
+  <p>Three established empirical relations fall out as consistency conditions of the escrow postulate. None are novel results &mdash; they are due to other authors. What is novel is reading them as facets of one principle.</p>
+
+  <p><strong>Newton&rsquo;s law (Verlinde 2011, repeated for completeness).</strong> For two masses <em>M</em>, <em>m</em> at separation <em>r</em>, the binding energy is <em>U</em>(<em>r</em>) = &minus;<em>GMm</em>/<em>r</em>. The local Unruh temperature at the position of <em>m</em> is <em>T</em>(<em>r</em>) = ℏ<em>GM</em> / (2π<em>cr</em>²<em>k</em><sub>B</sub>). Substituting into the escrow postulate, the <em>r</em>-dependence of <em>U</em> cancels exactly against the <em>r</em>-dependence of <em>T</em>. The entropy gradient is constant. The radial force is <em>F</em> = <em>T</em> &middot; d<em>S</em><sub>esc</sub>/d<em>r</em> = <em>GMm</em>/<em>r</em>². <strong>Gravitational attraction is the differential redemption of escrowed entropy as the separation decreases, mediated by the Unruh temperature acting as the energy/entropy exchange rate.</strong></p>
+
+  <p><strong>Bekenstein&ndash;Hawking entropy.</strong> At a Schwarzschild horizon, <em>r</em><sub>s</sub> = 2<em>GM</em>/<em>c</em>². Substituting into the escrow expression for self-binding (the entire mass localized at the horizon):</p>
+
+  <div class="equation">S<sub>esc</sub>(r<sub>s</sub>) = 4&pi; G M&sup2; k<sub>B</sub> / (ℏ c)</div>
+
+  <p>This is <em>exactly</em> the Bekenstein&ndash;Hawking entropy. No free coefficient: the <em>M</em>² scaling, the geometric prefactor, and the appearance of ℏ all emerge from the escrow postulate evaluated at the horizon. The physical picture: as a body collapses, the escrow of its self-binding grows monotonically. At the horizon, the escrow becomes infinite in the sense that no finite external entropy production can pay it off. <strong>The escrow is then forced to manifest directly, written on the horizon area as Bekenstein&ndash;Hawking entropy. The black hole is escrow finally cashed out into the universe&rsquo;s books, no longer hidden in a binding.</strong></p>
+
+  <p><strong>Tully&ndash;Fisher / deep-MOND.</strong> The Unruh temperature has a floor: the Gibbons&ndash;Hawking temperature of the cosmological horizon, <em>T</em><sub>dS</sub> = ℏ<em>c</em>√(Λ/3) / (2π<em>k</em><sub>B</sub>). This temperature is set by the cosmological constant alone and is therefore constant in cosmic time. By the same Carnot argument that limits any heat engine, the effective temperature governing escrow exchange cannot lie below <em>T</em><sub>dS</sub>. When the local Unruh temperature is large compared to <em>T</em><sub>dS</sub>, the escrow framework returns Newton&rsquo;s law unchanged. When it approaches <em>T</em><sub>dS</sub>, the deep-MOND asymptote takes the geometric-mean form <em>T</em><sub>eff</sub> = √(<em>T</em><sub>loc</sub> &middot; <em>T</em><sub>dS</sub>); the centripetal acceleration on a circular orbit becomes <em>a</em> = √(<em>a</em><sub>N</sub> &middot; <em>a</em><sub>0</sub>), with <em>a</em><sub>0</sub> = <em>c</em>²√(Λ/3) / (2π) emerging as the acceleration scale associated with the de Sitter floor &mdash; recovering the empirical Tully&ndash;Fisher relation <em>v</em>⁴ = <em>GM</em><sub>b</sub><em>a</em><sub>0</sub>.</p>
+
+  <h2>The equivalence principle from frame-dependence of escrow</h2>
+
+  <p>This is the framework&rsquo;s most distinctive contribution. A peculiar feature of gravity, known to every student of general relativity but rarely thematized, is its <em>closed-system</em> character. The Earth&ndash;Moon system behaves as a gravitational closed system despite enormous tidal forcings from the Sun, the Galactic center, and the cosmic microwave dipole. The solar system behaves as a closed system despite falling toward Andromeda. <strong>We do not feel Sagittarius A*, though it pulls on us with a force we can compute.</strong></p>
+
+  <p>This is the equivalence principle in its operational form. Within the escrow framework, the explanation is direct: the external field&rsquo;s escrow is uniform across any region small compared to the field&rsquo;s curvature scale. A uniform escrow has zero gradient. Gradient is force. The closed system feels nothing because there is nothing to feel &mdash; the bookkeeping is balanced internally to the frame.</p>
+
+  <p>Tidal forces survive precisely because they are the irreducible non-uniform piece of the escrow distribution. They are what cannot be transformed away. They are what enters the Riemann tensor in general relativity. <strong>The escrow framework predicts this without needing GR as motivation: tidal forces are the residual of escrow gradients that survive coordinate transformation.</strong></p>
+
+  <h2>The cosmological evolution of <em>a</em><sub>0</sub>: a quantitative test</h2>
+
+  <p>A long-standing question in MOND-style frameworks is whether the empirical acceleration scale <em>a</em><sub>0</sub> evolves with cosmic time. Milgrom (2017), analyzing the six high-redshift disk galaxies of Genzel et al. (2017) at <em>z</em> = 0.85 to 2.4, concluded that <em>a</em><sub>0</sub> &prop; (1+<em>z</em>)<sup>3/2</sup> &mdash; the scaling that would follow from identifying <em>a</em><sub>0</sub> with √(<em>G</em>ρ<sub>m</sub>) &mdash; is <strong>&ldquo;all but excluded&rdquo;</strong> by the data.</p>
+
+  <p>The escrow framework as developed in this paper is committed to the Λ-form of <em>T</em><sub>dS</sub>: <em>a</em><sub>0</sub> is set by the cosmological constant alone and is therefore constant in cosmic time. We extended Milgrom&rsquo;s test to discriminate among five distinct prescriptions for <em>a</em><sub>0</sub>: three constant-in-<em>z</em> values (Milgrom canonical 1.20, Hubble-scale 1.08, candidate 1.221, all in 10⁻¹⁰ m s⁻²) and two evolving prescriptions (Hubble-tracking <em>H</em>(<em>z</em>)/<em>H</em><sub>0</sub>, and (1+<em>z</em>)<sup>3/2</sup>). The result resolves the five prescriptions into two clean groups:</p>
+
+  <table style="margin: 1.5rem auto; border-collapse: collapse; font-family: var(--sans); font-size: 0.92rem;">
+    <tr style="border-bottom: 2px solid var(--text-faint);">
+      <th style="padding: 0.5rem 1rem; text-align: left;"><em>a</em><sub>0</sub> prescription</th>
+      <th style="padding: 0.5rem 1rem; text-align: right;">|mean &Delta;|</th>
+      <th style="padding: 0.5rem 1rem; text-align: right;">RMS &Delta;</th>
+      <th style="padding: 0.5rem 1rem; text-align: left;">Verdict</th>
+    </tr>
+    <tr><td style="padding: 0.4rem 1rem;">Canonical 1.20 &times; 10⁻¹⁰</td><td style="padding: 0.4rem 1rem; text-align: right;">0.016&ndash;0.034</td><td style="padding: 0.4rem 1rem; text-align: right;">0.025&ndash;0.039</td><td style="padding: 0.4rem 1rem;">&checkmark; passes</td></tr>
+    <tr><td style="padding: 0.4rem 1rem;">Hubble-scale 1.08 &times; 10⁻¹⁰</td><td style="padding: 0.4rem 1rem; text-align: right;">0.009&ndash;0.027</td><td style="padding: 0.4rem 1rem; text-align: right;">0.022&ndash;0.034</td><td style="padding: 0.4rem 1rem;">&checkmark; passes</td></tr>
+    <tr><td style="padding: 0.4rem 1rem;"><em>c</em>·<em>H</em><sub>0</sub>/π<sup>3/2</sup> 1.221 &times; 10⁻¹⁰</td><td style="padding: 0.4rem 1rem; text-align: right;">0.018&ndash;0.035</td><td style="padding: 0.4rem 1rem; text-align: right;">0.026&ndash;0.040</td><td style="padding: 0.4rem 1rem;">&checkmark; passes</td></tr>
+    <tr><td style="padding: 0.4rem 1rem;"><em>H</em>(<em>z</em>)-tracking</td><td style="padding: 0.4rem 1rem; text-align: right;">0.105&ndash;0.117</td><td style="padding: 0.4rem 1rem; text-align: right;">0.111&ndash;0.122</td><td style="padding: 0.4rem 1rem;">&times; <strong>fails</strong></td></tr>
+    <tr><td style="padding: 0.4rem 1rem;">(1+<em>z</em>)<sup>3/2</sup> tracking</td><td style="padding: 0.4rem 1rem; text-align: right;">0.168&ndash;0.177</td><td style="padding: 0.4rem 1rem; text-align: right;">0.174&ndash;0.182</td><td style="padding: 0.4rem 1rem;">&times; <strong>fails</strong></td></tr>
+  </table>
+
+  <p>All three constant-<em>a</em><sub>0</sub> cases pass at the |&Delta;| &le; 0.05 dex acceptance level and are statistically indistinguishable on the six-galaxy sample. <strong>The two evolving cases both fail.</strong> The (1+<em>z</em>)<sup>3/2</sup> case reproduces Milgrom&rsquo;s &ldquo;all but excluded&rdquo; assessment as a ~40% systematic underprediction. The <em>H</em>(<em>z</em>)-tracking case is independently disfavored at the ~0.11 dex residual level &mdash; a factor of three to four worse than any constant case, and well outside the acceptance band.</p>
+
+  <p>This bears on the framework structurally. Frameworks identifying <em>T</em><sub>dS</sub> or <em>a</em><sub>0</sub> with <em>H</em>(<em>z</em>) directly &mdash; including the proposal of van Putten (2017, 2023) when extrapolated to the Genzel sample &mdash; do not pass at the level here resolved. The escrow framework&rsquo;s structural choice to locate <em>T</em><sub>dS</sub> in Λ rather than <em>H</em>(<em>z</em>) is supported by this test.</p>
+
+  <h2>SPARC reanalysis</h2>
+
+  <p>The other empirical anchor is the deep-MOND acceleration scale measured directly from spiral galaxy rotation curves. Using the public SPARC mass-models table (175 disk galaxies, Spitzer 3.6-μm photometry, HI rotation curves), restricting to deep-MOND points and computing the per-galaxy median of <em>g</em><sub>obs</sub>²/<em>g</em><sub>bar</sub>, we obtain:</p>
+
+  <div class="equation">a<sub>0</sub><sup>SPARC</sup> &asymp; 1.24 &times; 10<sup>&minus;10</sup> m s<sup>&minus;2</sup></div>
+
+  <p>This agrees with Milgrom&rsquo;s canonical 1.20 &times; 10⁻¹⁰ m s⁻² within ~4%. The framework&rsquo;s bare Λ-form prediction is <em>a</em><sub>0</sub><sup>Λ</sup> = <em>c</em>√(Λ/3) / (2π) &asymp; 9.0 &times; 10⁻¹¹ m s⁻², which lies <strong>~25% below the empirical value</strong>.</p>
+
+  <h2>The honest part: a 25% gap and a coefficient awaiting derivation</h2>
+
+  <p>The 25% gap is too large to absorb into the SPARC systematic budget. It can be read structurally rather than as a failure: writing <em>a</em><sub>0</sub> = α &middot; <em>c</em>√(Λ/3) / (2π), the SPARC value implies α &asymp; 1.39 &mdash; comfortably in the order-unity range and within a factor of order unity of natural geometric coefficients (e/2 &asymp; 1.36, √2 &asymp; 1.41, 1/√Ω<sub>Λ</sub> &asymp; 1.21).</p>
+
+  <p>α is <strong>not a fitted parameter</strong>. It is a structural placeholder for an unfinished derivation: a careful matching of Rindler horizon thermodynamics to de Sitter horizon thermodynamics in the deep-MOND crossover regime would in general introduce such a coefficient, reflecting the precise definition of the effective horizon radius, the geometry of entropy flow, and the dimensionless ratio between local and global thermodynamic phase spaces. The matched-asymptotic calculation has not been performed in this paper, and we do not claim a value for α. <strong>This is the central technical task remaining.</strong></p>
+
+  <h2>What this paper does not claim</h2>
+
+  <blockquote>
+    <p>The framework in its present form is interpretive rather than predictive. It unifies a set of established empirical relations under a single picture, and it matches the empirical Milgrom acceleration scale up to an order-unity coefficient whose derivation is identified as the central technical task remaining. It does not in its present form derive the precise numerical value of <em>a</em><sub>0</sub>, the functional form of the MOND interpolation, or the closed dynamical system that would follow from the modified field equations sketched in Section 7.</p>
+  </blockquote>
+
+  <p>The paper is explicit about three structural limitations:</p>
+
+  <p><strong>(1) The relativistic extension is sketched, not derived.</strong> The naive multiplicative form of the modified field equations &mdash; <em>G</em><sub>μν</sub> + Λ<em>g</em><sub>μν</sub> = (8π<em>G</em>/<em>c</em>⁴) <em>f</em>(τ) <em>T</em><sub>μν</sub> &mdash; is structurally inadmissible: the contracted Bianchi identity forces ∇<sup>μ</sup>(<em>f</em><em>T</em><sub>μν</sub>) = 0, which gives a non-conserved stress-energy tensor and contradicts the equivalence-principle argument. The naive form is therefore rejected. The structurally correct alternative encodes the de Sitter floor in an effective cosmological term Λ<sub>eff</sub>(τ), with the modification realized through an additional T<sub>μν</sub><sup>(Λ_eff)</sup> sector exchanging energy-momentum with matter. <strong>The functional form of Λ<sub>eff</sub>(τ) has not been derived. It is the most pressing open problem in the framework.</strong></p>
+
+  <p><strong>(2) The cluster-cores problem.</strong> The framework predicts that high-<em>T</em><sub>local</sub> regions &mdash; including cluster cores &mdash; should be firmly Newtonian, with no MOND-style enhancement. The data show the opposite: the largest discrepancies appear in the cores, with discrepancy ratios of order ten in the inner two hundred kiloparsecs. <strong>This is a real empirical problem for the escrow interpretation as developed here, and we flag it as such rather than attempting to dissolve it.</strong> Resolution likely requires either an additional matter component in cluster cores (sterile neutrinos) or a non-thermodynamic ingredient not present in the formulation given here.</p>
+
+  <p><strong>(3) The framework is interpretive, not predictive.</strong> Standard MOND with <em>a</em><sub>0</sub> treated as a fitted constant also passes the SPARC and Genzel checks, by construction. The escrow framework&rsquo;s contribution is to identify <em>a</em><sub>0</sub> with the Gibbons&ndash;Hawking temperature of the cosmological horizon and recover the value to within an order-unity coefficient without further free parameters &mdash; and to predict the universality of <em>a</em><sub>0</sub> across galaxy types as a structural consequence rather than as an empirical observation requiring explanation.</p>
+
+  <h2>The picture, in one sentence</h2>
+
+  <blockquote>
+    <p>If the picture is right, gravity is the bookkeeping department of the second law. If it is wrong, it is wrong in well-defined ways that should produce productive failure modes for the next iteration.</p>
+  </blockquote>
+
+  <p>Several apparently disparate features of gravity become facets of one principle under this reading: the universal attractiveness of gravity reflects the one-directional character of entropy production (the second law has no opposite, and so neither does gravity). The impossibility of shielding gravity reflects the impossibility of shielding the second law (there is no operation that prevents the bookkeeping from balancing). The second-law character of gravitational time dilation reflects that escrow density is a quantity observers in different gravitational potentials disagree about in calculable ways. The area-law of black hole entropy reflects what happens when escrow becomes infinite and the books must be settled on the horizon itself.</p>
+
+  <p>None of these connections is mathematically novel; each has been observed by other authors in some form. <strong>What this paper offers is the picture that makes them obviously connected rather than coincidentally so.</strong></p>
+
+  <h2>Why this is Track 2</h2>
+
+  <p>Paper 10 (the Phonon Bound) opened Track 2 with a narrow falsifiable laboratory prediction in BEC analog gravity. Paper 11 sits at the opposite end of the Track 2 spectrum: a broad interpretive synthesis covering universal attractiveness, the equivalence principle, black hole entropy, and the Milgrom scale. Both share Track 2&rsquo;s defining lens &mdash; non-equilibrium thermodynamic and entropic-bound thinking applied to gravity-adjacent physical systems. Where Paper 10 commits to a 17% laboratory signature and waits for a BEC group to test it, Paper 11 commits to an interpretive picture and waits for a derivation of Λ<sub>eff</sub>(τ) and a resolution of the cluster-cores difficulty.</p>
+
+  <p>Together, the two papers establish Track 2 as a working line of inquiry rather than a one-off. Where it leads will depend on what the laboratories do, on what the next analytical question turns out to be, and on whether the framework can be amended to accommodate the radial pattern of cluster mass discrepancies.</p>
+
+  <hr>
+
+  <p style="font-size: 0.9rem; color: var(--text-faint); text-align: center; font-family: var(--sans);">
+    <em>Gravitational Entropy Escrow</em> is Paper 11 of the Windstorm Institute &mdash; the second paper in the <strong>Entropic Bounds in Analog Systems</strong> track.<br>
+    Zenodo: <a href="https://doi.org/10.5281/zenodo.20031932">10.5281/zenodo.20031932</a> &middot;
+    Code &amp; data: <a href="https://github.com/Windstorm-Institute/gravitational-entropy-escrow">github.com/Windstorm-Institute/gravitational-entropy-escrow</a><br>
+    <a href="https://github.com/Windstorm-Institute/gravitational-entropy-escrow/blob/main/paper.pdf">Download the full paper (PDF)</a> &middot;
+    <a href="https://github.com/Windstorm-Institute/gravitational-entropy-escrow/blob/main/paper/Paper11-v0.6.11-draft.md">Markdown source</a>
+  </p>
+
+</article>
+
+<div class="article-nav">
+  <a href="phonon-extraction-bound.html">&larr; The Phonon Bound (Paper 10)</a>
+  <span></span>
+</div>
+
+<footer class="article-footer">
+  <p>&copy; 2026 The Windstorm Institute &middot; Fort Ann, New York &middot; <a href="../index.html">Home</a></p>
+</footer>
+
+</body>
+</html>
