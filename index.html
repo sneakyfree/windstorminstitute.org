@@ -508,6 +508,22 @@ section { padding: 100px 0; }
 .team-card {
   background: var(--surface); border: 1px solid var(--border);
   border-radius: 12px; padding: 2rem;
+  transition: border-color 0.3s;
+}
+.team-card:hover { border-color: var(--border-light); }
+.team-portrait {
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 30%;
+  border: 2px solid var(--border-light);
+  margin: -0.25rem 0 1.25rem;
+  display: block;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.team-card:hover .team-portrait {
+  border-color: var(--accent);
+  box-shadow: 0 0 24px rgba(6, 182, 212, 0.18);
 }
 .team-card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.25rem; }
 .team-role {
@@ -1378,6 +1394,7 @@ footer {
     <h2 class="section-title">Who we are.</h2>
     <div class="team-grid">
       <div class="team-card">
+        <img src="assets/images/grant_whitmer_portrait.jpg" alt="Grant Lavell Whitmer III, founder of the Windstorm Institute" class="team-portrait" loading="lazy" width="900" height="900">
         <h3>Grant Lavell Whitmer III</h3>
         <div class="team-role">Founder & Principal Investigator</div>
         <p>Phillips Exeter and U.S. Naval Academy graduate. Cross-disciplinary researcher working at the intersection of information theory, molecular biology, and artificial intelligence. Creator of the Throughput Constraint framework and the Forma Animae Organon — the philosophical lens through which the Institute approaches its research. Author of two forthcoming popular books: <em>Pattern Upstream of Everything</em> and <em>Voice of the Vibe Coding Gods</em>.</p>
