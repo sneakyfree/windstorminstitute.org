@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Seven systems converging on the throughput basin">
+<style>
+  .hero-marker {
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: hero-marker-in 0.55s cubic-bezier(0.25, 0.9, 0.3, 1.4) both;
+  }
+  .hero-m1 { animation-delay: 0.45s; }
+  .hero-m2 { animation-delay: 0.65s; }
+  .hero-m3 { animation-delay: 0.85s; }
+  .hero-m4 { animation-delay: 1.05s; }
+  .hero-m5 { animation-delay: 1.25s; }
+  .hero-m6 { animation-delay: 1.45s; }
+  .hero-m7 { animation-delay: 1.65s; }
+  .hero-label {
+    opacity: 0;
+    animation: hero-fade-in 0.5s ease-out both;
+  }
+  .hero-l1 { animation-delay: 0.65s; }
+  .hero-l2 { animation-delay: 0.85s; }
+  .hero-l3 { animation-delay: 1.05s; }
+  .hero-l4 { animation-delay: 1.25s; }
+  .hero-l5 { animation-delay: 1.45s; }
+  .hero-l6 { animation-delay: 1.65s; }
+  .hero-l7 { animation-delay: 1.85s; }
+  .hero-basin {
+    opacity: 0;
+    animation: hero-fade-in 0.8s ease-out 0.1s both;
+  }
+  .hero-centroid {
+    opacity: 0;
+    stroke-dasharray: 1400;
+    stroke-dashoffset: 1400;
+    animation: hero-fade-in 0.4s ease-out 2.0s both,
+               hero-draw-in 1.4s cubic-bezier(0.25, 0.9, 0.3, 1) 2.0s both;
+  }
+  .hero-basin-label {
+    opacity: 0;
+    animation: hero-fade-in 0.7s ease-out 2.6s both;
+  }
+  .hero-arrow {
+    opacity: 0;
+    animation: hero-fade-in 0.5s ease-out 1.9s both;
+  }
+  @keyframes hero-marker-in {
+    from { opacity: 0; transform: translateY(-32px) scale(0.6); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @keyframes hero-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes hero-draw-in {
+    from { stroke-dashoffset: 1400; }
+    to   { stroke-dashoffset: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-marker, .hero-label, .hero-basin,
+    .hero-centroid, .hero-basin-label, .hero-arrow {
+      opacity: 1 !important;
+      transform: none !important;
+      stroke-dashoffset: 0 !important;
+      animation: none !important;
+    }
+  }
+</style>
+<rect width="1600" height="900" fill="#0a0a0b"/>
+<text x="800.0" y="80" text-anchor="middle" fill="#fafafa" font-family="Inter, system-ui, sans-serif" font-size="42" font-weight="700" letter-spacing="-0.5">Seven Systems. Six Domains. One Basin.</text>
+<text x="800.0" y="125" text-anchor="middle" fill="#06b6d4" font-family="Lora, Georgia, serif" font-size="20" font-style="italic" opacity="0.9">Dashed: mean throughput T̄ = 4.16 bits per event</text>
+<rect class="hero-basin" x="140" y="219.09090909090912" width="1340" height="405.68181818181813" fill="#06b6d4" fill-opacity="0.05"/>
+<line x1="140" y1="760.0" x2="1480" y2="760.0" stroke="#27272a" stroke-width="1" opacity="0.55"/>
+<text x="122" y="766.0" text-anchor="end" fill="#71717a" font-family="Inter, sans-serif" font-size="18">2</text>
+<line x1="140" y1="624.7727272727273" x2="1480" y2="624.7727272727273" stroke="#27272a" stroke-width="1" opacity="0.55"/>
+<text x="122" y="630.7727272727273" text-anchor="end" fill="#71717a" font-family="Inter, sans-serif" font-size="18">3</text>
+<line x1="140" y1="489.54545454545456" x2="1480" y2="489.54545454545456" stroke="#27272a" stroke-width="1" opacity="0.55"/>
+<text x="122" y="495.54545454545456" text-anchor="end" fill="#71717a" font-family="Inter, sans-serif" font-size="18">4</text>
+<line x1="140" y1="354.31818181818187" x2="1480" y2="354.31818181818187" stroke="#27272a" stroke-width="1" opacity="0.55"/>
+<text x="122" y="360.31818181818187" text-anchor="end" fill="#71717a" font-family="Inter, sans-serif" font-size="18">5</text>
+<line x1="140" y1="219.09090909090912" x2="1480" y2="219.09090909090912" stroke="#27272a" stroke-width="1" opacity="0.55"/>
+<text x="122" y="225.09090909090912" text-anchor="end" fill="#71717a" font-family="Inter, sans-serif" font-size="18">6</text>
+<line x1="140" y1="165" x2="140" y2="760" stroke="#27272a" stroke-width="1.4"/>
+<text x="65" y="462.5" text-anchor="middle" fill="#a1a1aa" font-family="Inter, sans-serif" font-size="20" transform="rotate(-90 65 462.5)">Effective Throughput (bits per event)</text>
+<line class="hero-centroid" x1="140" y1="467.90909090909093" x2="1480" y2="467.90909090909093" stroke="#06b6d4" stroke-width="2.4" stroke-dasharray="14 9" opacity="0.7"/>
+<g class="hero-arrow"><line x1="810.0" y1="603.25" x2="810.0" y2="552.875" stroke="#8b5cf6" stroke-width="2.5" opacity="0.65"/><polygon points="810.0,536.875 801.0,554.875 819.0,554.875" fill="#8b5cf6" opacity="0.65"/></g>
+<g class="hero-arrow"><line x1="1192.857142857143" y1="369.0795454545455" x2="1192.857142857143" y2="419.45454545454544" stroke="#f472b6" stroke-width="2.5" opacity="0.65"/><polygon points="1192.857142857143,435.45454545454544 1183.857142857143,417.45454545454544 1201.857142857143,417.45454545454544" fill="#f472b6" opacity="0.65"/></g>
+<circle cx="235.71428571428572" cy="436.80681818181824" r="18" class="hero-marker hero-m1" fill="#ef4444" stroke="white" stroke-width="2"/>
+<text x="235.71428571428572" y="378.80681818181824" text-anchor="middle" fill="#a1a1aa" font-family="Inter, sans-serif" font-size="20" font-weight="500" class="hero-label hero-l1">Ribosome</text>
+<text x="235.71428571428572" y="404.80681818181824" text-anchor="middle" fill="#a1a1aa" font-family="Inter, sans-serif" font-size="20" font-weight="500" class="hero-label hero-l1">(tRNA)</text>
+<rect x="410.9428571428571" y="446.3" width="32.4" height="32.4" class="hero-marker hero-m2" fill="#3b82f6" stroke="white" stroke-width="2"/>
+<text x="427.1428571428571" y="404.5" text-anchor="middle" fill="#a1a1aa" font-family="Inter, sans-serif" font-size="20" font-weight="500" class="hero-label hero-l2">English</text>
+<text x="427.1428571428571" y="430.5" text-anchor="middle" fill="#a1a1aa" font-family="Inter, sans-serif" font-size="20" font-weight="500" class="hero-label hero-l2">Consonants</text>
+<polygon points="618.5714285714286,525.6409090909091 637.4714285714285,546.3409090909091 618.5714285714286,567.0409090909092 599.6714285714286,546.3409090909091" class="hero-marker hero-m3" fill="#f59e0b" stroke="white" stroke-width="2"/>
+<text x="618.5714285714286" y="596.3409090909091" text-anchor="middle" fill="#a1a1aa" font-family="Inter, sans-serif" font-size="20" font-weight="500" class="hero-label hero-l3">Chromatic</text>
+<text x="618.5714285714286" y="622.3409090909091" text-anchor="middle" fill="#a1a1aa" font-family="Inter, sans-serif" font-size="20" font-weight="500" class="hero-label hero-l3">Scale</text>
+<polygon points="810.0,590.55 828.9,623.85 791.1,623.85" class="hero-marker hero-m4" fill="#8b5cf6" stroke="white" stroke-width="2"/>
+<text x="810.0" y="661.25" text-anchor="middle" fill="#a1a1aa" font-family="Inter, sans-serif" font-size="20" font-weight="500" class="hero-label hero-l4">Neural</text>
+<text x="810.0" y="687.25" text-anchor="middle" fill="#a1a1aa" font-family="Inter, sans-serif" font-size="20" font-weight="500" class="hero-label hero-l4">Working Memory</text>
+<polygon points="1001.4285714285714,442.7 1020.2594904512155,456.38146351137607 1013.0667194239625,478.51853648862397 989.7904234331804,478.51853648862397 982.5976524059274,456.38146351137607" class="hero-marker hero-m5" fill="#22c55e" stroke="white" stroke-width="2"/>
+<text x="1001.4285714285714" y="404.5" text-anchor="middle" fill="#a1a1aa" font-family="Inter, sans-serif" font-size="20" font-weight="500" class="hero-label hero-l5">AI Transformers</text>
+<text x="1001.4285714285714" y="430.5" text-anchor="middle" fill="#a1a1aa" font-family="Inter, sans-serif" font-size="20" font-weight="500" class="hero-label hero-l5">(matched)</text>
+<polygon points="1192.857142857143,381.7795454545455 1211.757142857143,348.4795454545455 1173.9571428571428,348.4795454545455" class="hero-marker hero-m6" fill="#f472b6" stroke="white" stroke-width="2"/>
+<text x="1192.857142857143" y="329.0795454545455" text-anchor="middle" fill="#a1a1aa" font-family="Inter, sans-serif" font-size="20" font-weight="500" class="hero-label hero-l6">Morse Code</text>
+<polygon points="1403.1857142857143,509.8295454545455 1393.7357142857143,526.1974255860714 1374.8357142857142,526.1974255860714 1365.3857142857141,509.8295454545455 1374.8357142857142,493.4616653230196 1393.7357142857143,493.4616653230196" class="hero-marker hero-m7" fill="#94a3b8" stroke="white" stroke-width="2"/>
+<text x="1384.2857142857142" y="559.8295454545455" text-anchor="middle" fill="#a1a1aa" font-family="Inter, sans-serif" font-size="20" font-weight="500" class="hero-label hero-l7">TCP/IP</text>
+<text x="1384.2857142857142" y="585.8295454545455" text-anchor="middle" fill="#a1a1aa" font-family="Inter, sans-serif" font-size="20" font-weight="500" class="hero-label hero-l7">Packets</text>
+<g class="hero-basin-label"><text x="1450" y="266.4204545454545" text-anchor="end" fill="#06b6d4" font-family="Lora, Georgia, serif" font-size="40" font-style="italic" opacity="0.92">The Throughput Basin</text><text x="1450" y="296.4204545454545" text-anchor="end" fill="#71717a" font-family="Inter, sans-serif" font-size="20" opacity="0.85">3 – 6 bits per event</text></g>
+</svg>
