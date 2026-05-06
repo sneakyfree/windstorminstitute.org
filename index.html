@@ -777,7 +777,12 @@ footer {
   <div class="container">
     <div class="section-label" style="color: var(--accent-2);">Track 2 &middot; Entropic Bounds in Analog Systems</div>
     <h2 class="section-title">An active second line of inquiry.</h2>
-    <p class="section-desc">Non-equilibrium thermodynamic bounds in analog physical systems &mdash; the same Clausius-inequality lens that drives Track 1&rsquo;s thermodynamic argument, applied to a different substrate. Two papers now in the field: a narrow falsifiable laboratory prediction, and a broad interpretive synthesis of gravity-as-entropy.</p>
+    <p class="section-desc">Non-equilibrium thermodynamic bounds in analog physical systems &mdash; the same Clausius-inequality lens that drives Track 1&rsquo;s thermodynamic argument, applied to a different substrate. Three papers now in the field: a narrow falsifiable laboratory prediction, a broad interpretive synthesis of gravity-as-entropy, and a methodology case study.</p>
+
+    <!-- Track 2 hero chart: where the bound becomes empirically discriminating -->
+    <div style="margin: 2rem 0 3rem; border: 1px solid rgba(139, 92, 246, 0.25); border-radius: 12px; overflow: hidden; background: var(--surface);">
+      <img src="assets/images/web_hero_track2_bound.png" alt="Plot of the entropic-gravity efficiency bound η ≤ 1/(1 + T/T_res) across 25 orders of magnitude of temperature ratio. The bound stays near η = 1 (vacuous) for all astrophysical regimes — Saturn V launch, hot-Jupiter atmospheric escape, stellar wind, binary inspiral — and only drops meaningfully as T/T_res approaches order unity. A gold star marks the BEC analog gravity sweet spot at T/T_res = 0.2 where the bound predicts η ≤ 0.83 — a 17% efficiency suppression distinguishable from naive energetic accounting." style="width: 100%; display: block;">
+    </div>
 
     <!-- Paper 10 -->
     <a href="articles/phonon-extraction-bound.html" class="area-card" style="display: block; text-decoration: none; color: inherit; border-color: rgba(139, 92, 246, 0.35); background: linear-gradient(135deg, var(--surface) 0%, rgba(139, 92, 246, 0.04) 100%); margin-bottom: 1.25rem;">
@@ -1354,34 +1359,23 @@ footer {
 
 <div class="divider"></div>
 
-<!-- LABS -->
+<!-- LABS — sister-site callout (option 2: replace duplicated content with cross-link) -->
 <section id="labs">
   <div class="container">
-    <div class="section-label">Windstorm Labs</div>
-    <h2 class="section-title">Compute infrastructure.</h2>
-    <p class="section-desc">Windstorm Labs is the experimental arm of the Institute — GPU clusters, autonomous AI research agents, and large-scale empirical science.</p>
-    <div class="infra-grid">
-      <div class="infra-card">
-        <h4>Primary Compute</h4>
-        <div class="infra-val">RTX 5090</div>
-        <p>32GB VRAM. Runs 1,749-model evaluation sweeps, evolutionary simulations, and model training.</p>
+    <div class="section-label" style="color: var(--green);">Windstorm Labs</div>
+    <h2 class="section-title">The engineering arm has its own home.</h2>
+    <p class="section-desc">Windstorm Labs builds and ships the Windy-* product family (Eternitas, Windy Word, Windy Chat, Windy Mail, Windy Fly, Windy Cloud, Windy Code, and more) and runs the autonomous research fleet that supports the Institute's empirical work. Full details, infrastructure breakdown, and the product family live on the Labs site.</p>
+
+    <a href="https://windstormlabs.com" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; background: linear-gradient(135deg, var(--surface) 0%, rgba(34, 197, 94, 0.05) 100%); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 12px; padding: 2rem; text-decoration: none; color: inherit; transition: border-color 0.3s, transform 0.2s;" onmouseover="this.style.borderColor='var(--green)'; this.style.transform='translateY(-2px)';" onmouseout="this.style.borderColor='rgba(34, 197, 94, 0.3)'; this.style.transform='translateY(0)';">
+      <div style="width: 56px; height: 56px; border-radius: 12px; background: linear-gradient(135deg, var(--green) 0%, var(--warm) 100%); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 22px; color: var(--bg); flex-shrink: 0;">L</div>
+      <div style="flex: 1; min-width: 280px;">
+        <div style="font-family: var(--mono); font-size: 0.7rem; color: var(--green); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.4rem; font-weight: 600;">Sister Site &middot; Engineering Arm</div>
+        <h3 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text);">windstormlabs.com</h3>
+        <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin: 0;">Engineering products, autonomous research fleet, RTX 5090 compute infrastructure, and the full Windy-* product roster. Same dark aesthetic, green accents instead of cyan.</p>
+        <div style="font-family: var(--mono); font-size: 0.8rem; color: var(--green); margin-top: 0.85rem;">Visit Windstorm Labs &rarr;</div>
       </div>
-      <div class="infra-card">
-        <h4>Agent Fleet</h4>
-        <div class="infra-val">8 Nodes</div>
-        <p>Autonomous AI research agents coordinated across distributed infrastructure. Parallel experiment execution.</p>
-      </div>
-      <div class="infra-card">
-        <h4>Models Evaluated</h4>
-        <div class="infra-val">1,749</div>
-        <p>Largest known tokenizer-information survey. Vocabulary sizes spanning 256 to 256K tokens on shared corpus.</p>
-      </div>
-      <div class="infra-card">
-        <h4>Open Science</h4>
-        <div class="infra-val">100%</div>
-        <p>All code, data, and experiment protocols published. Every result reproducible on commodity hardware.</p>
-      </div>
-    </div>
+    </a>
+
     <p class="infra-note">Institute: Fort Ann, NY &nbsp;|&nbsp; Labs: Mount Pleasant, SC</p>
   </div>
 </section>
