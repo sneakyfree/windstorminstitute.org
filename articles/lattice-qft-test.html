@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Half a Falsification — The Windstorm Institute</title>
+<meta name="description" content="Paper 13 of the Windstorm Institute: a plain-language companion to the lattice QFT test of the static escrow postulate. The framework's load-bearing identity is tested directly against quantum field theory on a lattice — and partially survives. The literal reading fails by 56 orders of magnitude. The modular Hamiltonian reading lives, with a calculable suppression factor as the open question.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Windstorm Institute">
+<meta property="og:url" content="https://windstorminstitute.org/articles/lattice-qft-test.html">
+<meta property="og:title" content="Half a Falsification — The Windstorm Institute">
+<meta property="og:description" content="The framework's load-bearing identity tested against lattice QFT. The literal reading fails. The modular reading partially survives. Honest about both.">
+<meta property="og:image" content="https://windstorminstitute.org/assets/images/web_hero_track2_bound.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Half a Falsification">
+<meta name="twitter:description" content="A direct lattice-QFT test of the Gravitational Entropy Escrow framework, honestly reported.">
+<meta name="twitter:image" content="https://windstorminstitute.org/assets/images/web_hero_track2_bound.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+img{max-width:100%;height:auto}
+
+:root {
+  --bg: #0a0a0b;
+  --surface: #111113;
+  --surface-2: #18181b;
+  --border: #27272a;
+  --border-light: #3f3f46;
+  --text: #fafafa;
+  --text-muted: #a1a1aa;
+  --text-faint: #71717a;
+  --accent: #06b6d4;
+  --accent-dim: #0891b2;
+  --accent-glow: rgba(6, 182, 212, 0.15);
+  --accent-2: #8b5cf6;
+  --warm: #f59e0b;
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Inter', -apple-system, sans-serif;
+  --serif: 'Lora', Georgia, serif;
+}
+
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+a:hover { color: #22d3ee; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(10, 10, 11, 0.85);
+  backdrop-filter: blur(20px) saturate(1.5);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1100px; margin: 0 auto; padding: 0 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+}
+.nav-brand {
+  display: flex; align-items: center; gap: 12px;
+  font-weight: 600; font-size: 0.95rem; color: var(--text);
+  letter-spacing: -0.01em;
+}
+.nav-mark {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 14px; color: white;
+}
+.nav-links { display: flex; gap: 2rem; }
+.nav-links a {
+  font-size: 0.85rem; font-weight: 500; color: var(--text-muted);
+  letter-spacing: 0.02em; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text); }
+
+.article-hero {
+  padding: 140px 0 60px;
+  position: relative;
+  text-align: center;
+}
+.article-hero::before {
+  content: '';
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 600px;
+  background: radial-gradient(ellipse, rgba(139, 92, 246, 0.18) 0%, transparent 70%);
+  pointer-events: none;
+  opacity: 0.55;
+}
+.article-hero-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+}
+.article-back {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--mono); font-size: 0.75rem; font-weight: 500;
+  color: var(--text-faint); letter-spacing: 0.06em; text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+.article-back:hover { color: var(--accent); }
+.track-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 12px; border-radius: 100px;
+  background: rgba(139, 92, 246, 0.12);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  font-family: var(--mono); font-size: 0.7rem; font-weight: 600;
+  color: var(--accent-2); letter-spacing: 0.08em; text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+.track-pill::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent-2); box-shadow: 0 0 8px var(--accent-2);
+}
+.article-meta {
+  font-family: var(--mono); font-size: 0.75rem;
+  color: var(--text-faint); letter-spacing: 0.06em;
+  margin-bottom: 1.5rem;
+  display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;
+}
+.article-hero h1 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700; letter-spacing: -0.02em;
+  line-height: 1.2; margin-bottom: 1.5rem;
+}
+.article-hero h1 .gradient {
+  background: linear-gradient(135deg, var(--accent-2) 0%, var(--accent) 50%, var(--warm) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.article-subtitle {
+  font-size: 1.15rem; color: var(--text-muted);
+  line-height: 1.75; max-width: 600px; margin: 0 auto 2rem;
+}
+.share-bar {
+  display: flex; justify-content: center; gap: 1rem;
+  margin-top: 1.5rem;
+}
+.share-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 14px; border-radius: 6px;
+  background: var(--surface-2); border: 1px solid var(--border);
+  font-family: var(--mono); font-size: 0.7rem; font-weight: 500;
+  color: var(--text-faint); letter-spacing: 0.04em;
+  cursor: pointer; transition: border-color 0.2s, color 0.2s;
+}
+.share-btn:hover { border-color: var(--border-light); color: var(--text-muted); }
+
+.article-body {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 3rem 2rem 6rem;
+}
+.article-body h2 {
+  font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em;
+  margin: 3rem 0 1rem;
+  padding-top: 1rem;
+}
+.article-body h3 {
+  font-size: 1.15rem; font-weight: 600;
+  margin: 2rem 0 0.75rem;
+}
+.article-body p {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.9;
+  margin-bottom: 1.5rem;
+}
+.article-body strong { color: var(--text); font-weight: 500; }
+.article-body em { font-style: italic; }
+.article-body blockquote {
+  border-left: 3px solid var(--accent-2);
+  padding: 1rem 1.5rem;
+  margin: 2rem 0;
+  background: var(--surface);
+  border-radius: 0 8px 8px 0;
+}
+.article-body blockquote p {
+  font-style: italic;
+  color: var(--text);
+  margin-bottom: 0;
+}
+.article-body hr {
+  border: none;
+  height: 1px;
+  background: var(--border);
+  margin: 3rem 0;
+}
+.callout {
+  margin: 2.5rem 0;
+  padding: 1.25rem 1.5rem;
+  background: var(--surface);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+}
+.callout-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.5rem;
+}
+.callout p {
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+}
+.callout p:last-child { margin-bottom: 0; }
+
+.article-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 2rem 3rem;
+}
+.article-nav a {
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}
+
+.article-footer {
+  max-width: 680px; margin: 0 auto;
+  padding: 2rem 2rem 4rem;
+  border-top: 1px solid var(--border);
+}
+.article-footer p {
+  font-size: 0.85rem; color: var(--text-faint); line-height: 1.7;
+}
+
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .article-hero { padding: 120px 0 40px; }
+  .article-body { padding: 2rem 1.5rem 4rem; }
+  .article-meta { flex-direction: column; gap: 0.5rem; }
+}
+
+/* ─── COMMENTS / DISCUSSION ─── */
+.article-comments {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 3rem;
+  border-top: 1px solid var(--border);
+}
+.article-comments-header {
+  margin-bottom: 1.75rem;
+}
+.article-comments-header .section-tag {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.article-comments-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.85rem;
+}
+.article-comments-header p {
+  font-size: 0.85rem;
+  color: var(--text-faint);
+  line-height: 1.7;
+  margin: 0;
+}
+.article-comments-header p a {
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  transition: color 0.2s, border-color 0.2s;
+}
+.article-comments-header p a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+.giscus, .giscus-frame {
+  min-height: 240px;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+.giscus-frame {
+  border: none;
+  color-scheme: dark;
+}
+@media (max-width: 640px) {
+  .article-comments { padding: 2rem 1.5rem 2.5rem; }
+  .article-comments-header h2 { font-size: 1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand">
+      <div class="nav-mark">W</div>
+      The Windstorm Institute
+    </a>
+    <div class="nav-links">
+      <a href="../index.html#research">Research</a>
+      <a href="../index.html#articles">Articles</a>
+      <a href="../index.html#publications">Publications</a>
+      <a href="../index.html#labs">Labs</a>
+      <a href="../index.html#team">Team</a>
+    </div>
+  </div>
+</nav>
+
+<header class="article-hero">
+  <div class="article-hero-inner">
+    <a href="../index.html#articles" class="article-back">&larr; All Articles</a>
+    <div class="track-pill">Track 2 · Entropic Bounds</div>
+    <div class="article-meta">
+      <span>Paper 13</span>
+      <span>May 2026</span>
+      <span>~14 min read</span>
+      <span>Grant Lavell Whitmer III</span>
+      <span>zenodo</span>
+    </div>
+    <h1>Half a Falsification:<br><span class="gradient">A Lattice QFT Test of the Static Escrow Postulate</span></h1>
+    <p class="article-subtitle">The framework from Paper 11 makes a load-bearing identification: gravitational binding energy <em>is</em> entropy held in escrow against the local Unruh temperature. <strong>Is that an actual identity in quantum field theory, or just a useful analogy?</strong> We tested it directly. The literal reading fails by fifty-six orders of magnitude. The modular-Hamiltonian reading partially survives, with a calculable suppression factor as the remaining open question. Both halves of that result are honestly reported here.</p>
+    <div class="share-bar">
+      <button class="share-btn" onclick="window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(document.title)+' '+encodeURIComponent(location.href),'_blank')">Share on X</button>
+      <button class="share-btn" onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(location.href),'_blank')">Share on LinkedIn</button>
+    </div>
+  </div>
+</header>
+
+<article class="article-body">
+
+  <p><em>This article is a plain-language companion to Paper 13 &mdash; the Lattice QFT Test. The technical version is at <a href="https://github.com/Windstorm-Institute/lattice-qft-test">github.com/Windstorm-Institute/lattice-qft-test</a>. It&rsquo;s the fourth paper in the Institute&rsquo;s Track 2, and a direct supplement to <a href="gravitational-entropy-escrow.html">Paper 11 (the Gravitational Entropy Escrow framework)</a>.</em></p>
+
+  <hr>
+
+  <h2>The claim being tested</h2>
+
+  <p>Paper 11 proposes that gravity isn&rsquo;t fundamentally a force &mdash; it&rsquo;s the universe&rsquo;s collection agency for an entropy debt held in escrow. The mathematical statement of that claim is one short equation:</p>
+
+  <blockquote>
+    <p>S<sub>esc</sub> = |U<sub>grav</sub>| &divide; T<sub>Unruh</sub></p>
+  </blockquote>
+
+  <p>In English: the entropy held in escrow against gravitational binding equals the binding energy divided by a temperature called the Unruh temperature. Plug in two equal point masses separated by a distance, and the equation simplifies to <em>S</em><sub>esc</sub> = 2&pi;&middot;<em>m</em>&middot;<em>L</em>. (In natural units. Physicists love natural units.)</p>
+
+  <p>This is not a metaphor in Paper 11. It&rsquo;s an equation. The whole framework rests on this one identity being right. Newton&rsquo;s law follows from it. Black hole entropy follows from it. The deep-MOND acceleration scale follows from it. <strong>If this equation isn&rsquo;t a real statement about the world, the framework collapses.</strong></p>
+
+  <p>So the natural question is: <em>is</em> it a real statement about the world?</p>
+
+  <p>Specifically: if you take a quantum field that lives in space, put two masses in it, and compute the entanglement entropy of that field directly &mdash; using the standard machinery of quantum field theory, with no fudging &mdash; do you get <em>S</em><sub>esc</sub>?</p>
+
+  <p>That&rsquo;s the test Paper 13 ran.</p>
+
+  <h2>How you actually do this on a computer</h2>
+
+  <p>You can&rsquo;t put a quantum field on a computer literally. Continuous space has infinitely many points; computers have finitely many memory cells. So you do what physicists have done since the 1970s: you cheat geometrically. You replace continuous space with a regular grid of discrete sites &mdash; a <em>lattice</em> &mdash; and you put a copy of the quantum field at each site, with the sites talking to their neighbors.</p>
+
+  <p>This is called <strong>lattice quantum field theory</strong>, and it is one of the workhorses of theoretical physics. It&rsquo;s how we compute the mass of the proton from the underlying quark theory. It&rsquo;s how we test gauge theories that have no analytic solution. The arithmetic is well-trodden; what&rsquo;s being tested is whether <em>the postulate</em> survives that arithmetic, not whether the arithmetic itself works.</p>
+
+  <p>For Paper 13, the field was a free scalar field &mdash; the simplest one, the &ldquo;hydrogen atom&rdquo; of QFT &mdash; and we ran two scans:</p>
+
+  <ul style="font-family: var(--serif); font-size: 1.05rem; color: var(--text-muted); line-height: 1.9; margin-bottom: 1.5rem; padding-left: 1.5rem;">
+    <li><strong>1+1D</strong> &mdash; one space dimension and one time dimension. Lattice sizes up to N = 3000 sites. A 295-point scan over (lattice size, mass separation, mass strength).</li>
+    <li><strong>3+1D</strong> &mdash; three space dimensions and one time. Cubic lattices up to N&sup3; = 8000 sites (N up to 20). With a CPU implementation cross-checked against a separate GPU implementation on an NVIDIA RTX 5090. The two implementations agreed to better than two parts in 100,000.</li>
+  </ul>
+
+  <p>And we computed three different entropy quantities at every grid point:</p>
+
+  <ol style="font-family: var(--serif); font-size: 1.05rem; color: var(--text-muted); line-height: 1.9; margin-bottom: 1.5rem; padding-left: 1.5rem;">
+    <li><strong>Bipartition entanglement entropy</strong> &mdash; cut space in half, measure how much information the left half &ldquo;knows&rdquo; about the right half through quantum entanglement.</li>
+    <li><strong>Mutual information</strong> &mdash; how much information one region surrounding one mass shares with another region surrounding the other mass.</li>
+    <li><strong>Modular Hamiltonian content</strong> &mdash; a more sophisticated measure related to the &ldquo;temperature&rdquo; an observer in the left half would see for the field, evaluated under a sixty-year-old conjecture by Bisognano and Wichmann.</li>
+  </ol>
+
+  <p>If Paper 11&rsquo;s static identity is a literal statement about quantum field theory, <em>at least one</em> of these three measures should match <em>S</em><sub>esc</sub> up to an order-unity prefactor. That&rsquo;s the bar.</p>
+
+  <h2>What happened</h2>
+
+  <h3>Bipartition entropy: ruled out, decisively</h3>
+
+  <p>The 1+1D bipartition entropy and the postulate&rsquo;s prediction disagreed by <strong>56 orders of magnitude</strong> across the parameter grid &mdash; more precisely, the dimensionless ratio between them spanned 56 powers of ten as we varied the masses and separations. If the postulate were a real identity, the ratio should be approximately <em>constant</em> (of order unity) across the grid. Instead it varied by factors of 10<sup>56</sup>. There is no slope of order one to be saved here.</p>
+
+  <p>In 3+1D, things were more interesting and worse. The bipartition entropy was dominated by an enormous &ldquo;area-law&rdquo; term that has been known about for fifty years &mdash; basically, putting a mass somewhere makes a small <em>change</em> to a much larger background entropy that scales with the size of the boundary surface, not with the mass. So we measured the <em>change</em> &mdash; the mass-induced part &mdash; against the postulate. The mass-induced ratio came out bounded by 10<sup>&minus;3</sup> across all grid points. Three orders of magnitude small, not order unity.</p>
+
+  <p>And the mutual information &mdash; the second independent measure &mdash; <em>decayed</em> as <em>L</em><sup>&minus;4</sup> with mass separation. The postulate predicts linear <em>growth</em>. The directions disagree.</p>
+
+  <p><strong>That settles the literal bipartition-entropy reading.</strong> Whatever <em>S</em><sub>esc</sub> means, it isn&rsquo;t the entanglement entropy of the field in the presence of these masses. Two independent measures (bipartition entropy and mutual information) say so, in two independent dimensions, with two independent code paths.</p>
+
+  <h2>The interesting thing happened to the third measure</h2>
+
+  <p>The modular Hamiltonian content &mdash; the third entropy measure, the one tied to the Bisognano-Wichmann conjecture &mdash; gave a more nuanced answer.</p>
+
+  <p>Bisognano and Wichmann showed in the 1970s that for a free quantum field, an observer who only has access to half of space sees the field as if it were at a temperature that depends on how far each point is from the boundary. Specifically, the contribution of a point at perpendicular distance <em>d</em><sub>1</sub> from the boundary should grow <em>linearly</em> with <em>d</em><sub>1</sub>. That linear growth is the &ldquo;BW asymptote&rdquo;: &Delta;<em>K</em> &prop; <em>d</em><sub>1</sub>.</p>
+
+  <p>The static escrow postulate, when you stare at it, predicts the same kind of linear growth in <em>d</em><sub>1</sub>, with the prefactor being 2&pi;&middot;<em>m</em>. So if the modular reading is real, you should see a clean line of slope 2&pi;&middot;<em>m</em> on a plot of &Delta;<em>K</em> against <em>d</em><sub>1</sub>.</p>
+
+  <p>What you actually see is a line, with the right slope, in a small window. And then it bends.</p>
+
+  <h3>The 1+1D result, in plain English</h3>
+
+  <p>For small <em>d</em><sub>1</sub> &mdash; specifically, the window <em>d</em><sub>1</sub> = 2 to 6 lattice sites at unit mass &mdash; the local exponent of &Delta;<em>K</em>(<em>d</em><sub>1</sub>) is +1.02. That&rsquo;s indistinguishable from the Bisognano-Wichmann prediction of exactly 1. <strong>The structural form of the postulate&rsquo;s prediction holds.</strong></p>
+
+  <p>But the prefactor is wrong. Specifically, the lattice answer is about <strong>1/30 the size</strong> of what the literal reading of the postulate would predict.</p>
+
+  <p>And as you go to larger <em>d</em><sub>1</sub>, the local exponent decreases smoothly, sliding from +1.0 down through +0.5 toward zero. The line bends into a sublinear tail. The bending isn&rsquo;t the postulate failing &mdash; it&rsquo;s real lattice physics. But the linear regime, where the postulate&rsquo;s prediction <em>shape</em> is right, lives only inside a small-distance window.</p>
+
+  <h3>And then there&rsquo;s a confession to make about the previous version of this paper</h3>
+
+  <p>The previously-published version (v0.5) of this paper reported &ldquo;&Delta;<em>K</em> &prop; <em>L</em><sup>0.7</sup> sublinear scaling&rdquo; as the headline 1+1D modular result. That number &mdash; 0.7 &mdash; turned out to be an artifact of fitting a single power law across data that doesn&rsquo;t obey a single power law. The actual local exponent slides from 1 to 0.5 to nearly zero across the range tested. A single fit averages all that and lands somewhere in the middle.</p>
+
+  <p>v0.7 corrects this by reporting the local exponent in different windows, with the explicit statement that the function is not a single power law. <strong>The 0.7 was a fitting artifact across a smooth crossover.</strong> The corrected story is BW linear at small <em>d</em><sub>1</sub> with prefactor approximately 1/30; smooth crossover; tail decay exponent approximately 0.5. <em>That&rsquo;s</em> what the data say.</p>
+
+  <p>This is the kind of correction we owe to people who try to build on published work. Better that the v0.7 says &ldquo;the v0.5 framing was misleading in this specific way, here is the corrected version&rdquo; than that we leave the bad framing standing and let other researchers cite it as gospel.</p>
+
+  <h3>The 3+1D result is grimmer</h3>
+
+  <p>The companion paper extends the modular-Hamiltonian test to 3+1D, where physical reality lives. There the BW asymptote is <em>not</em> recovered within the distance range the lattice can resolve. Modular content peaks at <em>d</em><sub>1</sub> &asymp; 2 lattice sites and decays roughly as <em>d</em><sub>1</sub><sup>&minus;2</sup> to <em>d</em><sub>1</sub><sup>&minus;3</sup> for larger <em>d</em><sub>1</sub>. That&rsquo;s the wrong sign of behavior for the postulate &mdash; growth, not decay, is what BW predicts.</p>
+
+  <p>This could mean BW recovery in 3+1D requires distances much larger than current lattices can reach. Or it could mean the BW connection is genuinely 1+1D-only. The honest framing is that we don&rsquo;t know, but the rate of approach to the continuum BW asymptote is substantially slower in 3+1D than in 1+1D, and at the scales lattice computers can simulate today, you don&rsquo;t see BW recovery in 3+1D at all.</p>
+
+  <h2>What this means for Paper 11</h2>
+
+  <p>Paper 11&rsquo;s framework had four kinds of empirical content. Let me sort them by what these tests do and don&rsquo;t affect.</p>
+
+  <h3>Unaffected by these tests</h3>
+
+  <p><strong>The horizon thermodynamics.</strong> Paper 11 recovers the Bekenstein-Hawking entropy of black holes and the Gibbons-Hawking entropy of the de Sitter universe. Those derivations go through the surface-gravity Unruh temperature, which is a different physical regime from the flat-space free-QFT tests Paper 13 ran. The lattice tests cannot, and do not, falsify the horizon-thermodynamics piece of the framework.</p>
+
+  <p><strong>The empirical successes.</strong> Paper 11&rsquo;s headline phenomenological result &mdash; that the deep-MOND acceleration scale <em>a</em><sub>0</sub> falls out of the framework as a constant set by the cosmological constant &Lambda;, matching observations of galaxy rotation curves at high redshift &mdash; is also independent of these flat-space tests. So is the Genzel five-case test result that ruled out evolving forms of <em>a</em><sub>0</sub> at &gt;0.10 dex. That empirical content stands.</p>
+
+  <h3>Falsified by these tests</h3>
+
+  <p><strong>The literal bipartition-entropy reading of the static identity.</strong> If you read Paper 11 as claiming &ldquo;<em>S</em><sub>esc</sub> equals the bipartition entanglement entropy of the field with two masses inserted,&rdquo; that reading is dead. Any future writing about the framework should not phrase the identity that way.</p>
+
+  <h3>Partially survives</h3>
+
+  <p><strong>The modular-Hamiltonian reading of the static identity, in 1+1D, in a small-distance window.</strong> The structural form of the prediction (linear growth in <em>d</em><sub>1</sub>) is correct. The prefactor is suppressed by approximately 1/30. The 1/30 is the open question.</p>
+
+  <p>One speculation in the paper&rsquo;s &sect;VI.D: the BW formula is an infrared, long-wavelength prediction. A localized lattice mass at <em>m</em> = 1 corresponds to a correlation length of about one lattice spacing, which is a UV-scale (short-distance) perturbation by the lattice&rsquo;s own measure. A factor of about 30 between the IR prediction and a UV-scale perturbation would not be surprising on dimensional grounds, but turning &ldquo;not surprising&rdquo; into a calculation is the job that&rsquo;s now on the table.</p>
+
+  <h2>The methodology side note</h2>
+
+  <p>One of the values published in v0.7 came out of a multi-LLM verification audit that turned out to be more important than its own results. We sent the 3+1D production code to three external AI sandboxes and asked each to run it independently and report the numerical answers.</p>
+
+  <ul style="font-family: var(--serif); font-size: 1.05rem; color: var(--text-muted); line-height: 1.9; margin-bottom: 1.5rem; padding-left: 1.5rem;">
+    <li><strong>Perplexity, run #1</strong> &mdash; numbers matched local ground-truth to six decimal places. Trustworthy.</li>
+    <li><strong>Perplexity, run #2</strong> &mdash; numbers matched to 0.05 percent. Trustworthy. (Quietly substituted N=13 for N=14, which we caught and flagged.)</li>
+    <li><strong>Gemini</strong> &mdash; numbers disagreed with ground-truth by factors of 6&times; to 23&times;, with no consistent error pattern. The textual signature of the run included &ldquo;<code>... [Internal functions as provided] ...</code>&rdquo; placeholders. <strong>Gemini did not run the code. It made up numbers and reported them as if it had.</strong></li>
+  </ul>
+
+  <p>If we&rsquo;d trusted Gemini and incorporated its results, the v0.7 paper would have published claims (alpha approximately 1.1, &ldquo;closer to BW&rdquo;) that are flat-out false. The reason we caught it is that we had local ground-truth to compare against; the &ldquo;multi-LLM cross-validation&rdquo; we&rsquo;d set up was actually an external-ground-truth cross-check, not a peer-review system among AIs. <strong>Multi-LLM review without external grounding is not load-bearing.</strong> The most confident-sounding LLM may simply be the most hallucinatory.</p>
+
+  <p>This is the same lesson Paper 12 documented from a different direction. Both papers are now part of a small but growing case-study record on what does and doesn&rsquo;t work when you try to use AI systems for serious physics work. The pattern: AI dialogue is genuinely useful for generating candidate ideas; AI verification is dangerous unless you have an independent way to ground-truth the answers.</p>
+
+  <h2>The honest framing</h2>
+
+  <p>This paper is not what you&rsquo;d ship if your goal were to make Paper 11 look good. The headline result is &ldquo;a load-bearing identification in the framework you previously published is, in its literal form, ruled out by direct calculation, by 56 orders of magnitude.&rdquo; That&rsquo;s not flattering.</p>
+
+  <p>But here&rsquo;s what falsification means in physics, when it&rsquo;s done right: <em>you find out where the picture is real and where it&rsquo;s a useful analogy.</em> The horizon thermodynamics is real. The empirical content (constant <em>a</em><sub>0</sub>, deep-MOND, Genzel test) is real. The modular-Hamiltonian connection in 1+1D within a small-<em>d</em><sub>1</sub> window is real, modulo a calculable suppression factor. The literal-bipartition-entropy reading is not real.</p>
+
+  <p>That&rsquo;s a more useful map of the framework than &ldquo;everything works&rdquo; would have been. It tells future researchers (and future versions of me) which parts of the picture to push on and which parts to stop trying to defend in a form they don&rsquo;t hold up in.</p>
+
+  <p>The framework had to face this test eventually. Better that it face it now, while it&rsquo;s still small and easily revised, than after it&rsquo;s accumulated five years of citations.</p>
+
+  <blockquote>
+    <p>Falsification is the friend you don&rsquo;t want and don&rsquo;t deserve. It tells you the truth about your work even when you&rsquo;re not ready for it. Listen anyway.</p>
+  </blockquote>
+
+  <hr>
+
+  <h2>Read the technical version</h2>
+
+  <p>The full v0.7 paper, the 1+1D production code, and the consolidated findings document are at:</p>
+
+  <ul style="font-family: var(--serif); font-size: 1.05rem; color: var(--text-muted); line-height: 1.9; margin-bottom: 1.5rem; padding-left: 1.5rem;">
+    <li><a href="https://github.com/Windstorm-Institute/lattice-qft-test">github.com/Windstorm-Institute/lattice-qft-test</a> &mdash; paper PDF, headline results</li>
+    <li><a href="https://github.com/Windstorm-Labs/lattice-qft-test">github.com/Windstorm-Labs/lattice-qft-test</a> &mdash; reproduction code, raw analysis</li>
+    <li><a href="https://doi.org/10.5281/zenodo.20043421">doi.org/10.5281/zenodo.20043421</a> &mdash; Zenodo deposit (concept DOI, always resolves to latest)</li>
+    <li><a href="https://doi.org/10.5281/zenodo.20057538">doi.org/10.5281/zenodo.20057538</a> &mdash; v0.7 specifically</li>
+  </ul>
+
+  <p>The companion paper (3+1D) will be deposited as a separate Zenodo record shortly. Reading them as a paired update is the recommended order.</p>
+
+</article>
+
+<div class="article-nav">
+  <a href="../index.html#articles">&larr; All Articles</a>
+  <a href="../index.html">The Windstorm Institute &rarr;</a>
+</div>
+
+<section class="article-comments" id="comments">
+  <div class="article-comments-header">
+    <span class="section-tag">Discussion</span>
+    <h2>Discuss this article</h2>
+    <p>Sign in with your GitHub account to comment. Comments are powered by GitHub Discussions on the <a href="https://github.com/sneakyfree/windstorm-institute-site">website source repository</a>; each article gets its own thread, automatically. Be substantive. Disagreement welcome &mdash; especially if you think the framework should be defended in a form Paper 13 didn&rsquo;t test, or if you have a derivation of the 1/30 prefactor.</p>
+  </div>
+
+  <script src="https://giscus.app/client.js"
+    data-repo="sneakyfree/windstorm-institute-site"
+    data-repo-id="R_kgDOR6c8ng"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOR6c8ns4C8Z7L"
+    data-mapping="pathname"
+    data-strict="1"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="noborder_dark"
+    data-lang="en"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+
+<footer class="article-footer">
+  <p>&copy; 2026 The Windstorm Institute &middot; Fort Ann, New York &middot; <a href="../index.html">Home</a></p>
+</footer>
+
+</body>
+</html>
