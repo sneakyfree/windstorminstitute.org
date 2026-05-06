@@ -1049,7 +1049,7 @@ footer {
       </div>
     </div>
     <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.75; max-width: 640px;">Evolution is a better optimizer &mdash; for this particular problem. The ribosome has had 3.8 billion years to close the gap between its performance and the thermodynamic limit. Silicon has had decades. The mathematics is the same. The engineering maturity is not.</p>
-    <p style="font-size: 0.85rem; color: var(--text-faint); line-height: 1.7; max-width: 640px; margin-top: 1.25rem; padding: 1rem 1.25rem; border-left: 2px solid var(--border-light); background: rgba(255,255,255,0.02);"><strong style="color: var(--text-muted);">A note on the &phi; numbers.</strong> The "~10<sup>9</sup>&times; above Landauer" figure is the <em>useful-dissipation</em> fraction per discrimination event &mdash; the thermodynamically relevant energy attributed to the irreversible logical step itself. Paper 7's RTX 5090 measurements report &phi; &asymp; 10<sup>15</sup>&ndash;10<sup>18</sup> for <em>total GPU wall power</em>, which additionally pays for memory access, cooling, power-supply conversion, and idle circuitry. Both numbers are correct; they measure different physical boundaries. See Paper 7 &sect;3.4 for the full reconciliation.</p>
+    <p style="font-size: 0.85rem; color: var(--text-faint); line-height: 1.7; max-width: 640px; margin-top: 1.25rem; padding: 1rem 1.25rem; border-left: 2px solid var(--border-light); background: rgba(255,255,255,0.02);"><strong style="color: var(--text-muted);">A note on the &phi; numbers.</strong> The "~10<sup>9</sup>&times; above Landauer" figure is the <em>useful-dissipation</em> fraction per discrimination event &mdash; the thermodynamically relevant energy attributed to the irreversible logical step itself. Paper 7's GPU measurements report &phi; &asymp; 10<sup>15</sup>&ndash;10<sup>18</sup> for <em>total GPU wall power</em>, which additionally pays for memory access, cooling, power-supply conversion, and idle circuitry. Both numbers are correct; they measure different physical boundaries. See Paper 7 &sect;3.4 for the full reconciliation.</p>
   </div>
 </section>
 
@@ -1122,7 +1122,7 @@ footer {
         <div class="pub-num">05</div>
         <div class="pub-info">
           <h4>The Dissipative Decoder: Thermodynamic Cost Bounds on the Serial Decoding Throughput Basin &mdash; and Why Silicon Escapes Them</h4>
-          <p>Derives WHY the throughput basin exists from thermodynamic cost minimization. Two-regime framework: Regime A (biology, &alpha; > 1) produces a basin; Regime B (silicon, &alpha; < 1) escapes it. Kazusa-verified thermophilic validation (partial r = &minus;0.451, p = 0.014, n = 29). Silicon benchmark: 27 models on RTX 5090. The ribosome operates within 2% of its thermodynamic minimum; silicon operates ~10&sup9;&times; above its Landauer floor.</p>
+          <p>Derives WHY the throughput basin exists from thermodynamic cost minimization. Two-regime framework: Regime A (biology, &alpha; > 1) produces a basin; Regime B (silicon, &alpha; < 1) escapes it. Kazusa-verified thermophilic validation (partial r = &minus;0.451, p = 0.014, n = 29). Silicon benchmark: 27 models on standardized Nvidia GPU hardware. The ribosome operates within 2% of its thermodynamic minimum; silicon operates ~10&sup9;&times; above its Landauer floor.</p>
           <div class="pub-meta">
             <span class="pub-tag live">2026</span>
             <span class="pub-tag">thermodynamics</span>
@@ -1486,7 +1486,7 @@ footer {
       <div style="flex: 1; min-width: 280px;">
         <div style="font-family: var(--mono); font-size: 0.7rem; color: var(--green); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.4rem; font-weight: 600;">Sister Site &middot; Engineering Arm</div>
         <h3 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text);">windstormlabs.com</h3>
-        <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin: 0;">Engineering products, the autonomous research fleet, RTX 5090 compute infrastructure, and the complete Windy product family &mdash; the operational arm that turns the Institute's research into shipping tools.</p>
+        <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin: 0;">Engineering products, the autonomous research fleet, CUDA-accelerated Nvidia GPU compute, a multi-LLM agent fleet, and the complete Windy product family &mdash; the operational arm that turns the Institute's research into shipping tools.</p>
         <div style="font-family: var(--mono); font-size: 0.8rem; color: var(--green); margin-top: 0.85rem;">Visit Windstorm Labs &rarr;</div>
       </div>
     </a>
@@ -1512,7 +1512,7 @@ footer {
       <div class="team-card">
         <h3>Windstorm Labs</h3>
         <div class="team-role">Experimental Division</div>
-        <p>A fleet of autonomous AI research agents executing large-scale empirical experiments, adversarial review, and computational simulations. Headquartered on an NVIDIA RTX 5090 in Mount Pleasant, South Carolina.</p>
+        <p>A fleet of autonomous AI research agents &mdash; Anthropic Claude, xAI Grok, Google Gemini, Perplexity Deep Research, and OpenAI &mdash; running coordinated empirical experiments, adversarial review, and multi-LLM verification workflows over CUDA-accelerated Nvidia GPU compute. Headquartered in Mount Pleasant, South Carolina.</p>
       </div>
       <div class="team-card">
         <h3>Advisory & Collaboration</h3>

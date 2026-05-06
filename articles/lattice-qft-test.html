@@ -388,7 +388,7 @@ nav {
 
   <ul style="font-family: var(--serif); font-size: 1.05rem; color: var(--text-muted); line-height: 1.9; margin-bottom: 1.5rem; padding-left: 1.5rem;">
     <li><strong>1+1D</strong> &mdash; one space dimension and one time dimension. Lattice sizes up to N = 3000 sites. A 295-point scan over (lattice size, mass separation, mass strength).</li>
-    <li><strong>3+1D</strong> &mdash; three space dimensions and one time. Cubic lattices up to N&sup3; = 8000 sites (N up to 20). With a CPU implementation cross-checked against a separate GPU implementation on an NVIDIA RTX 5090. The two implementations agreed to better than two parts in 100,000.</li>
+    <li><strong>3+1D</strong> &mdash; three space dimensions and one time. Cubic lattices up to N&sup3; = 8000 sites (N up to 20). With a CPU implementation cross-checked against a separate CUDA GPU implementation on current-generation Nvidia hardware. The two implementations agreed to better than two parts in 100,000.</li>
   </ul>
 
   <p>And we computed three different entropy quantities at every grid point:</p>

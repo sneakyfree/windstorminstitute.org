@@ -400,7 +400,7 @@ nav {
 
   <p>The vocabulary &mdash; those 50,000+ tokens &mdash; is implemented as a cheap linear projection: the softmax layer maps a high-dimensional hidden state to a probability distribution over tokens. The cost of adding tokens to the vocabulary is negligible. This is fundamentally different from biology, where adding a symbol to the alphabet means building entirely new molecular recognition machinery.</p>
 
-  <p>We measured this directly. A 27-model energy benchmark on standardized hardware (RTX 5090) showed that silicon energy scales as params^0.937 &mdash; sub-linearly. Each additional parameter costs <em>less</em> energy than the last, not more. This is the opposite of biology&rsquo;s quadratic scaling.</p>
+  <p>We measured this directly. A 27-model energy benchmark on standardized Nvidia GPU hardware showed that silicon energy scales as params^0.937 &mdash; sub-linearly. Each additional parameter costs <em>less</em> energy than the last, not more. This is the opposite of biology&rsquo;s quadratic scaling.</p>
 
   <p>The consequence: no peak in bits-per-joule. No optimal vocabulary size. No thermodynamic basin. The smallest model is the most energy-efficient per bit of compression. Efficiency decreases monotonically with scale.</p>
 
@@ -422,7 +422,7 @@ nav {
 
   <div class="callout">
     <div class="callout-label">A note on the &phi; numbers (added April 2026)</div>
-    <p>The &asymp;10<sup>9</sup> figure quoted here is the <em>useful-dissipation</em> fraction per discrimination event &mdash; the thermodynamically relevant energy attributed to the irreversible logical step itself. Paper 7's RTX 5090 measurements report &phi; &asymp; 10<sup>15</sup>&ndash;10<sup>18</sup> for <em>total GPU wall power</em>, which additionally pays for memory access, cooling, power-supply conversion losses, and idle leakage of the entire board. Both numbers are correct; they measure different physical boundaries. The &asymp;10<sup>9</sup> figure here is the right number for the <em>computational</em> efficiency gap; the &asymp;10<sup>16</sup> figure is the right number for the <em>total system</em> efficiency gap. See <a href="throughput-basin-origin.html">Paper 7</a> &sect;3.4 for the full reconciliation.</p>
+    <p>The &asymp;10<sup>9</sup> figure quoted here is the <em>useful-dissipation</em> fraction per discrimination event &mdash; the thermodynamically relevant energy attributed to the irreversible logical step itself. Paper 7's GPU measurements report &phi; &asymp; 10<sup>15</sup>&ndash;10<sup>18</sup> for <em>total GPU wall power</em>, which additionally pays for memory access, cooling, power-supply conversion losses, and idle leakage of the entire board. Both numbers are correct; they measure different physical boundaries. The &asymp;10<sup>9</sup> figure here is the right number for the <em>computational</em> efficiency gap; the &asymp;10<sup>16</sup> figure is the right number for the <em>total system</em> efficiency gap. See <a href="throughput-basin-origin.html">Paper 7</a> &sect;3.4 for the full reconciliation.</p>
   </div>
 
   <p>This single comparison says more about the difference between biological and artificial information processing than any amount of theory. Evolution is a better optimizer than human engineering &mdash; at least for serial decoding under thermodynamic constraints.</p>
