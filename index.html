@@ -616,6 +616,7 @@ footer {
       <a href="#publications">Publications</a>
       <a href="#labs">Labs</a>
       <a href="#team">Team</a>
+      <a href="#contact">Contact</a>
       <a href="https://windstormlabs.com" target="_blank" rel="noopener" style="color: var(--green); border: 1px solid rgba(34, 197, 94, 0.25); padding: 6px 12px; border-radius: 6px; font-family: var(--mono); font-size: 0.75rem;">Labs site &rarr;</a>
     </div>
   </div>
@@ -1652,6 +1653,73 @@ footer {
     <div class="section-label">The Core Question</div>
     <h2 class="section-title" style="max-width: 600px;">Why does the ribosome process 4.39 bits per codon — and why does a transformer process roughly the same?</h2>
     <p class="section-desc">Two systems separated by 3.8 billion years of evolution, built on entirely different substrates, solving the same mathematical problem: decode one symbol per time step from a noisy serial stream while minimizing discrimination cost. The rate-distortion surface doesn't care whether the receiver is RNA, neurons, or silicon. We're mapping that surface.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact" style="padding: 100px 0;">
+  <div class="container">
+    <div class="section-label">Contact</div>
+    <h2 class="section-title">Get in touch.</h2>
+    <p class="section-desc">The Institute is a single-investigator operation. Email is the right channel for everything &mdash; research collaborations, peer review, press, students looking for advice, comments on the work, and anything else.</p>
+
+    <!-- Primary contact card -->
+    <div style="display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 1.5rem; margin-top: 2.5rem;" class="contact-grid">
+      <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 2.5rem 2.25rem; display: flex; flex-direction: column; gap: 1.25rem;">
+        <div style="font-family: var(--mono); font-size: 0.7rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.14em; font-weight: 600;">Direct Email</div>
+        <a id="contact-email-link" href="#contact"
+           onclick="location.href='mai'+'lto:'+'grant'+'@'+'windstorminstitute.org'; return false;"
+           data-email-user="grant" data-email-domain="windstorminstitute.org"
+           style="display: inline-flex; align-items: center; gap: 0.75rem; font-family: var(--mono); font-size: clamp(1.15rem, 2.4vw, 1.6rem); color: var(--text); text-decoration: none; font-weight: 500; padding: 1.25rem 1.5rem; background: rgba(6, 182, 212, 0.06); border: 1px solid rgba(6, 182, 212, 0.25); border-radius: 10px; transition: all 0.18s ease;"
+           onmouseover="this.style.borderColor='rgba(6, 182, 212, 0.55)'; this.style.background='rgba(6, 182, 212, 0.10)';"
+           onmouseout="this.style.borderColor='rgba(6, 182, 212, 0.25)'; this.style.background='rgba(6, 182, 212, 0.06)';">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--accent); flex-shrink: 0;"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+          <span><span style="color: var(--accent);">grant</span>@<span>windstorminstitute.org</span></span>
+        </a>
+        <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin: 0;">Click the address above to compose. <strong>Response time:</strong> typically within 24&ndash;48 hours during normal weeks. Genuine research correspondence is the only thing I prioritize over sleep.</p>
+
+        <div style="border-top: 1px solid var(--border); padding-top: 1.25rem; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem 1.25rem; font-size: 0.88rem; color: var(--text-muted);">
+          <div><strong style="color: var(--text-faint); font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em;">Good fit</strong></div>
+          <div><strong style="color: var(--text-faint); font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em;">Not a fit</strong></div>
+          <div>Comments on the papers &mdash; especially disagreement</div>
+          <div>Sales pitches and recruitment outreach</div>
+          <div>Research collaboration proposals</div>
+          <div>Newsletter and content-syndication asks</div>
+          <div>Peer-review requests</div>
+          <div>Coin offerings and AI-tool partnerships</div>
+          <div>Students looking for reading-list advice</div>
+          <div>Anything addressed to "Dear Researcher"</div>
+        </div>
+      </div>
+
+      <!-- Identity / About card -->
+      <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 2.25rem; display: flex; flex-direction: column; gap: 1rem;">
+        <div style="font-family: var(--mono); font-size: 0.7rem; color: var(--accent-2); text-transform: uppercase; letter-spacing: 0.14em; font-weight: 600;">Correspondence</div>
+        <div>
+          <h3 style="font-size: 1.2rem; margin: 0 0 0.5rem; color: var(--text);">Grant Lavell Whitmer III</h3>
+          <p style="color: var(--text-muted); font-size: 0.92rem; margin: 0 0 0.35rem; line-height: 1.55;">Founder &amp; Principal Investigator</p>
+          <p style="color: var(--text-muted); font-size: 0.92rem; margin: 0; line-height: 1.55;">The Windstorm Institute<br>Fort Ann, New York 12827<br>United States</p>
+        </div>
+        <div style="border-top: 1px solid var(--border); padding-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem; font-family: var(--mono); font-size: 0.82rem;">
+          <a href="https://orcid.org/0009-0007-3224-755X" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: none;">ORCID: 0009-0007-3224-755X &rarr;</a>
+          <a href="https://github.com/Windstorm-Institute" target="_blank" rel="noopener" style="color: var(--text-muted); text-decoration: none;">GitHub: Windstorm-Institute &rarr;</a>
+          <a href="https://zenodo.org/communities/windstorm-institute/" target="_blank" rel="noopener" style="color: var(--text-muted); text-decoration: none;">Zenodo community &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Press / press-kit line -->
+    <p style="font-size: 0.85rem; color: var(--text-faint); margin-top: 2rem; max-width: 720px; padding: 0.85rem 1.25rem; border-left: 2px solid var(--border-light); background: rgba(255,255,255,0.02); line-height: 1.7;">
+      <strong style="color: var(--text-muted);">Press &amp; media.</strong> For interviews or feature requests, email the address above with <em>[Press]</em> in the subject. Author headshots, paper PDFs, and figures are at the <a href="https://github.com/Windstorm-Institute" target="_blank" rel="noopener" style="color: var(--accent);">Windstorm-Institute GitHub org</a>. Each paper repo carries the corresponding manuscript and figure assets under CC BY 4.0 (free to reuse with attribution).
+    </p>
+
+    <style>
+      @media (max-width: 760px) {
+        .contact-grid { grid-template-columns: 1fr !important; }
+      }
+    </style>
   </div>
 </section>
 
