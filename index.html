@@ -1670,15 +1670,17 @@ footer {
       <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 2.5rem 2.25rem; display: flex; flex-direction: column; gap: 1.25rem;">
         <div style="font-family: var(--mono); font-size: 0.7rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.14em; font-weight: 600;">Direct Email</div>
         <a id="contact-email-link" href="#contact"
-           onclick="location.href='mai'+'lto:'+'grant'+'@'+'windstorminstitute.org'; return false;"
            data-email-user="grant" data-email-domain="windstorminstitute.org"
-           style="display: inline-flex; align-items: center; gap: 0.75rem; font-family: var(--mono); font-size: clamp(1.15rem, 2.4vw, 1.6rem); color: var(--text); text-decoration: none; font-weight: 500; padding: 1.25rem 1.5rem; background: rgba(6, 182, 212, 0.06); border: 1px solid rgba(6, 182, 212, 0.25); border-radius: 10px; transition: all 0.18s ease;"
+           style="display: inline-flex; align-items: center; gap: 0.75rem; font-family: var(--mono); font-size: clamp(1.15rem, 2.4vw, 1.6rem); color: var(--text); text-decoration: none; font-weight: 500; padding: 1.25rem 1.5rem; background: rgba(6, 182, 212, 0.06); border: 1px solid rgba(6, 182, 212, 0.25); border-radius: 10px; transition: all 0.18s ease; position: relative;"
            onmouseover="this.style.borderColor='rgba(6, 182, 212, 0.55)'; this.style.background='rgba(6, 182, 212, 0.10)';"
-           onmouseout="this.style.borderColor='rgba(6, 182, 212, 0.25)'; this.style.background='rgba(6, 182, 212, 0.06)';">
+           onmouseout="this.style.borderColor='rgba(6, 182, 212, 0.25)'; this.style.background='rgba(6, 182, 212, 0.06)';"
+           title="Click to copy + open mail client (if configured)">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--accent); flex-shrink: 0;"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
           <span><span style="color: var(--accent);">grant</span>@<span>windstorminstitute.org</span></span>
+          <span style="margin-left: auto; font-family: var(--mono); font-size: 0.65rem; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.7;">Click to copy</span>
         </a>
-        <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin: 0;">Click the address above to compose. <strong>Response time:</strong> typically within 24&ndash;48 hours during normal weeks. Genuine research correspondence is the only thing I prioritize over sleep.</p>
+        <div id="email-copy-status" style="font-family: var(--mono); font-size: 0.82rem; color: var(--success, #58c98a); min-height: 1.2em; margin-top: -0.4rem; opacity: 0; transition: opacity 0.2s ease;"></div>
+        <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin: 0;">Click the address above to <strong>copy it to your clipboard</strong> and (if you have a mail client configured) open a fresh compose window. Or paste it into Gmail / Outlook / your webmail of choice. <strong>Response time:</strong> typically within 24&ndash;48 hours during normal weeks. Genuine research correspondence is the only thing I prioritize over sleep.</p>
 
         <div style="border-top: 1px solid var(--border); padding-top: 1.25rem; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem 1.25rem; font-size: 0.88rem; color: var(--text-muted);">
           <div><strong style="color: var(--text-faint); font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em;">Good fit</strong></div>
@@ -1762,6 +1764,50 @@ footer {
     </p>
 
     <script>
+    // Email-card click: copy to clipboard + try mailto: as a bonus
+    (function () {
+      var link = document.getElementById('contact-email-link');
+      var statusEl = document.getElementById('email-copy-status');
+      if (!link) return;
+      var hideTimer;
+      function showStatus(msg, color) {
+        statusEl.textContent = msg;
+        statusEl.style.color = color || 'var(--success, #58c98a)';
+        statusEl.style.opacity = '1';
+        clearTimeout(hideTimer);
+        hideTimer = setTimeout(function () { statusEl.style.opacity = '0'; }, 3500);
+      }
+      function legacyCopy(text) {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed'; ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        var ok = false;
+        try { ok = document.execCommand('copy'); } catch (e) {}
+        document.body.removeChild(ta);
+        return ok;
+      }
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        var email = link.dataset.emailUser + '@' + link.dataset.emailDomain;
+        var copied = false;
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(email).then(function () {
+            showStatus('✓ Copied ' + email + ' — paste into your mail client');
+          }).catch(function () {
+            copied = legacyCopy(email);
+            showStatus(copied ? '✓ Copied ' + email : 'Couldn\'t copy — select the address and Ctrl+C', copied ? null : 'var(--warm)');
+          });
+        } else {
+          copied = legacyCopy(email);
+          showStatus(copied ? '✓ Copied ' + email + ' — paste into your mail client' : 'Couldn\'t copy — select the address and Ctrl+C', copied ? null : 'var(--warm)');
+        }
+        // Also try to open the system mail client (silent no-op if no handler)
+        try { window.location.href = 'mailto:' + email; } catch (err) {}
+      });
+    })();
+
     (function () {
       var form = document.getElementById('contact-form');
       var statusEl = document.getElementById('contact-status');
