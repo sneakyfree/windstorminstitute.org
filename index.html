@@ -1710,10 +1710,105 @@ footer {
       </div>
     </div>
 
+    <!-- Web-form contact (for users without a mail client) -->
+    <div id="contact-form-wrap" style="margin-top: 2.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 2.5rem 2.25rem;">
+      <div style="font-family: var(--mono); font-size: 0.7rem; color: var(--warm); text-transform: uppercase; letter-spacing: 0.14em; font-weight: 600; margin-bottom: 0.75rem;">Or — send a message from this page</div>
+      <h3 style="font-size: 1.15rem; margin: 0 0 0.5rem; color: var(--text); font-weight: 600;">No mail client? Send through the site.</h3>
+      <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.65; margin: 0 0 1.5rem; max-width: 640px;">For visitors on devices without a mail client configured (work computers, webmail-only setups). Submits directly to the inbox above. Reply lands in your email.</p>
+
+      <form id="contact-form" novalidate style="display: grid; gap: 1rem; max-width: 720px;">
+        <!-- Honeypot (hidden from humans) -->
+        <input type="text" name="website" tabindex="-1" autocomplete="off" style="position: absolute; left: -9999px; height: 0; width: 0; opacity: 0;" aria-hidden="true">
+        <!-- Render-time stamp (for fill-time spam check) -->
+        <input type="hidden" name="t" id="contact-t">
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;" class="contact-form-row">
+          <label style="display: flex; flex-direction: column; gap: 0.4rem; font-family: var(--mono); font-size: 0.72rem; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600;">
+            Name
+            <input type="text" name="name" required maxlength="200" autocomplete="name"
+                   style="font-family: var(--sans); font-size: 0.95rem; color: var(--text); padding: 0.7rem 0.85rem; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; outline: none; text-transform: none; letter-spacing: 0; font-weight: 400;">
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 0.4rem; font-family: var(--mono); font-size: 0.72rem; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600;">
+            Email
+            <input type="email" name="email" required maxlength="200" autocomplete="email" inputmode="email"
+                   style="font-family: var(--sans); font-size: 0.95rem; color: var(--text); padding: 0.7rem 0.85rem; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; outline: none; text-transform: none; letter-spacing: 0; font-weight: 400;">
+          </label>
+        </div>
+        <label style="display: flex; flex-direction: column; gap: 0.4rem; font-family: var(--mono); font-size: 0.72rem; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600;">
+          Subject
+          <input type="text" name="subject" required maxlength="200"
+                 style="font-family: var(--sans); font-size: 0.95rem; color: var(--text); padding: 0.7rem 0.85rem; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; outline: none; text-transform: none; letter-spacing: 0; font-weight: 400;">
+        </label>
+        <label style="display: flex; flex-direction: column; gap: 0.4rem; font-family: var(--mono); font-size: 0.72rem; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600;">
+          Message
+          <textarea name="message" required maxlength="8000" rows="6"
+                    style="font-family: var(--sans); font-size: 0.95rem; color: var(--text); padding: 0.85rem; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; outline: none; resize: vertical; min-height: 140px; line-height: 1.55; text-transform: none; letter-spacing: 0; font-weight: 400;"></textarea>
+        </label>
+
+        <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+          <button type="submit" id="contact-submit"
+                  style="font-family: var(--mono); font-size: 0.85rem; color: var(--accent-fg, #18181b); background: var(--accent); border: none; padding: 0.85rem 1.6rem; border-radius: 8px; cursor: pointer; font-weight: 600; letter-spacing: 0.04em; transition: opacity 0.15s;"
+                  onmouseover="this.style.opacity='0.88'" onmouseout="this.style.opacity='1'">
+            Send message
+          </button>
+          <span id="contact-status" style="font-family: var(--mono); font-size: 0.82rem; color: var(--text-muted);"></span>
+        </div>
+      </form>
+    </div>
+
     <!-- Press / press-kit line -->
     <p style="font-size: 0.85rem; color: var(--text-faint); margin-top: 2rem; max-width: 720px; padding: 0.85rem 1.25rem; border-left: 2px solid var(--border-light); background: rgba(255,255,255,0.02); line-height: 1.7;">
       <strong style="color: var(--text-muted);">Press &amp; media.</strong> For interviews or feature requests, email the address above with <em>[Press]</em> in the subject. Author headshots, paper PDFs, and figures are at the <a href="https://github.com/Windstorm-Institute" target="_blank" rel="noopener" style="color: var(--accent);">Windstorm-Institute GitHub org</a>. Each paper repo carries the corresponding manuscript and figure assets under CC BY 4.0 (free to reuse with attribution).
     </p>
+
+    <script>
+    (function () {
+      var form = document.getElementById('contact-form');
+      var statusEl = document.getElementById('contact-status');
+      var submitBtn = document.getElementById('contact-submit');
+      var t = document.getElementById('contact-t');
+      if (!form) return;
+      t.value = String(Date.now());
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        statusEl.style.color = 'var(--text-muted)';
+        statusEl.textContent = 'Sending…';
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.6';
+        submitBtn.style.cursor = 'wait';
+
+        var fd = new FormData(form);
+        var payload = {};
+        fd.forEach(function (v, k) { payload[k] = v; });
+
+        try {
+          var resp = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+          var body = await resp.json().catch(function () { return { ok: false, error: 'Bad response' }; });
+          if (resp.ok && body.ok) {
+            form.reset();
+            t.value = String(Date.now());
+            statusEl.style.color = 'var(--success, #58c98a)';
+            statusEl.innerHTML = '✓ Message sent. Reply within 24–48 hours.';
+          } else {
+            statusEl.style.color = 'var(--warm, #f59e0b)';
+            statusEl.textContent = (body && body.error) ? body.error : 'Send failed — please use the email link above.';
+          }
+        } catch (err) {
+          statusEl.style.color = 'var(--warm, #f59e0b)';
+          statusEl.textContent = 'Network error — please use the email link above.';
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.style.opacity = '1';
+          submitBtn.style.cursor = 'pointer';
+        }
+      });
+    })();
+    </script>
 
     <style>
       @media (max-width: 760px) {
